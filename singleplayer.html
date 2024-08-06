@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Ice Dodo - UnOfficial Site</title>
+    <link rel="icon" href="src/assets/icons/icon.png">
+    <meta name="description" content="Play hundreds of 3D Ice dodo levels. Do not fall off or touch spikes.">
+    
+    <script type="module" crossorigin src="src/assets/index.ts"></script>
+    <script type="module" src="src/dodoCup.ts"></script>
+    <!-- <link rel="stylesheet" href="src/assets/index.css"> -->
+    <style>
+        .button {
+            margin-bottom:5px;
+            margin-top:5px;
+            border: 4px solid #bbbbbb;
+            border-radius: 10px;
+            background-color: transparent;
+            color:white;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #8A0468;
+        }
+        input[type=text] {
+            width:2vw;
+        } 
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        p {
+            margin: 2px;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="appContainer">
+      <div id="app"></div>
+    </div>
+    <img id="validation" src="src/assets/icons/validation.svg" alt="validation" style="position:absolute;right:-15px;bottom:50px;width:20vh">
+    <div id="preroll"></div>
+    <div id="ModMenu">
+        <div id="ModMenuContent" style="opacity: 75%;position:absolute;top:0;right:5vw;width:17vw;border:rgb(59, 59, 59) 1px solid;background-color: rgb(39, 39, 39);border-radius: 0 0 5px 5px;-index:-1">
+            <button id="togglemenu" class="modbutton">ModMenu (click)</button>
+            <div class="modmenuOption">
+                <botton class="button" onclick="window.location.href='../'">Back To Config</botton>
+                <br>
+                <input id="spin" type="checkbox">
+                <label>Turn Off Spin</label>
+                <br>
+                <input id="PracticeMode" type="checkbox">
+                <label>Practice Mode</label>
+                <p>Cords + Rotation(0.0-1.0)</p>
+                <input type="number" id="PracticeX" style="width:2vw"><input type="number" id="PracticeY" style="width:2vw"><input type="number" id="PracticeZ" style="width:2vw"><input type="number" id="PracticeR" style="width:2vw">
+                <br>
+                <button id="togglecheats" class="modbutton">Cheats</button>
+                <div id="cheats">
+                    <input id="godmode" type="checkbox">
+                    <label>Godmode</label>
+                    <br>
+                    <input id="gravityoverwrite" type="checkbox">
+                    <label>Overwrite Gravity?</label>
+                    <br>
+                    <!-- <input id="gravity" type="number" > -->
+                    <div id="gravitytoggle">
+                        <input type="range" min="-18" max="0" id="gravity" step="1">
+                        <p style="display:block;margin:0;" id="gravityindicator">0</p> 
+                    </div>
+
+                    <input id="speedoverwrite" type="checkbox">
+                    <label>Overwrite speed?</label>
+                    <br>
+                    <!-- <input id="speed" type="number" > -->
+                    <div id="speedtoggle">
+                        <input type="range" min="0" max="1" id="speed" step=".02">
+                        <p style="display:block;margin:0;" id="speedindicator">0.28</p>
+                    </div>
+                    <botton class="button" onclick="window.tsTriggers.onWin()">Instant Win</botton>
+                </div>
+                <button id="toggledodocontrols" class="modbutton">Dodo Cinematics</button>
+                <!-- <button id="testbutton" class="modbutton">Dodo rotation</button> -->
+                <div id="dodocontrols">
+                    <input id="freecam" type="checkbox">
+                    <label>FreeCam</label>
+                    <br>
+                    <input id="freeze" type="checkbox" >
+                    <label >Freeze Dodo</label>
+                    <br >
+                    <input id="follow" type="checkbox" >
+                    <label >Follow Player</label>
+                    <br >
+                    <p style="margin: 0;">Movement</p>
+                    <div class="container">
+                        <div class="home"><button id="home" class="dodocontrolButton">Home</button></div>
+                        <div class="up"><button id="up" class="dodocontrolButton">Up</button></div>
+                        <div class="left"><button id="left" class="dodocontrolButton">Left</button></div>
+                        <div class="right"><button id="right" class="dodocontrolButton">Right</button></div>
+                        <div class="down"><button id="down" class="dodocontrolButton">Down</button></div>
+                        <div class="foreward"><button id="foreward" class="dodocontrolButton">forewards</button></div>
+                        <div class="backward"><button id="backward" class="dodocontrolButton">backwards</button></div>
+                    </div>
+                    <p style="margin: 0;">Rotation</p>
+                    <div class="container">
+                        <div class="home"><button id="Chome" class="dodocontrolButton">Home</button></div>
+                        <div class="up"><button id="Cup" class="dodocontrolButton">Up</button></div>
+                        <div class="left"><button id="Cleft" class="dodocontrolButton">Left</button></div>
+                        <div class="right"><button id="Cright" class="dodocontrolButton">Right</button></div>
+                        <div class="down"><button id="Cdown" class="dodocontrolButton">Down</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="LevelEditor">
+        <div id="LevelEditorContent" style="opacity: 100%;position:absolute;top:0;left:10vw;width:15vw;border:rgb(59, 59, 59) 1px solid;background-color: rgb(39, 39, 39);border-radius: 0 0 5px 5px;-index:-1">
+            <button id="toggleLevelEditor" class="modbutton">LevelEditor (click)</button>
+            <div class="LevelEditorOption">
+                <button id="toggleLevelEditorObjects" class="modbutton">LevelEditor Objects</button>
+                <div class="LevelEditorObjects" style="max-height:25vh;overflow-y: auto;">
+                    <button class="button" id="GetAllObjects">get All Objects (emergency)</button>
+                    <button class="button" id="DeleteAllMadeObjects">Delete All (made) Objects</button>
+                    <button class="button" id="DeleteSelectedMadeObjects">Delete Selected Object</button>
+                    <br>
+                    <select id="ObjectSelector"><option> </option></select>
+                </div>
+                <button id="toggleLevelEditorAdd" class="modbutton">LevelEditor Add</button>
+                <div class="LevelEditorAdd">
+                    <button id="addBox" class="button">add box</button><br>
+                    <button id="addcylinder" class="button">add cylinder</button>
+                </div>
+                <button id="toggleLevelEditorControl" class="modbutton">LevelEditor Control</button>
+                <div class="LevelEditorControl">
+                    <p>Position</p>
+                    <input type="text" id="x"><input type="text" id="y"><input type="text" id="z">
+                    <p>Rotation</p>
+                    <input type="text" id="xr"><input type="text" id="yr"><input type="text" id="zr">
+                    <p>Scale</p>
+                    <input type="text" id="xs"><input type="text" id="ys"><input type="text" id="zs">
+                    <br>
+                    <p>Texture</p>
+                        <select id="TextureSelector">
+                            <option value=""></option>
+                            <option value="bright.png">Bright</option>
+                            <option value="dark.png">Dark</option>
+                            <option value="flare.png">Flare</option>
+                            <option value="icedd.png">Icedd</option>
+                            <option value="pm1.png">PM1</option>
+                            <option value="pm2.png">PM2</option>
+                        </select>
+                    <br>
+                    <button class="button" id="ControlButton">Set</button>
+                    <br>
+                    <button class="button" id="Export">Export Level</button>
+                    <textarea style="color:black;font-size: xx-small;font-family: arial;" id="ExportMap"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" type="text/javascript" src="src/scripts/decorations.ts"></script>
+    <script type="module" src="src/modmenu.ts"></script>
+
+    <!-- <script type="text/javascript" src="/libraries/babylon.ts"></script> -->
+    <script type="module" type="text/javascript" src="src/assets/VSingleplayer.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/fov.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/change_state.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/maker.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/alias.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/const_controller.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/cleanup.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/start.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/update.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/flyjump.ts"></script>
+    <script type="module" type="text/javascript" src="src/scripts/boot.ts"></script>
+</body>
+</html>

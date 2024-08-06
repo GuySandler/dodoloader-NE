@@ -1,0 +1,701 @@
+.modbutton {
+    width:100%;
+    border:rgb(59, 59, 59) 1px solid;
+    background-color: rgb(39, 39, 39);
+    border-radius: 0 0 5px 5px;
+    color:white;
+}
+.container {
+    display: grid; 
+    grid-template-columns: 33.33333% 33.33333% 33.33333%; 
+    grid-template-rows: 33.33333% 33.33333% 33.33333%; 
+    grid-template-areas: 
+      "foreward up ."
+      "left home right"
+      "backward down ."; 
+}
+.home { grid-area: home; }
+.up { grid-area: up; }
+.left { grid-area: left; }
+.right { grid-area: right; }
+.down { grid-area: down; }
+.dodocontrolButton {
+    width:100%;
+    height:100%;
+}
+
+.noAntiAlias {
+  image-rendering: optimizeSpeed; /* STOP SMOOTHING, GIVE ME SPEED  */
+  image-rendering: -moz-crisp-edges; /* Firefox                        */
+  image-rendering: -o-crisp-edges; /* Opera                          */
+  image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+  image-rendering: pixelated; /* Universal support since 2021   */
+  image-rendering: optimize-contrast; /* CSS3 Proposed                  */
+  -ms-interpolation-mode: nearest-neighbor; /* IE8+                           */
+}
+
+.noDrag {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.noHighlight {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.hoverGrow {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.hoverGrow:hover {
+  transform: scale(1.25);
+}
+
+.hoverOutline {
+  cursor: pointer;
+}
+
+.hoverOutline:hover {
+  outline: 3px solid #fff;
+}
+
+.colorDarker {
+  color: #333333;
+}
+
+.colorDark {
+  color: #18314F;
+}
+
+.colorBright {
+  color: #384E77;
+}
+
+.colorBrighter {
+  color: #E6F9AF;
+}
+
+.colorPink {
+  color: #C546C4;
+}
+
+.colorPinkDark {
+  color: #F421A7;
+}
+
+.colorWhite {
+  color: #FFFFFF;
+}
+
+.colorGreen {
+  color: #56e04c;
+}
+
+.colorRed {
+  color: #e04c4f !important;
+}
+
+.colorError {
+  color: #FF0000;
+}
+
+.colorGray1 {
+  color: #222222;
+}
+
+.colorGray2 {
+  color: #333333;
+}
+
+.colorGray3 {
+  color: #666666;
+}
+
+.colorGray4 {
+  color: #bbbbbb;
+}
+
+.colorGray5 {
+  color: #eeeeee;
+}
+
+@font-face {
+  font-family: "pixeled";
+  src: url("/assets/fonts/pixeled.ttf");
+}
+
+.buttonLarge {
+  flex: 1;
+  flex-grow: 0;
+  font-family: "pixeled";
+  font-size: 18px;
+  display: inline-block;
+  border: 4px solid white;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  margin: 6px 4px;
+  font-size: 18px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 10px white;
+  border-radius: 10px;
+}
+
+.buttonLarge:hover {
+  background: #8A0468;
+  box-shadow: inset 0 0 20px #C546C4;
+  color: white;
+}
+
+.buttonSmall {
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  border: 2px solid #bbbbbb;
+  border-radius: 10px;
+  color: #bbbbbb;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin: 5px;
+  font-family: "pixeled", Arial, sans-serif;
+}
+
+.buttonSmall:hover {
+  background: #8A0468;
+  box-shadow: inset 0 0 20px #C546C4;
+  color: white;
+}
+
+.buttonSmall.isSelectedButton {
+  border-color: yellow;
+  color: yellow;
+}
+
+.buttonSmall.isDisabledButton {
+  border-color: #222222;
+  color: #222222;
+  cursor: default;
+}
+
+.buttonSmall.isDisabledButton:hover {
+  background: none;
+  box-shadow: none;
+  color: #222222;
+}
+
+.textSmall {
+  font-size: 10px;
+  line-height: 20px;
+  margin: 5px;
+  font-weight: normal;
+  font-family: "pixeled", Arial, sans-serif;
+}
+
+.textLarge {
+  font-size: 18px;
+  line-height: 36px;
+  margin: 9px;
+  font-weight: normal;
+  font-family: "pixeled", Arial, sans-serif;
+}
+
+.textArial {
+  font-size: 18px !important;
+  font-family: "Arial", sans-serif !important;
+  font-weight: normal !important;
+}
+
+.clickableText {
+  text-decoration: none;
+  cursor: pointer;
+  color: #CFA569;
+}
+
+.clickableText:hover {
+  color: white;
+}
+
+.inputSmall {
+  display: inline-block;
+  font-size: 10px;
+  border: 2px solid #bbbbbb;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin: 5px;
+  font-family: "pixeled", Arial, sans-serif;
+  background: black;
+  border: 2px solid white;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+
+.inputSmall:hover {
+  border-color: #C546C4;
+}
+
+.inputSmall:focus {
+  outline: none;
+  border-color: yellow;
+}
+
+.selectSmall {
+  display: inline-block;
+  font-size: 10px;
+  border: 2px solid #bbbbbb;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin: 5px;
+  font-family: "pixeled", Arial, sans-serif;
+  background: black;
+  border: 2px solid white;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+
+.selectSmall:hover {
+  border-color: #C546C4;
+}
+
+.selectSmall:focus {
+  outline: none;
+  border-color: yellow;
+}
+
+.invertImageColor {
+  filter: invert(100%);
+}
+
+.pageContainer {
+  display: none;
+}
+
+.pageContainer.isVisible {
+  display: block;
+}
+
+.isWebsiteOnlyCup {
+  color: #10A800;
+  padding-left: 8px;
+}
+
+:deep(.htmlContents) * {
+  font-family: "Arial";
+  font-size: 18px;
+}
+
+:deep(.htmlContents) a {
+  color: orange;
+  text-decoration: none;
+}
+
+:deep(.htmlContents) a:hover {
+  color: yellow;
+}
+
+.textAndInput {
+  display: inline-flex;
+  width: 340px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.textAndInput p {
+  text-align: left;
+}
+
+.textAndInput input, .textAndInput select {
+  width: 140px;
+}
+
+.checkboxSmall {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+  margin: 20px;
+}
+
+.titleWithIcon {
+  display: flex;
+  align-items: center;
+  background-color: #333333;
+}
+
+.titleWithIcon img {
+  flex: 1;
+  flex-grow: 0;
+  width: 40px;
+  cursor: pointer;
+  cursor: pointer;
+  transition: transform 0.2s;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+.titleWithIcon img:hover {
+  transform: scale(1.25);
+}
+
+.titleWithIcon h1 {
+  flex: 1;
+  text-align: left;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  background-image: url("/assets/icons/validation2.svg");
+  background-size: 100px;
+  background-opa: 150px;
+  font-family: "pixeled";
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+html ::-webkit-scrollbar, body ::-webkit-scrollbar {
+  display: none;
+}
+
+#renderCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  position: relative;
+  height: 100vh;
+}
+
+#app .appMain {
+  height: 100%;
+}.appMain .routerView[data-v-89c65bae] {
+  width: 100%;
+  height: 100%;
+}.noAntiAlias[data-v-4be08e94] {
+  image-rendering: optimizeSpeed; /* STOP SMOOTHING, GIVE ME SPEED  */
+  image-rendering: -moz-crisp-edges; /* Firefox                        */
+  image-rendering: -o-crisp-edges; /* Opera                          */
+  image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+  image-rendering: pixelated; /* Universal support since 2021   */
+  image-rendering: optimize-contrast; /* CSS3 Proposed                  */
+  -ms-interpolation-mode: nearest-neighbor; /* IE8+                           */
+}
+.noDrag[data-v-4be08e94] {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+.noHighlight[data-v-4be08e94] {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+   supported by Chrome, Edge, Opera and Firefox */
+}
+.hoverGrow[data-v-4be08e94] {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.hoverGrow[data-v-4be08e94]:hover {
+  transform: scale(1.25);
+}
+.hoverOutline[data-v-4be08e94] {
+  cursor: pointer;
+}
+.hoverOutline[data-v-4be08e94]:hover {
+  outline: 3px solid #fff;
+}
+.colorDarker[data-v-4be08e94] {
+  color: #333333;
+}
+.colorDark[data-v-4be08e94] {
+  color: #18314F;
+}
+.colorBright[data-v-4be08e94] {
+  color: #384E77;
+}
+.colorBrighter[data-v-4be08e94] {
+  color: #E6F9AF;
+}
+.colorPink[data-v-4be08e94] {
+  color: #C546C4;
+}
+.colorPinkDark[data-v-4be08e94] {
+  color: #F421A7;
+}
+.colorWhite[data-v-4be08e94] {
+  color: #FFFFFF;
+}
+.colorGreen[data-v-4be08e94] {
+  color: #56e04c;
+}
+.colorRed[data-v-4be08e94] {
+  color: #e04c4f !important;
+}
+.colorError[data-v-4be08e94] {
+  color: #FF0000;
+}
+.colorGray1[data-v-4be08e94] {
+  color: #222222;
+}
+.colorGray2[data-v-4be08e94] {
+  color: #333333;
+}
+.colorGray3[data-v-4be08e94] {
+  color: #666666;
+}
+.colorGray4[data-v-4be08e94] {
+  color: #bbbbbb;
+}
+.colorGray5[data-v-4be08e94] {
+  color: #eeeeee;
+}
+@font-face {
+  font-family: "pixeled";
+  src: url("/assets/fonts/pixeled.ttf");
+}
+.buttonLarge[data-v-4be08e94] {
+  flex: 1;
+  flex-grow: 0;
+  font-family: "pixeled";
+  font-size: 18px;
+  display: inline-block;
+  border: 4px solid white;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  margin: 6px 4px;
+  font-size: 18px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 10px white;
+  border-radius: 10px;
+}
+.buttonLarge[data-v-4be08e94]:hover {
+  background: #8A0468;
+  box-shadow: inset 0 0 20px #C546C4;
+  color: white;
+}
+.buttonSmall[data-v-4be08e94] {
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  border: 2px solid #bbbbbb;
+  border-radius: 10px;
+  color: #bbbbbb;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin: 5px;
+  font-family: "pixeled", Arial, sans-serif;
+}
+.buttonSmall[data-v-4be08e94]:hover {
+  background: #8A0468;
+  box-shadow: inset 0 0 20px #C546C4;
+  color: white;
+}
+.buttonSmall.isSelectedButton[data-v-4be08e94] {
+  border-color: yellow;
+  color: yellow;
+}
+.buttonSmall.isDisabledButton[data-v-4be08e94] {
+  border-color: #222222;
+  color: #222222;
+  cursor: default;
+}
+.buttonSmall.isDisabledButton[data-v-4be08e94]:hover {
+  background: none;
+  box-shadow: none;
+  color: #222222;
+}
+.textSmall[data-v-4be08e94] {
+  font-size: 10px;
+  line-height: 20px;
+  margin: 5px;
+  font-weight: normal;
+  font-family: "pixeled", Arial, sans-serif;
+}
+.textLarge[data-v-4be08e94] {
+  font-size: 18px;
+  line-height: 36px;
+  margin: 9px;
+  font-weight: normal;
+  font-family: "pixeled", Arial, sans-serif;
+}
+.textArial[data-v-4be08e94] {
+  font-size: 18px !important;
+  font-family: "Arial", sans-serif !important;
+  font-weight: normal !important;
+}
+.clickableText[data-v-4be08e94] {
+  text-decoration: none;
+  cursor: pointer;
+  color: #CFA569;
+}
+.clickableText[data-v-4be08e94]:hover {
+  color: white;
+}
+.inputSmall[data-v-4be08e94] {
+  display: inline-block;
+  font-size: 10px;
+  border: 2px solid #bbbbbb;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin: 5px;
+  font-family: "pixeled", Arial, sans-serif;
+  background: black;
+  border: 2px solid white;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+.inputSmall[data-v-4be08e94]:hover {
+  border-color: #C546C4;
+}
+.inputSmall[data-v-4be08e94]:focus {
+  outline: none;
+  border-color: yellow;
+}
+.selectSmall[data-v-4be08e94] {
+  display: inline-block;
+  font-size: 10px;
+  border: 2px solid #bbbbbb;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 4px;
+  margin: 5px;
+  font-family: "pixeled", Arial, sans-serif;
+  background: black;
+  border: 2px solid white;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+.selectSmall[data-v-4be08e94]:hover {
+  border-color: #C546C4;
+}
+.selectSmall[data-v-4be08e94]:focus {
+  outline: none;
+  border-color: yellow;
+}
+.invertImageColor[data-v-4be08e94] {
+  filter: invert(100%);
+}
+.pageContainer[data-v-4be08e94] {
+  display: none;
+}
+.pageContainer.isVisible[data-v-4be08e94] {
+  display: block;
+}
+.isWebsiteOnlyCup[data-v-4be08e94] {
+  color: #10A800;
+  padding-left: 8px;
+}
+[data-v-4be08e94] .htmlContents * {
+  font-family: "Arial";
+  font-size: 18px;
+}
+[data-v-4be08e94] .htmlContents a {
+  color: orange;
+  text-decoration: none;
+}
+[data-v-4be08e94] .htmlContents a:hover {
+  color: yellow;
+}
+.textAndInput[data-v-4be08e94] {
+  display: inline-flex;
+  width: 340px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.textAndInput p[data-v-4be08e94] {
+  text-align: left;
+}
+.textAndInput input[data-v-4be08e94], .textAndInput select[data-v-4be08e94] {
+  width: 140px;
+}
+.checkboxSmall[data-v-4be08e94] {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+  margin: 20px;
+}
+.titleWithIcon[data-v-4be08e94] {
+  display: flex;
+  align-items: center;
+  background-color: #333333;
+}
+.titleWithIcon img[data-v-4be08e94] {
+  flex: 1;
+  flex-grow: 0;
+  width: 40px;
+  cursor: pointer;
+  cursor: pointer;
+  transition: transform 0.2s;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+.titleWithIcon img[data-v-4be08e94]:hover {
+  transform: scale(1.25);
+}
+.titleWithIcon h1[data-v-4be08e94] {
+  flex: 1;
+  text-align: left;
+}
+.bootMain[data-v-4be08e94] {
+  font-family: "pixeled", Arial, sans-serif;
+}
+.bootMain.bootMainWebsite[data-v-4be08e94] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bootMain.bootMainWebsite .bootContents[data-v-4be08e94] {
+  flex: 1;
+  transform: scale(2);
+}
+.bootMain.bootMainExtension[data-v-4be08e94] {
+  text-align: center;
+}
+.bootMain.bootMainExtension .bootContents[data-v-4be08e94] {
+  display: inline-block;
+  padding: 20px 0px;
+  width: 200px !important;
+}

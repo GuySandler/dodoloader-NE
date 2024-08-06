@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Ice Dodo - UnOfficial Site</title>
+    <link rel="icon" href="images/dodoloader.webp">
+    <meta name="description" content="Modded Ice Dodo by Onionfist.com">
+    <style type="text/css" media="screen">
+        @font-face {
+            font-family: "pixeled";
+            src: url('src/assets/fonts/pixeled.ttf');
+        }
+        * {
+            box-sizing: border-box;
+            font-family: "pixeled";
+            /* font-size: small; */
+            color:#bbbbbb;
+        }
+        html {
+            background-color: black;
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            height: 100%;
+        }
+        #Menu {
+            display:inline-block;
+            overflow-y: auto;
+            width: 50vw;
+            margin-top: 35px;
+            height: calc(100vh - 15px);
+            background-color: #151515;
+            box-shadow: 0px 30px 40px gray;
+            /* margin: 15px; */
+            border: 5px solid #bbbbbb;
+            border-radius: 10px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow-x: hidden;
+        }
+        button {
+            margin-bottom:10px;
+            border: 4px solid #bbbbbb;
+            border-radius: 10px;
+            background-color: transparent;
+            color:white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #8A0468;
+        }
+        input {
+            color: black;
+            background-color: white;
+        }
+        p {
+            margin: 5px;
+        }
+        .arrow {
+            scale:300%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .arrow:hover {
+            scale: 325%;
+        }
+        .arrow:active {
+            scale: 275%;
+        }
+    </style>
+  </head>
+  <body>
+    <center>    
+    <div id="Menu">
+        <div style="background-color: #151515;border-bottom: 2px inset #202020;">
+            <h1 style="margin-top:15px;margin-bottom: 2px;">DodoLoader</h1>
+            <p style="margin: 2px;">Original Ice Dodo by <a href="https://onionfist.com">Onionfist/Jason</a></p>
+            <p style="font-size:xx-small;margin:2px;">-</p>
+            <p style="margin: 2px;">Dodoloader by Guy</p>
+            <button style="width:45%;" onclick="window.location.href='singleplayer'">Play Now</button>
+            <br>
+            <button onclick="localStorage.clear();window.location.reload()">Clear All Custom</button>
+            <img src="src/assets/svgs/caret-right-fill.svg" id="rightArrow" class="arrow" style="float:right;margin-right:50px;" onclick="cycleRight()">
+            <img src="src/assets/svgs/caret-left-fill.svg" id="leftArrow" class="arrow" style="float:left;margin-left:50px;" onclick="cycleLeft()">
+            <p style="font-size:xx-small;padding-bottom: 10px;">if game does not load you messed up the cups, clear them</p>
+        </div>
+        <div id="0">
+            <form id="Cupadder">
+                <h3>Add Cup</h3>
+                <input type="text" id="name">
+                <p style="font-size: small;">Name of cup</p>
+                <br>
+                <input style="width:90%;margin-left:5%;margin-right:5%;font-family:arial;" type="text" id="maps">
+                <p style="font-size:small;font-family:arial;">Maps for cup<br>make sure you type it like this example:<br>[{diff:1,id:"glass_walkway",name:"Glass Walkway"},{diff:1,id:"lucid_dreams",name:"Lucid Dreams"}]<br>the diff is the difficulty that map will show as</p>
+                <br>
+                <input type="file" accept="image/png" id="image">
+                <p style="font-size: small;">Image for cup (PNG only)</p>
+            </form>
+            <button onclick="SaveConfig()">Add Cup</button>
+            <br>
+            <p>Export/Import</p>
+            <input id="cupExport" type="number">
+            <p style="font-size: small;">Number of cup you made</p>
+            <button id="export" style="margin-right:5px" onclick="exportCup()">Export</button>
+            <button id="import" onclick="importCup()">Import</button>
+            <br>
+            <textarea style="color:black;font-size: xx-small;font-family: arial;" id="exportimport"></textarea>
+            <p>Custom Cups Added</p>
+        </div>
+        <div id="1" style="display:none;">
+            <h3>Custom Maps</h3>
+            <p style="font-size: small;">Name Of Map</p>
+            <input id="ImportMapId" type="text">
+            <p style="font-size: small;">Map Script</p>
+            <textarea style="color:black;font-size: xx-small;font-family: arial;" id="ImportCustomMap"></textarea>
+            <button id="importMap" onclick="ImportMap()">Import</button>
+        </div>
+        <div id="2" style="display:none;">
+            <h2>Tutorial</h2>
+            <h3>Mod Menu</h3>
+            <p>Click on the collapsible elements of the menu to see them</p>
+            <h3>Cheats</h3>
+            <p>All cheats exept god mode have to be toggled before you enter the level or if you die and restart</p>
+            <h3>Dodo Cinematics</h3>
+            <p>This is a tool for viewing maps and making freecam videos</p>
+            <p>Freecam: frees camera from player</p>
+            <p>Freeze Dodo: freezes dodo in place (must go menu and back to disable)</p>
+            <p>Follow Player: looks at the player at all times automatically</p>
+            <p>You can use the buttons or use ijkl controls to move + p; to move up and down</p>
+            <p>You can use the bottons or hold shift with ijkl to rotate camera</p>
+            <a href="https://discord.gg/hQvKAdEH5Q">Any questions?</a>
+        </div>
+        <p style="visibility:hidden;margin-bottom: 5%;">spacer</p>
+    </div>
+    <script type="text/javascript">
+        if (localStorage.getItem("CupNames") == null){
+            localStorage.setItem("CupNames",JSON.stringify([]))
+        }
+        if (localStorage.getItem("CupMaps") == null){
+            localStorage.setItem("CupMaps",JSON.stringify([]))
+        }
+        if (localStorage.getItem("CupImages") == null){
+            localStorage.setItem("CupImages",JSON.stringify([]))
+        }
+        if (localStorage.getItem("CustomMaps") == null){
+            localStorage.setItem("CustomMaps",JSON.stringify([]))
+        }
+        function LocalList(name) {return JSON.parse(localStorage.getItem(name))}
+        function SaveConfig(){
+            var name = document.getElementById("name").value;
+            var maps = document.getElementById("maps").value;
+            var image = document.getElementById("image").files[0];
+
+            var cupNames = LocalList("CupNames");
+            cupNames.push(name);
+            localStorage.setItem("CupNames", JSON.stringify(cupNames));
+
+            var cupMaps = LocalList("CupMaps");
+            cupMaps.push(maps.replace(/\s/g, ""));
+            localStorage.setItem("CupMaps", JSON.stringify(cupMaps));
+
+            var reader = new FileReader();
+            reader.onload = function(){
+                var base64 = reader.result;
+                var cupImages = LocalList("CupImages");
+                cupImages.push(base64);
+                localStorage.setItem("CupImages", JSON.stringify(cupImages));
+            };
+            reader.readAsDataURL(image);
+            window.location.reload();
+        }
+        const Cupmenu = document.getElementById("0");
+        function GetCustomCups(){
+            for (let i = 0; i < LocalList("CupNames").length; i++){ {
+                Cupmenu.innerHTML += "<div style='padding:5px;border: 2px solid #1e1e1e;border-radius: 5px;width:10vw;height:10vw; background-image: url("+LocalList("CupImages")[i]+");background-size: cover;'><p style='padding:2px;border:2px solid #bbbbbb;background: #8A0468;border-radius: 5px;position:relative;top:20%;width-min:50%;font-size:70%;width:fit-content;overflow-wrap: break-word;'>"+LocalList("CupNames")[i]+"</p></div>";
+            }}
+        }
+        GetCustomCups();
+        function exportCup() {
+            let cupNum = document.getElementById("cupExport").value;
+            let ExportName = JSON.parse(localStorage.getItem("CupNames"))[cupNum];
+            let ExportMaps = JSON.parse(localStorage.getItem("CupMaps"))[cupNum];
+            let ExportImage = JSON.parse(localStorage.getItem("CupImages"))[cupNum];
+            console.log(document.getElementById('exportimport').value = "['"+ExportName+"'"+","+ExportMaps+","+"'"+ExportImage+"']");
+            let Export = [ExportName, ExportMaps, ExportImage]; 
+            document.getElementById('exportimport').value = JSON.stringify([Export]);
+        }
+        function importCup() {
+            let Import = JSON.parse(document.getElementById('exportimport').value);
+            console.log(Import);
+            let ImportName = Import[0][0];
+            let ImportMaps = Import[0][1];
+            let ImportImage = Import[0][2];
+            console.log(ImportName, ImportMaps, ImportImage);
+            
+            let cupNames = LocalList("CupNames");
+            cupNames.push(ImportName);
+            localStorage.setItem("CupNames", JSON.stringify(cupNames));
+
+            let cupMaps = LocalList("CupMaps");
+            cupMaps.push(ImportMaps);
+            localStorage.setItem("CupMaps", JSON.stringify(cupMaps));
+
+            let cupImages = LocalList("CupImages");
+            cupImages.push(ImportImage);
+            localStorage.setItem("CupImages", JSON.stringify(cupImages));
+
+            window.location.reload();
+        }
+        const MaxIndex = 2;
+        let currentIndex = 0;
+        function cycleRight() {
+            if (currentIndex < MaxIndex) {
+                currentIndex++;
+                document.getElementById((currentIndex-1).toString()).style.display = "none";
+                document.getElementById(currentIndex.toString()).style.display = "block";
+            }
+            else {
+                currentIndex = 0;
+                document.getElementById(MaxIndex.toString()).style.display = "none";
+                document.getElementById(currentIndex.toString()).style.display = "block";
+            }
+        }
+        function cycleLeft() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                document.getElementById((currentIndex+1).toString()).style.display = "none";
+                document.getElementById(currentIndex.toString()).style.display = "block";
+            }
+            else {
+                currentIndex = MaxIndex;
+                document.getElementById("0").style.display = "none";
+                document.getElementById(currentIndex.toString()).style.display = "block";
+            }
+        }
+        function ImportMap() {
+            let ImportMap = document.getElementById("ImportCustomMap").value;
+            let ImportMapId = document.getElementById("ImportMapId").value;
+            let CustomMaps = LocalList("CustomMaps");
+            CustomMaps.push({id: ImportMapId, map: ImportMap});
+            console.log(CustomMaps)
+            localStorage.setItem("CustomMaps", JSON.stringify(CustomMaps));
+        }
+        console.log(JSON.parse(localStorage.getItem("CustomMaps")))
+    </script>
+    
+</center></body></html>
