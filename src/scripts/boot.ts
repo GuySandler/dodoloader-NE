@@ -1,5 +1,6 @@
 /* eslint-disable */
-
+import {start} from './start';
+import {decorations} from './decorations';
 var boot = {
     didPreload: false,
     preload: async function() {

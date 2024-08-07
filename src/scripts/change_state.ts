@@ -1,5 +1,6 @@
 /* eslint-disable */
-
+import * as BABYLON from "@babylonjs/core";
+// needs imports
 var change_state = {
 	die: function(deathMessage) {
 		if (!alive) return

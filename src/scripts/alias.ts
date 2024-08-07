@@ -1,4 +1,9 @@
 /* eslint-disable */
+import * as BABYLON from "@babylonjs/core";
+import { maker } from "./maker";
+import { scene, player, camera } from "./start";
+import { cc, default_speed, default_gravity, default_steer } from "./const_controller";
+// still needs more imports
 
 const IS_ICEPARTY = false;
 
@@ -43,12 +48,12 @@ var a = {
             mesh.physicsImpostor.setAngularVelocity(new BABYLON.Quaternion(0,0,0,0));
         }
     },
-    g: function(x,y,z) {
-        let vec = cc.get("gravity", {
-            x: (x != null) ? x*default_gravity : null,
-            y: (y != null) ? y*default_gravity : null,
-            z: (z != null) ? z*default_gravity : null
-        });
+    g: function(x, y, z) {
+        let vec = { // had to fix, might be a problem
+            x: (x !== null && x !== undefined) ? x * default_gravity : 0,
+            y: (y !== null && y !== undefined) ? y * default_gravity : 0,
+            z: (z !== null && z !== undefined) ? z * default_gravity : 0
+        };
         gravity = vec;
         scene.getPhysicsEngine().setGravity(vec);
     },
@@ -95,7 +100,7 @@ var a = {
         scene.getMeshByName(id).unfreezeWorldMatrix();
     },
     msg_set: function(text) {
-        window.tsTriggers.setInGameMessage(text)
+        window.tsTriggers.setInGameMessage(text) // window vars might have a problem
     },
     msg_del: function() {
         window.tsTriggers.hideInGameMessage()

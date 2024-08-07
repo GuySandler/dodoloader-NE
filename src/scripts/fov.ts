@@ -1,6 +1,5 @@
 /* eslint-disable */
 
-
 var fov = {
 	radius: 1,
 	y_offset: 2,

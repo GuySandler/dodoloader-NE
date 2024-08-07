@@ -1,6 +1,8 @@
 /* eslint-disable */
+import * as BABYLON from "@babylonjs/core";
+
 let KILLER_BOUNCE = 999999
-var maker = {
+export var maker = {
     platform_count: 0,
     cone_count: 0,
     cylinder_count: 0,

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as BABYLON from "@babylonjs/core";
 
 const INF = 90000000000000;
 
@@ -38,7 +39,7 @@ var cam_depression = 0;
 var cc = {
 	default: {},
 	monkey: {},
-	set_default: function() {
+	set_default: function() { // need to fix whatever this is
 		this.default["camera.maxZ"] = () => {return 300};
 		this.default["camera.fov mul2"] = () => {return 1};
 		this.default["light.intensity"] = () => {return 1.0};
@@ -142,3 +143,4 @@ var cc = {
 	}
 }
 
+export { cc, INF, default_speed, default_radius, default_steer, default_gravity, physics_call_rate, default_cameraDownAngle, default_cameraRightAngle, default_jumpSpeed, default_jumpHeight, speed, steer, gravity, jumpSpeed, jumpHeight, radius, cameraDownAngle, cameraRightAngle, cam_horizontal, cam_vertical, cam_depression };

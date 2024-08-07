@@ -1,10 +1,11 @@
 /* eslint-disable */
+import * as BABYLON from "@babylonjs/core";
 
 var decorations = {
     materials: {},
     idno: 0,
     skybox: null,
-    init: function() {
+    init: function() { // fix this
         // GENERAL
         this.materials.invis = this.rgba_mat(0,0,0,0);
         this.materials.ending = this.rgba_mat(36, 252, 3, 0.5);
@@ -248,3 +249,4 @@ var decorations = {
         }
     }
 }
+export {decorations};
