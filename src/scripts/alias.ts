@@ -141,3 +141,5 @@ var a = {
         maker.og_tree(p1,p2,p3);
     }
 }
+
+export { a };

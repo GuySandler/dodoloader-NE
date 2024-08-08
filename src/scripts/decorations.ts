@@ -1,15 +1,58 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
+import {scene} from "./start";
+interface Decorations { // I used AI to help me make this monstrosity of a type because whatever I tried didn't work (and this still isn't perfect, gotta review it)
+    materials: { [key: string]: any };
+    idno: number;
+    skybox: BABYLON.Mesh | null;
+    bright?: BABYLON.StandardMaterial;
+    dark?: BABYLON.StandardMaterial;
+    flare?: BABYLON.StandardMaterial;
+    icedd?: BABYLON.StandardMaterial;
+    pm1?: BABYLON.StandardMaterial;
+    pm2?: BABYLON.StandardMaterial;
+    plat0?: BABYLON.StandardMaterial;
+    plat1?: BABYLON.StandardMaterial;
+    plat2?: BABYLON.StandardMaterial;
+    plat3?: BABYLON.StandardMaterial;
+    plat5?: BABYLON.StandardMaterial;
+    plat6?: BABYLON.StandardMaterial;
+    plat7?: BABYLON.StandardMaterial;
+    plat8?: BABYLON.StandardMaterial;
+    cone0?: BABYLON.StandardMaterial;
+    cone1?: BABYLON.StandardMaterial;
+    cylinder0?: BABYLON.StandardMaterial;
+    cylinder1?: BABYLON.StandardMaterial;
+    cylinder2?: BABYLON.StandardMaterial;
+    cylinder3?: BABYLON.StandardMaterial;
+    cylinder4?: BABYLON.StandardMaterial;
+    cylinder5?: BABYLON.StandardMaterial;
+    cylinder6?: BABYLON.StandardMaterial;
+    cylinder7?: BABYLON.StandardMaterial;
+    sphere0?: BABYLON.StandardMaterial;
+    sphere1?: BABYLON.StandardMaterial;
+    sphere2?: BABYLON.StandardMaterial;
+    sphere3?: BABYLON.StandardMaterial;
+    sphere4?: BABYLON.StandardMaterial;
+    init: () => void;
+    decorate: (obj: any, mat_id: string) => void;
+    decorate_player: (mesh: any, skinUrl: string) => void;
+    rgba_mat: (r: number, g: number, b: number, a: number, backFaceCulling?: boolean) => BABYLON.StandardMaterial;
+    add_particle_system: () => void;
+    addOrRemoveSkybox: () => void;
+    hexToRgb: (hex: string) => { r: number; g: number; b: number; a: number };
+    decorateCustomLevel: (meshes: BABYLON.AbstractMesh[], platforms: BABYLON.AbstractMesh[], cones: BABYLON.AbstractMesh[], ends: BABYLON.AbstractMesh[], TextureName: string[], TextureColor: { r: number; g: number; b: number; a: number }[]) => void;
+}
 
-var decorations = {
+const decorations: Decorations = {
     materials: {},
     idno: 0,
     skybox: null,
     init: function() { // fix this
         // GENERAL
-        this.materials.invis = this.rgba_mat(0,0,0,0);
+        this.materials.invis = this.rgba_mat(0, 0, 0, 0);
         this.materials.ending = this.rgba_mat(36, 252, 3, 0.5);
-        this.materials.player = this.rgba_mat(255, 255, 255,1.0);;
+        this.materials.player = this.rgba_mat(255, 255, 255, 1.0);
 
         // PLATFORM
         this.bright = new BABYLON.StandardMaterial("brightmat", scene);
@@ -72,20 +115,20 @@ var decorations = {
         this.materials.plat3.alpha = 0.55;
         this.materials.plat3.backFaceCulling = true;
         this.materials.plat3.freeze();
-        
 
-        this.materials.plat5 = this.rgba_mat(255,0,0,1, true); // fire
 
-        this.materials.plat6 = this.rgba_mat(34,139,34,0.4, true); // green
-        
-        this.materials.plat7 = this.rgba_mat(165,42,42,0.8, true); // brown
+        this.materials.plat5 = this.rgba_mat(255, 0, 0, 1, true); // fire
 
-        this.materials.plat8 = this.rgba_mat(64,164,223,0.2, true); // water
+        this.materials.plat6 = this.rgba_mat(34, 139, 34, 0.4, true); // green
+
+        this.materials.plat7 = this.rgba_mat(165, 42, 42, 0.8, true); // brown
+
+        this.materials.plat8 = this.rgba_mat(64, 164, 223, 0.2, true); // water
 
         // CONE
-        this.materials.cone0 = this.rgba_mat(235,50,50,1.0);
+        this.materials.cone0 = this.rgba_mat(235, 50, 50, 1.0);
 
-        this.materials.cone1 = this.rgba_mat(65, 174, 217,1.0);
+        this.materials.cone1 = this.rgba_mat(65, 174, 217, 1.0);
 
         // CYLINDER
         this.materials.cylinder0 = this.rgba_mat(40, 60, 235, 0.8);
@@ -102,13 +145,13 @@ var decorations = {
         this.materials.cylinder3.backFaceCulling = true;
         this.materials.cylinder3.freeze();
 
-        this.materials.cylinder4 = this.rgba_mat(255,0,0,1, true); // fire
+        this.materials.cylinder4 = this.rgba_mat(255, 0, 0, 1, true); // fire
 
-        this.materials.cylinder5 = this.rgba_mat(34,139,34,0.4, true); // green
-        
-        this.materials.cylinder6 = this.rgba_mat(165,42,42,0.8, true); // brown
+        this.materials.cylinder5 = this.rgba_mat(34, 139, 34, 0.4, true); // green
 
-        this.materials.cylinder7 = this.rgba_mat(64,164,223,0.2, true); // water
+        this.materials.cylinder6 = this.rgba_mat(165, 42, 42, 0.8, true); // brown
+
+        this.materials.cylinder7 = this.rgba_mat(64, 164, 223, 0.2, true); // water
 
         // SPHERE
         this.materials.sphere0 = this.rgba_mat(40, 60, 235, 0.8);
@@ -141,18 +184,18 @@ var decorations = {
         pmat.freeze();
         mesh.material = pmat;
     },
-    rgba_mat: function(r,g,b,a, backFaceCulling=false) {
+    rgba_mat: function(r, g, b, a, backFaceCulling = false) {
         this.idno += 1;
         let customMat = new BABYLON.StandardMaterial("mat" + this.idno, scene);
-        customMat.diffuseColor = new BABYLON.Color3(r/255, g/255, b/255);
+        customMat.diffuseColor = new BABYLON.Color3(r / 255, g / 255, b / 255);
         customMat.alpha = a;
         customMat.backFaceCulling = backFaceCulling;
         customMat.freeze();
         return customMat;
     },
-    add_particle_system: function () {
+    add_particle_system: function() {
         let ps = new BABYLON.ParticleSystem("particles", 2000, scene);
-        //Texture of each particle//textures/flare
+        // Texture of each particle
         ps.particleTexture = new BABYLON.Texture("assets/textures/flare.png", scene);
         // Where the particles come from
         ps.emitter = player; // the starting object, the emitter
@@ -232,21 +275,24 @@ var decorations = {
         // let platforms = scene.getMeshesByTags("platform");
         // let cones = scene.getMeshesByTags("cone");
         // let ends = scene.getMeshesByTags("end");
-        for (let i=0;i<meshes.length;i++) {
-            if (BABYLON.Tags.MatchesQuery(meshes[i], "end")) {meshes[i].material = decorations.materials.ending}
-            else if (BABYLON.Tags.MatchesQuery(meshes[i], "cone")) {meshes[i].material = decorations.rgba_mat(235,50,50,1.0)}
-            // if (TextureName[i].slice(0, 3) == "mat") {
+        for (let i = 0; i < meshes.length; i++) {
+            if (BABYLON.Tags.MatchesQuery(meshes[i], "end")) {
+                meshes[i].material = decorations.materials.ending
+            } else if (BABYLON.Tags.MatchesQuery(meshes[i], "cone")) {
+                meshes[i].material = decorations.rgba_mat(235, 50, 50, 1.0)
+            } // if (TextureName[i].slice(0, 3) == "mat") {
             //     else {meshes[i].material = decorations.rgba_mat(TextureColor[i].r*255,TextureColor[i].r*255,TextureColor[i].r*255,1.0)}
             // }
             else {
-                if (TextureName[i] == 'darkmat'){meshes[i].material = decorations.dark}
-                else if (TextureName[i] == 'flaremat'){meshes[i].material = decorations.flare}
-                else if (TextureName[i] == 'iceddmat'){meshes[i].material = decorations.icedd}
-                else if (TextureName[i] == 'pm1mat'){meshes[i].material = decorations.pm1}
-                else if (TextureName[i] == 'pm2mat'){meshes[i].material = decorations.pm2}
-                else{meshes[i].material = decorations.bright}
+                if (TextureName[i] == 'darkmat') { meshes[i].material = decorations.dark }
+                else if (TextureName[i] == 'flaremat') { meshes[i].material = decorations.flare }
+                else if (TextureName[i] == 'iceddmat') { meshes[i].material = decorations.icedd }
+                else if (TextureName[i] == 'pm1mat') { meshes[i].material = decorations.pm1 }
+                else if (TextureName[i] == 'pm2mat') { meshes[i].material = decorations.pm2 }
+                else { meshes[i].material = decorations.bright }
             }
         }
     }
 }
-export {decorations};
+
+export { decorations };

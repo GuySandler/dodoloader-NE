@@ -16549,5 +16549,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
 }
 const VSingleplayer = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-ebd70a9e"]]);
 export {
-  VSingleplayer as default
+  VSingleplayer
 };

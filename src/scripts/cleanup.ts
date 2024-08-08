@@ -1,5 +1,7 @@
 /* eslint-disable */
-
+import {maker} from "./maker";
+import {scene} from "./start";
+import {cc} from "./const_controller";
 var cleanup = {
 	run: function(full_reset=true) {
 		if (isMapLoaded == false) {

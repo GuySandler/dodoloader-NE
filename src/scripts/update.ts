@@ -1,5 +1,11 @@
 /* eslint-disable */
-
+import {scene, camera, player, light, cape_tail, cape_wings} from "./start";
+// import {map} from "./map";
+import {flyjump} from "./flyjump";
+import {maker} from "./maker";
+import {change_state} from "./change_state";
+// import {cones, endings} from "./start";
+// import {cape_wings, cape_tail} from "./decorations";
 
 var update = {
 	loop: function() {

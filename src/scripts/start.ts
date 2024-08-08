@@ -1,5 +1,6 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
+import { decorations } from "./decorations";
 // needs decorations import
 // game objects
 var camera = null;

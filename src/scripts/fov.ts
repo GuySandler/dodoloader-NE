@@ -1,12 +1,13 @@
 /* eslint-disable */
-
+import {VSingleplayer} from "../assets/VSingleplayer";
+import {camera} from "./start";
 var fov = {
 	radius: 1,
 	y_offset: 2,
 	mul1: 1,
 	mul2: 1,
 	init: function() {
-		this.set_mul1(settings.fovLevel);
+		this.set_mul1(VSingleplayer.settings.fovLevel);
 		this.apply();
 	},
 	set_mul1: function(option) {
@@ -35,3 +36,4 @@ var fov = {
 		camera.fov = Math.min(intensity, 2.8);
 	}
 }
+export { fov }
