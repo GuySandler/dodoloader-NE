@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as BABYLON from "@babylonjs/core";
+// import * as BABYLON from "@babylonjs/core";
 // import { player } from "./start";
 var flyjump = {
 	can_jump: false,

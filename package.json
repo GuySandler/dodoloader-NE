@@ -5,19 +5,16 @@
     "main": "index.js",
     "dependencies": {
         "babylon": "^6.18.0",
-        "browserify": "^17.0.0",
+        "cannon": "^0.6.2",
         "esbuild": "^0.21.5",
         "i": "^0.3.7",
         "jquery": "^3.7.1",
         "nanoid": "^3.3.7",
-        "npm": "^10.8.2",
         "picocolors": "^1.0.1",
         "postcss": "^8.4.41",
-        "reading-time": "^1.5.0",
         "rollup": "^4.20.0",
         "source-map-js": "^1.2.0",
-        "typescript": "^5.5.4",
-        "watchify": "^4.0.0"
+        "typescript": "^5.5.4"
     },
     "scripts": {
         "dev": "vite",

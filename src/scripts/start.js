@@ -1,11 +1,11 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
 // import { decorations } from "./decorations";
-// needs decorations import
+import decorations from "./decorations";
 // game objects
 var camera = null;
 var light = null;
-var player = null;
+export var player = null;
 var cape_wings = null;
 var cape_tail = null;
 
@@ -16,8 +16,8 @@ var driftPads = [];
 
 // game essentials
 var canvas = null;
-var engine = null;
-var scene = null;
+export var engine = null;
+export var scene = null;
 
 // game variables
 var rotation = 0;
@@ -130,3 +130,4 @@ var start = {
 }
 
 // export {scene, player, camera, light, cape_wings, cape_tail, start, currentMapId, isMapLoaded, currentRoute, rotation, isTouchingDriftPad, isSpectating, spectateAnimationValue, endings, cones, jumppads, driftPads};
+export default start;

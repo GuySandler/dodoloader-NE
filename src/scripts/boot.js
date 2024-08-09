@@ -1,13 +1,20 @@
 /* eslint-disable */
-
-var boot = {
+import start from './start.js';
+import decorations from './decorations.js';
+import {maker} from './maker.js';
+// console.log(maker) I had an undefined issue solved by just adding {} to the import. I hate this
+// console.log('Logging maker:', maker);
+// console.log('Type of maker:', typeof maker);
+// console.log('Maker keys:', Object.keys(maker));
+// console.log('Maker init method:', maker.init);
+export var boot = {
     didPreload: false,
     preload: async function() {
         if (this.didPreload) return;
         this.didPreload = true;
         await start.init();
         await decorations.init();
-        await maker.init();
+        maker.init();
         await start.create_scene();
         await cc.set_default();
         await decorations.add_particle_system();
@@ -29,3 +36,4 @@ var boot = {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+// export default {boot};

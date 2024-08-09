@@ -1,6 +1,8 @@
 /* eslint-disable */
+import * as BABYLON from "@babylonjs/core";
+import { scene, player } from "./start"
 
-var decorations = {
+export var decorations = {
     materials: {},
     idno: 0,
     skybox: null,
@@ -248,3 +250,4 @@ var decorations = {
         }
     }
 }
+export default decorations;

@@ -1,9 +1,11 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
+import { scene } from "./start";
+import { decorations } from "./decorations";
 // import {decorations} from "./decorations";
 // import {jumppads, driftPads, cones, endings} from "./start"
 let KILLER_BOUNCE = 999999
-var maker = {
+export var maker = {
     platform_count: 0,
     cone_count: 0,
     cylinder_count: 0,
@@ -13,6 +15,7 @@ var maker = {
     plat2: null,
     plat3: null,
     init: function() {
+        console.log('Maker init called');
         this.add_root_meshes("cone", 2, (i) => {
             return BABYLON.Mesh.CreateCylinder("cone"+i, 1.0, 0.0, 1.0, 5, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
         });
@@ -289,9 +292,10 @@ var maker = {
         cylinderXD.rotation.x = (rotationX * (Math.PI / 180)); // complete
         cylinderXD.rotation.y = (rotationY * (Math.PI / 180)); // complete
         cylinderXD.rotation.z = (rotationZ * (Math.PI / 180)); // complete
-        
+
         this.cylinder_count += 1;
     }
 }
-
+console.log(maker.init)
 // export {maker};
+export default {maker};

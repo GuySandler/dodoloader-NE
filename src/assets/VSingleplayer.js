@@ -1,4 +1,10 @@
 import * as BABYLON from "@babylonjs/core";
+import {boot} from "../scripts/boot"
+import {engine} from "../scripts/start"
+import cannon from "cannon";
+
+window.CANNON = cannon;
+
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => {
@@ -224,7 +230,7 @@ class SkinUtils {
     if (skinId > 57) {
         return JSON.parse(localStorage.getItem("CupImages"))[skinId-58]
     }
-    else {return `/assets/skins/${skinName}.png`;}
+    else {return `src/assets/skins/${skinName}.png`;}
   }
   static getPercent(progress) {
     return progress.completedMaps / progress.totalMaps;
@@ -1033,7 +1039,7 @@ class FSinglePopupManager {
                     <li>Turn on "Use hardware acceleration when available"</li>
                     <li>Click the "Relaunch" button</li>
                 </ul>
-                <img src="/assets/other/engine_error.gif" style="width: 100%" />
+                <img src="src/assets/other/engine_error.gif" style="width: 100%" />
             `,
       buttons: [{
         text: CLOSE_BUTTON_TEXT,
@@ -1224,7 +1230,7 @@ class FSinglePopupManager {
                 Use the arrow keys to move.<br>dfskhklfasdilfisdahfl
                 Hit the green portal to win.<br>
                 Do not fall off or hit the spikes.<br>
-                <img style="width: 140px;" src="/assets/icons/controls.png" alt="controls">
+                <img style="width: 140px;" src="src/assets/icons/controls.png" alt="controls">
                 <br><br>
                 In-game keyboard shortcuts:
                 <ul>
@@ -14447,7 +14453,7 @@ class FBaseSoundPlayer {
     const isSoundOn = await FStorage.getString(StorageKeyEnum.IsSoundOn);
     this.isSoundOn = isSoundOn === StorageValueEnum.On;
     const svgName = this.isSoundOn ? "sound-on.svg" : "sound-off.svg";
-    this.overlayToggleSoundImg.src = "/assets/svgs/" + svgName;
+    this.overlayToggleSoundImg.src = "src/assets/svgs/" + svgName;
   }
   async createBackgroundMusic() {
     const musicType = await FStorage.getString(StorageKeyEnum.SelectedSoundtrack);
@@ -14820,15 +14826,15 @@ const _sfc_main$e = defineComponent({
     }
   }
 });
-const _imports_0$4 = "/assets/svgs/fullscreen.svg";
-const _imports_0$3 = "/assets/svgs/sound-on.svg";
-const _imports_2$2 = "/assets/svgs/arrow-left.svg";
-const _imports_1$2 = "/assets/svgs/jump_enabled.svg";
-const _imports_1$3 = "/assets/svgs/arrow-left.svg";
-const _imports_2$1 = "/assets/svgs/controls_reversed.svg";
-const _imports_3$1 = "/assets/svgs/drift_enabled.svg";
-const _imports_7$1 = "/assets/svgs/help.svg";
-const _imports_7 = "/assets/svgs/info.svg";
+const _imports_0$4 = "src/assets/svgs/fullscreen.svg";
+const _imports_0$3 = "src/assets/svgs/sound-on.svg";
+const _imports_2$2 = "src/assets/svgs/arrow-left.svg";
+const _imports_1$2 = "src/assets/svgs/jump_enabled.svg";
+const _imports_1$3 = "src/assets/svgs/arrow-left.svg";
+const _imports_2$1 = "src/assets/svgs/controls_reversed.svg";
+const _imports_3$1 = "src/assets/svgs/drift_enabled.svg";
+const _imports_7$1 = "src/assets/svgs/help.svg";
+const _imports_7 = "src/assets/svgs/info.svg";
 const VGame_vue_vue_type_style_index_0_scoped_31fa11aa_lang = "";
 const _withScopeId$9 = (n2) => (pushScopeId("data-v-31fa11aa"), n2 = n2(), popScopeId(), n2);
 const _hoisted_1$e = { id: "gameMain" };
@@ -15000,7 +15006,7 @@ const _sfc_main$c = defineComponent({
     this.isStickyVisible = true;
   }
 });
-const _imports_0$2 = "/assets/svgs/cross.svg";
+const _imports_0$2 = "src/assets/svgs/cross.svg";
 const VSticky_vue_vue_type_style_index_0_scoped_92828c32_lang = "";
 const _hoisted_1$c = {
   key: 0,
@@ -15175,15 +15181,15 @@ const _sfc_main$a = defineComponent({
   },
   components: { VMapListing, VSticky, VBrewListing }
 });
-const _imports_0$1 = "/assets/svgs/skins.svg";
-const _imports_1$1 = "/assets/svgs/finder.svg";
-const _imports_2 = "/assets/svgs/settings.svg";
-const _imports_3 = "/assets/svgs/multiplayer.svg";
-const _imports_4 = "/assets/svgs/sync.svg";
-const _imports_5 = "/assets/svgs/caret-left-fill.svg";
-const _imports_6 = "/assets/svgs/caret-right-fill.svg";
-const _imports_8 = "/assets/icons/discord.svg";
-const _imports_9 = "/assets/icons/instagram.svg";
+const _imports_0$1 = "src/assets/svgs/skins.svg";
+const _imports_1$1 = "src/assets/svgs/finder.svg";
+const _imports_2 = "src/assets/svgs/settings.svg";
+const _imports_3 = "src/assets/svgs/multiplayer.svg";
+const _imports_4 = "src/assets/svgs/sync.svg";
+const _imports_5 = "src/assets/svgs/caret-left-fill.svg";
+const _imports_6 = "src/assets/svgs/caret-right-fill.svg";
+const _imports_8 = "src/assets/icons/discord.svg";
+const _imports_9 = "src/assets/icons/instagram.svg";
 const VMenu_vue_vue_type_style_index_0_scoped_c2338e83_lang = "";
 const _withScopeId$6 = (n2) => (pushScopeId("data-v-c2338e83"), n2 = n2(), popScopeId(), n2);
 const _hoisted_1$a = { class: "menuMain" };
@@ -15460,7 +15466,7 @@ const _sfc_main$9 = defineComponent({
   mounted() {
   }
 });
-const _imports_0 = "/assets/svgs/back_arrow.svg";
+const _imports_0 = "src/assets/svgs/back_arrow.svg";
 const VCredits_vue_vue_type_style_index_0_scoped_c7113168_lang = "";
 const _withScopeId$5 = (n2) => (pushScopeId("data-v-c7113168"), n2 = n2(), popScopeId(), n2);
 const _hoisted_1$9 = { class: "titleWithIcon" };
@@ -16125,7 +16131,7 @@ const _sfc_main$2 = defineComponent({
       this.selectedSkinId = selectedSkinId;
   }
 });
-const _imports_1 = "/assets/svgs/lock.svg";
+const _imports_1 = "src/assets/svgs/lock.svg";
 const VSkins_vue_vue_type_style_index_0_scoped_1a1c1d8c_lang = "";
 const _withScopeId = (n2) => (pushScopeId("data-v-1a1c1d8c"), n2 = n2(), popScopeId(), n2);
 const _hoisted_1$2 = { class: "titleWithIcon" };
