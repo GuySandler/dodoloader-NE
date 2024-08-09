@@ -1,7 +1,22 @@
 /* eslint-disable */
-import start from './start.js';
-import decorations from './decorations.js';
+import {start} from './start.js';
+import {decorations} from './decorations.js';
 import {maker} from './maker.js';
+import {fov} from './fov.js';
+// import map from "window.currentMapId";
+import {map} from "../maps/infiltration.js";
+import {cc} from './const_controller.js';
+// import System from 'es-module-loader/core/loader-polyfill.js';
+// System.import("../maps/"+window.currentMapId).then(function(m) {
+//     console.log(m);
+//   });
+// async function importModule() {
+//     try {
+//        const module = await import("../maps/"+window.currentMapId);
+//     } catch (error) {
+//        console.log('import failed');
+//     }
+//  }
 // console.log(maker) I had an undefined issue solved by just adding {} to the import. I hate this
 // console.log('Logging maker:', maker);
 // console.log('Type of maker:', typeof maker);

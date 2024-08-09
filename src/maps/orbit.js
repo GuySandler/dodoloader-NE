@@ -25,7 +25,7 @@ break;case 6:camera.position.x=-17.1789;camera.position.z=-1612.05;if(score>840)
 a.msg_set("With each planet destroyed, the remaining will orbit a little slower.");this.section_id+=1}
 break;case 7:camera.position.x=-17.1789;camera.position.z=-1612.05;if(score>1080||this.skip){steer=default_steer;cam_horizontal=this.ch;cam_vertical=this.cv;cam_depression=this.cd;speed=10*default_speed;radius=12;a.cam_d(radius);a.msg_del()
 a.msg_set("Crash into a planet to destroy it!")
-const skymat1=new BABYLON.StandardMaterial("skyBox1",scene);skymat1.backFaceCulling=false;const texture1=new BABYLON.Texture("assets/textures/skybox.jpg",scene);skymat1.reflectionTexture=texture1;skymat1.reflectionTexture.coordinatesMode=BABYLON.Texture.SPHERICAL_MODE;skymat1.disableLighting=true;skybox1=BABYLON.Mesh.CreateBox("skyBox1",5000,scene);skybox1.infiniteDistance=true;skybox1.material=skymat1;skymat1.freeze();this.ss=score
+const skymat1=new BABYLON.StandardMaterial("skyBox1",scene);skymat1.backFaceCulling=false;const texture1=new BABYLON.Texture("src/assets/textures/skybox.jpg",scene);skymat1.reflectionTexture=texture1;skymat1.reflectionTexture.coordinatesMode=BABYLON.Texture.SPHERICAL_MODE;skymat1.disableLighting=true;skybox1=BABYLON.Mesh.CreateBox("skyBox1",5000,scene);skybox1.infiniteDistance=true;skybox1.material=skymat1;skymat1.freeze();this.ss=score
 this.section_id+=1}
 break;case 8:if(score>this.ss+120){a.msg_del()
 a.msg_set("Hold space for a burst of speed but slower turning.")
@@ -60,7 +60,7 @@ a.re('S0',[0.37007-(-17.17993),0.50007-0.50042,-1298.91993-(-1612.04958)],[0,0,0
 
         var particleSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
         
-        particleSystem.particleTexture = new BABYLON.Texture("assets/textures/flare.png", scene);
+        particleSystem.particleTexture = new BABYLON.Texture("src/assets/textures/flare.png", scene);
         
         particleSystem.minLifeTime = 0.3;
         particleSystem.maxLifeTime = 1.5;

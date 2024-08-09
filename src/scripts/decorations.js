@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
 import { scene, player } from "./start"
+import { IS_ICEPARTY } from "./alias";
 
 export var decorations = {
     materials: {},
@@ -14,43 +15,43 @@ export var decorations = {
 
         // PLATFORM
         this.bright = new BABYLON.StandardMaterial("brightmat", scene);
-        this.bright.diffuseTexture = new BABYLON.Texture("assets/textures/bright.png", scene);
+        this.bright.diffuseTexture = new BABYLON.Texture("src/assets/textures/bright.png", scene);
         this.bright.diffuseTexture.uScale = this.bright.diffuseTexture.vScale = 1.0;
         this.bright.backFaceCulling = true; // false;
         this.bright.freeze();
 
         this.dark = new BABYLON.StandardMaterial("darkmat", scene);
-        this.dark.diffuseTexture = new BABYLON.Texture("assets/textures/dark.png", scene);
+        this.dark.diffuseTexture = new BABYLON.Texture("src/assets/textures/dark.png", scene);
         this.dark.diffuseTexture.uScale = this.dark.diffuseTexture.vScale = 1.0;
         this.dark.backFaceCulling = true; // false;
         this.dark.freeze();
 
         this.flare = new BABYLON.StandardMaterial("flaremat", scene);
-        this.flare.diffuseTexture = new BABYLON.Texture("assets/textures/flare.png", scene);
+        this.flare.diffuseTexture = new BABYLON.Texture("src/assets/textures/flare.png", scene);
         this.flare.diffuseTexture.uScale = this.flare.diffuseTexture.vScale = 1.0;
         this.flare.backFaceCulling = true; // false;
         this.flare.freeze();
 
         this.icedd = new BABYLON.StandardMaterial("iceddmat", scene);
-        this.icedd.diffuseTexture = new BABYLON.Texture("assets/textures/icedd.png", scene);
+        this.icedd.diffuseTexture = new BABYLON.Texture("src/assets/textures/icedd.png", scene);
         this.icedd.diffuseTexture.uScale = this.icedd.diffuseTexture.vScale = 1.0;
         this.icedd.backFaceCulling = true; // false;
         this.icedd.freeze();
 
         this.pm1 = new BABYLON.StandardMaterial("pm1mat", scene);
-        this.pm1.diffuseTexture = new BABYLON.Texture("assets/textures/pm1.png", scene);
+        this.pm1.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm1.png", scene);
         this.pm1.diffuseTexture.uScale = this.pm1.diffuseTexture.vScale = 1.0;
         this.pm1.backFaceCulling = true; // false;
         this.pm1.freeze();
 
         this.pm2 = new BABYLON.StandardMaterial("pm2mat", scene);
-        this.pm2.diffuseTexture = new BABYLON.Texture("assets/textures/pm2.png", scene);
+        this.pm2.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm2.png", scene);
         this.pm2.diffuseTexture.uScale = this.pm2.diffuseTexture.vScale = 1.0;
         this.pm2.backFaceCulling = true; // false;
         this.pm2.freeze();
 
         this.skybox = new BABYLON.StandardMaterial("skyboxmat", scene);
-        this.skybox.diffuseTexture = new BABYLON.Texture("assets/textures/skybox.jpg", scene);
+        this.skybox.diffuseTexture = new BABYLON.Texture("src/assets/textures/skybox.jpg", scene);
         this.skybox.diffuseTexture.uScale = this.skybox.diffuseTexture.vScale = 1.0;
         this.skybox.backFaceCulling = true; // false;
         this.skybox.freeze();
@@ -58,13 +59,13 @@ export var decorations = {
         this.materials.plat0 = (settings.baseTexture === "dark") ? this.dark : this.bright;
 
         this.materials.plat1 = new BABYLON.StandardMaterial("plat1", scene);
-        this.materials.plat1.diffuseTexture = new BABYLON.Texture("assets/textures/pm1.png", scene);
+        this.materials.plat1.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm1.png", scene);
         this.materials.plat1.diffuseTexture.uScale = this.bright.diffuseTexture.vScale = 1.0;
         this.materials.plat1.backFaceCulling = false;
         this.materials.plat1.freeze();
 
         this.materials.plat2 = new BABYLON.StandardMaterial("plat2", scene);
-        this.materials.plat2.diffuseTexture = new BABYLON.Texture("assets/textures/pm2.png", scene);
+        this.materials.plat2.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm2.png", scene);
         this.materials.plat2.diffuseTexture.uScale = this.bright.diffuseTexture.vScale = 1.0;
         this.materials.plat2.backFaceCulling = false;
         this.materials.plat2.freeze();

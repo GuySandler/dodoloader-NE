@@ -1,5 +1,7 @@
 /* eslint-disable */
-
+import { camera, light, player, scene } from "./start.js";
+import { a } from "./alias.js";
+import * as BABYLON from "@babylonjs/core";
 const INF = 90000000000000;
 
 // defaults
@@ -8,34 +10,34 @@ let speedtoggle = document.getElementById("speedoverwrite")
 let speedOverwrite = document.getElementById("speed");
 
 let default_speed;
-const default_radius = 2.5;
-const default_steer = 0.022;
-const default_gravity = -9;
-const physics_call_rate = 2; // higher = better performance. lower = better accuracy.
-const default_cameraDownAngle = 0.3;
-const default_cameraRightAngle = 0;
-const default_jumpSpeed = 1;
-const default_jumpHeight = 1;
+export const default_radius = 2.5;
+export const default_steer = 0.022;
+export const default_gravity = -9;
+export const physics_call_rate = 2; // higher = better performance. lower = better accuracy.
+export const default_cameraDownAngle = 0.3;
+export const default_cameraRightAngle = 0;
+export const default_jumpSpeed = 1;
+export const default_jumpHeight = 1;
 
 
 // current
-var speed;// = default_speed;
-var steer;// = default_steer;
-var gravity;
+export var speed;// = default_speed;
+export var steer;// = default_steer;
+export var gravity;
 
-var jumpSpeed;
-var jumpHeight;
+export var jumpSpeed;
+export var jumpHeight;
 
-var radius;// = default_radius;
-var cameraDownAngle;// = default_cameraDownAngle;
-var cameraRightAngle;// = default_cameraRightAngle;
+export var radius;// = default_radius;
+export var cameraDownAngle;// = default_cameraDownAngle;
+export var cameraRightAngle;// = default_cameraRightAngle;
 
 // solved
-var cam_horizontal = 0;
-var cam_vertical = 0;
-var cam_depression = 0;
+export var cam_horizontal = 0;
+export var cam_vertical = 0;
+export var cam_depression = 0;
 
-var cc = {
+export var cc = {
 	default: {},
 	monkey: {},
 	set_default: function() {
@@ -142,3 +144,4 @@ var cc = {
 	}
 }
 
+export default {cc, default_speed, default_radius, default_steer, default_gravity, physics_call_rate, default_cameraDownAngle, default_cameraRightAngle, default_jumpSpeed, default_jumpHeight, INF};

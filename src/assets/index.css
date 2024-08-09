@@ -127,12 +127,6 @@
 .colorGray5 {
   color: #eeeeee;
 }
-
-@font-face {
-  font-family: "pixeled";
-  src: url("src/fonts/pixeled.ttf");
-}
-
 .buttonLarge {
   flex: 1;
   flex-grow: 0;
@@ -367,7 +361,7 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: black;
-  background-image: url("/assets/icons/validation2.svg");
+  background-image: url("./icons/validation2.svg");
   background-size: 100px;
   background-opa: 150px;
   font-family: "pixeled";
@@ -477,10 +471,6 @@ html ::-webkit-scrollbar, body ::-webkit-scrollbar {
 }
 .colorGray5[data-v-4be08e94] {
   color: #eeeeee;
-}
-@font-face {
-  font-family: "pixeled";
-  src: url("src/fonts/pixeled.ttf");
 }
 .buttonLarge[data-v-4be08e94] {
   flex: 1;

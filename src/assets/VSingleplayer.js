@@ -2,6 +2,7 @@ import * as BABYLON from "@babylonjs/core";
 import {boot} from "../scripts/boot"
 import {engine} from "../scripts/start"
 import cannon from "cannon";
+import { update } from "../scripts/update";
 
 window.CANNON = cannon;
 
@@ -1914,20 +1915,24 @@ async function GetMap(mapId, mapUrl, cupId, num){
 }
 class FMapLoader {
   static async loadMap(mapId, mapUrl, cupId, num) {
+    console.log(mapId)
     if (window.isMapLoaded) {
       console.error("Map already loaded");
       return;
     }
     window.currentMapId = mapId;
+    window.currentMapUrl = mapUrl;
     window.isMapLoaded = true;
     await GetMap(mapId, mapUrl, cupId, num)
   }
   static async loadScript(scriptUrl, cupId) {
     return new Promise((resolve2) => {
+        // I somehow need to inject import a from "../scripts/alias";export to all maps
       const head = document.getElementsByTagName("head")[0];
       const script = document.createElement("script");
-      script.type = "text/javascript";
-      if (scriptUrl.substring(0,4) == "/map") {script.src = scriptUrl;}
+      script.type = "module";
+      console.log(scriptUrl)
+      if (scriptUrl.substring(0,4) == "src/") {script.src = scriptUrl;}
       else {script.innerHTML = scriptUrl;}
       script.id = "map-script";
       head.appendChild(script);
@@ -1955,7 +1960,7 @@ class FMapLoader {
                     fetchUrl = 'src/JSON cups/dodoCup.json';
                     break;
                 default:
-                    return `/maps/${mapId}.js`;
+                    return "src/maps/" + mapId + ".js";
             }
 
             const response = await fetch(fetchUrl);
@@ -14458,7 +14463,7 @@ class FBaseSoundPlayer {
   async createBackgroundMusic() {
     const musicType = await FStorage.getString(StorageKeyEnum.SelectedSoundtrack);
     return A.from({
-      url: "/assets/" + this.getSoundTrackSelected(musicType ?? StorageValueEnum.MusicDefault),
+      url: "src/assets/" + this.getSoundTrackSelected(musicType ?? StorageValueEnum.MusicDefault),
       autoPlay: false,
       loop: true,
       volume: 0.35,
@@ -14468,7 +14473,7 @@ class FBaseSoundPlayer {
   }
   createMenuMusic() {
     return A.from({
-      url: "/assets/" + SoundFileEnum.Brink,
+      url: "src/assets/" + SoundFileEnum.Brink,
       autoPlay: false,
       loop: true,
       volume: 0.2,
@@ -14477,7 +14482,7 @@ class FBaseSoundPlayer {
     });
   }
   loadSound(audioUrl) {
-    const link = "/assets/" + audioUrl;
+    const link = "src/assets/" + audioUrl;
     return A.from(link);
   }
   getSoundTrackSelected(Music) {
@@ -14780,6 +14785,7 @@ class FSingleWorld extends FBaseWorld {
     // console.log(this.mainState.mapListing.cupId);
     // console.log(this.mainState.mapListing.num);
     // console.log(this.mainState.mapListing);
+    console.log("Map ID "+this.mainState)
     await FMapLoader.loadMap(this.mainState.mapListing.mapId, this.mainState.mapUrl, this.mainState.mapListing.cupId, this.mainState.mapListing.num);
     await this.onMapLoaded();
   }

@@ -3,32 +3,32 @@ import * as BABYLON from "@babylonjs/core";
 // import { decorations } from "./decorations";
 import decorations from "./decorations";
 // game objects
-var camera = null;
-var light = null;
+export var camera = null;
+export var light = null;
 export var player = null;
-var cape_wings = null;
-var cape_tail = null;
+export var cape_wings = null;
+export var cape_tail = null;
 
-var endings = [];
-var cones = [];
-var jumppads = [];
-var driftPads = [];
+export var endings = [];
+export var cones = [];
+export var jumppads = [];
+export var driftPads = [];
 
 // game essentials
-var canvas = null;
+export var canvas = null;
 export var engine = null;
 export var scene = null;
 
 // game variables
-var rotation = 0;
-var isTouchingDriftPad = false
-var isSpectating = false
-var spectateAnimationValue = 0
-var currentMapId = null
-var isMapLoaded = false
-var currentRoute = '/'
+export var rotation = 0;
+export var isTouchingDriftPad = false
+export var isSpectating = false
+export var spectateAnimationValue = 0
+export var currentMapId = null
+export var isMapLoaded = false
+export var currentRoute = '/'
 
-var start = {
+export var start = {
 	init: async function() {
         // window.platformermode = true
 		canvas = await document.getElementById("renderCanvas");

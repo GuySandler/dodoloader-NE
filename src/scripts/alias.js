@@ -1,8 +1,14 @@
 /* eslint-disable */
+import {maker} from './maker.js';
+import {scene, player, camera} from './start.js';
+import {cc, cam_horizontal, cam_vertical, cam_depression} from './const_controller.js';
+import * as BABYLON from "@babylonjs/core";
+import {fov} from './fov.js';
 
-const IS_ICEPARTY = false;
+export const IS_ICEPARTY = false;
 
-var a = {
+// console.log('maker:', maker.make_platform);
+export var a = {
     p: function(q,r,s, imat, bounce, mass, friction, jump, air, isKiller, isDriftOn) {
         if (!imat) imat = (IS_ICEPARTY) ? 1 : 0;
         if (!bounce) bounce = 0;
@@ -49,7 +55,7 @@ var a = {
             y: (y != null) ? y*default_gravity : null,
             z: (z != null) ? z*default_gravity : null
         });
-        gravity = vec;
+        // gravity = vec; // hopefully this won't bite me back
         scene.getPhysicsEngine().setGravity(vec);
     },
     d: function(x,y,z) {
@@ -136,3 +142,5 @@ var a = {
         maker.og_tree(p1,p2,p3);
     }
 }
+// export {a};
+export default a;

@@ -1,1 +1,1 @@
-const s="/assets/svgs/back_arrow.svg";export{s as _};
+const s="src/assets/svgs/back_arrow.svg";export{s as _};

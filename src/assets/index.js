@@ -7022,7 +7022,7 @@ class CupUtils {
         return JSON.parse(localStorage.getItem("CupImages"))[cupId-36];
     }
     else {
-        return `/assets/skins/${CupIdEnum[cupId].toLowerCase()}.png`;
+        return `src/assets/skins/${CupIdEnum[cupId].toLowerCase()}.png`;
     }
   }
   static isOnlyOnWebsite(cupId, isExtension) {

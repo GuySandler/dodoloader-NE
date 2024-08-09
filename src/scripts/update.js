@@ -7,6 +7,8 @@
 // import {cones, endings} from "./start";
 // import {cape_wings, cape_tail} from "./decorations";
 
+import { isMapLoaded } from "./start";
+
 var update = {
 	loop: function() {
 		if (!isMapLoaded) return
@@ -161,3 +163,4 @@ var update = {
 		window.tsTriggers.setDriftEnabledSignVisibility(isTouchingDriftPad);
 	}
 }
+export { update }

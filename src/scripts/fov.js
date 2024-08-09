@@ -1,13 +1,16 @@
 /* eslint-disable */
 // import {VSingleplayer} from "../assets/VSingleplayer";
 // import {camera} from "./start";
-var fov = {
+// import {VSingleplayer} from "../assets/VSingleplayer";
+import {camera} from "./start";
+export var fov = {
 	radius: 1,
 	y_offset: 2,
 	mul1: 1,
 	mul2: 1,
 	init: function() {
-		this.set_mul1(VSingleplayer.settings.fovLevel);
+		// this.set_mul1(VSingleplayer.settings.fovLevel);
+		this.set_mul1(window.settings.fovLevel);
 		this.apply();
 	},
 	set_mul1: function(option) {
@@ -37,3 +40,4 @@ var fov = {
 	}
 }
 // export { fov }
+export default fov;

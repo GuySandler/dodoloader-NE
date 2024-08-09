@@ -2,6 +2,7 @@
 import * as BABYLON from "@babylonjs/core";
 import { scene } from "./start";
 import { decorations } from "./decorations";
+import { cones, jumppads, driftPads, endings } from "./start";
 // import {decorations} from "./decorations";
 // import {jumppads, driftPads, cones, endings} from "./start"
 let KILLER_BOUNCE = 999999
@@ -15,7 +16,7 @@ export var maker = {
     plat2: null,
     plat3: null,
     init: function() {
-        console.log('Maker init called');
+        // console.log('Maker init called');
         this.add_root_meshes("cone", 2, (i) => {
             return BABYLON.Mesh.CreateCylinder("cone"+i, 1.0, 0.0, 1.0, 5, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
         });
@@ -32,7 +33,7 @@ export var maker = {
             decorations.decorate(this[name+i], name+i);
             this[name+i].isVisible = false;
             this[name+i].cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
-        }  
+        }
     },
     make_platform: function(posList, rotList, sizList, imat=0, bounce=0, mass=0, friction=0.6, jump=false, air=false, isKiller=false, isDriftOn=false) {
         let godmode = document.getElementById("godmode");
@@ -296,6 +297,6 @@ export var maker = {
         this.cylinder_count += 1;
     }
 }
-console.log(maker.init)
+// console.log(maker.init)
 // export {maker};
 export default {maker};
