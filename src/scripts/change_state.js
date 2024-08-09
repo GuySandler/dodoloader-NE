@@ -1,14 +1,9 @@
 /* eslint-disable */
-import * as BABYLON from "@babylonjs/core";
-import { flyjump } from "./flyjump";
-import { player } from "./start"
-import { cc } from "./const_controller"
-// needs map import :(
-// needs imports
+
 var change_state = {
-	die: function(deathMessage: String) {
+	die: function(deathMessage) {
 		if (!alive) return
-        alive = false;
+		alive = false;
 		window.tsTriggers.onDeath(deathMessage);
 	},
 	spawn: function() {
@@ -37,7 +32,6 @@ var change_state = {
 	win: function() {
 		if (!alive) return
 		alive = false;
-		window.tsTriggers.onWin() // window var
+		window.tsTriggers.onWin()
 	}
 }
-export { change_state }

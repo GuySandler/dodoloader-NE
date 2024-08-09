@@ -130,7 +130,7 @@
 
 @font-face {
   font-family: "pixeled";
-  src: url("/assets/fonts/pixeled.ttf");
+  src: url("src/fonts/pixeled.ttf");
 }
 
 .buttonLarge {
@@ -480,7 +480,7 @@ html ::-webkit-scrollbar, body ::-webkit-scrollbar {
 }
 @font-face {
   font-family: "pixeled";
-  src: url("/assets/fonts/pixeled.ttf");
+  src: url("src/fonts/pixeled.ttf");
 }
 .buttonLarge[data-v-4be08e94] {
   flex: 1;

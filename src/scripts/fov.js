@@ -1,6 +1,6 @@
 /* eslint-disable */
-import {VSingleplayer} from "../assets/VSingleplayer";
-import {camera} from "./start";
+// import {VSingleplayer} from "../assets/VSingleplayer";
+// import {camera} from "./start";
 var fov = {
 	radius: 1,
 	y_offset: 2,
@@ -36,4 +36,4 @@ var fov = {
 		camera.fov = Math.min(intensity, 2.8);
 	}
 }
-export { fov }
+// export { fov }

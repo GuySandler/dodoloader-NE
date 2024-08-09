@@ -1,12 +1,5 @@
 /* eslint-disable */
-import {start} from './start';
-import {decorations} from './decorations';
-import {maker} from './maker';
-import {fov} from './fov';
-import {flyjump} from './flyjump';
-// import {map} from './map'; // might be a really big issue. it relies on global imports
-import {cc} from './const_controller';
-import {change_state} from './change_state';
+
 var boot = {
     didPreload: false,
     preload: async function() {

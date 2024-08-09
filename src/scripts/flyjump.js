@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
-import { player } from "./start";
+// import { player } from "./start";
 var flyjump = {
 	can_jump: false,
 	jump_sess: 0,
@@ -110,4 +110,4 @@ var flyjump = {
 		return false
 	}
 }
-export { flyjump }
+// export { flyjump }

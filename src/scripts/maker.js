@@ -1,7 +1,7 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
-import {decorations} from "./decorations";
-import {jumppads, driftPads, cones, endings} from "./start"
+// import {decorations} from "./decorations";
+// import {jumppads, driftPads, cones, endings} from "./start"
 let KILLER_BOUNCE = 999999
 var maker = {
     platform_count: 0,
@@ -294,4 +294,4 @@ var maker = {
     }
 }
 
-export {maker};
+// export {maker};
