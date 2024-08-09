@@ -136,6 +136,8 @@ export var decorations = {
         }
     },
     decorate_player: function(mesh, skinUrl) {
+        console.log(mesh);
+        
         let pmat = new BABYLON.StandardMaterial("pmat", scene);
         pmat.diffuseTexture = new BABYLON.Texture(skinUrl, scene);
         pmat.diffuseTexture.uScale = pmat.diffuseTexture.vScale = 1.0;

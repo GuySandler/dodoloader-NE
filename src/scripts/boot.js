@@ -4,8 +4,9 @@ import {decorations} from './decorations.js';
 import {maker} from './maker.js';
 import {fov} from './fov.js';
 // import map from "window.currentMapId";
-import {map} from "../maps/infiltration.js";
+import {map} from "../maps/infiltration.js"; // change later
 import {cc} from './const_controller.js';
+import { change_state } from './change_state.js';
 // import System from 'es-module-loader/core/loader-polyfill.js';
 // System.import("../maps/"+window.currentMapId).then(function(m) {
 //     console.log(m);

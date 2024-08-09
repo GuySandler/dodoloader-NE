@@ -3,6 +3,8 @@ import {boot} from "../scripts/boot"
 import {engine} from "../scripts/start"
 import cannon from "cannon";
 import { update } from "../scripts/update";
+import { decorations } from "../scripts/decorations";
+import {map} from "../maps/infiltration.js"; // change later
 
 window.CANNON = cannon;
 

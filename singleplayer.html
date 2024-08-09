@@ -10,7 +10,7 @@
 
     <script type="module" type="text/javascript" src="src/scripts/decorations.js"></script>
     <script type="module" type="text/javascript" src="src/scripts/fov.js"></script>
-    <script type="text/javascript" src="src/scripts/change_state.js"></script>
+    <script type="module" type="text/javascript" src="src/scripts/change_state.js"></script>
     <script type="module" type="text/javascript" src="src/scripts/maker.js"></script>
     <script type="module" type="text/javascript" src="src/scripts/alias.js"></script>
     <script type="module" type="text/javascript" src="src/scripts/const_controller.js"></script>
@@ -23,6 +23,7 @@
     <!-- <link rel="stylesheet" href="src/assets/VSingleplayer.css"> -->
     <script type="module" src="src/assets/index.js"></script>
     <script type="module" src="src/dodoCup.js"></script>
+    <script type="module" src="src/assets/VSingleplayer.js"></script>
     <style>
         .button {
             margin-bottom:5px;
@@ -50,6 +51,9 @@
         @font-face {
             font-family: "pixeled";
             src: url('src/fonts/pixeled.ttf');
+        }
+        canvas {
+            background-color: red;
         }
     </style>
   </head>
@@ -185,7 +189,18 @@
     <script type="module">
         import * as BABYLON from "@babylonjs/core";
         import $ from "jquery";
+
         $(document).ready(function () {
+            let canvas = document.getElementById("renderCanvas")
+            var scene = new BABYLON.Scene(new Engine(renderCanvas, true));
+            var camera = new BABYLON.FreeCamera(
+                'camera1',
+                new BABYLON.Vector3(0, 5, -10),
+                scene
+            );
+            camera.setTarget(BABYLON.Vector3.Zero());
+            camera.attachControl(canvas, true);
+
             $(".modmenuOption").hide();
             $(".LevelEditorOption").hide();
             $(".LevelEditorObjects").hide();

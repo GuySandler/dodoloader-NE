@@ -34,6 +34,7 @@ export var start = {
 		canvas = await document.getElementById("renderCanvas");
 		engine = await this.asyncEngineCreation();
 		scene = await new BABYLON.Scene(engine, {antialiasing: false});
+        console.log("scene created");
 		const gravityVector = new BABYLON.Vector3(0,-9, 0);
 		scene.enablePhysics(gravityVector);
 	},
@@ -77,7 +78,8 @@ export var start = {
 		player.position = new BABYLON.Vector3(0,0,0);
 		player.applyGravity = true;
 		player.checkCollisions = true;
-	
+
+        window.player = player;
 		// light
 	    light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 	    light.intensity = 1.0;

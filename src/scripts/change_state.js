@@ -1,6 +1,9 @@
 /* eslint-disable */
-
-var change_state = {
+import {rotation, spectateAnimationValue, player} from './start.js';
+import * as BABYLON from "@babylonjs/core";
+import {map} from "../maps/infiltration.js"; // change later
+import {cc} from './const_controller.js';
+export var change_state = {
 	die: function(deathMessage) {
 		if (!alive) return
 		alive = false;
@@ -10,9 +13,9 @@ var change_state = {
 		alive = true;
 		score = 0;
 		flyjump.last_frame = 0;
-        rotation = 0
+        let rotation = 0
 		// rotation = document.getElementById("PracticeR").value;
-		spectateAnimationValue = 5;
+		let spectateAnimationValue = 5;
 		// world
 		player.rotationQuaternion = BABYLON.Quaternion.RotationAxis(new BABYLON.Vector3(0,0,0),0);
 		player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));
@@ -35,3 +38,4 @@ var change_state = {
 		window.tsTriggers.onWin()
 	}
 }
+export default {change_state};

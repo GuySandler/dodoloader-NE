@@ -1,7 +1,9 @@
 /* eslint-disable */
 import {maker} from './maker.js';
 import {scene, player, camera} from './start.js';
-import {cc, cam_horizontal, cam_vertical, cam_depression} from './const_controller.js';
+import {cc} from './const_controller.js';
+// import {cc, cam_horizontal, cam_vertical, cam_depression} from './const_controller.js';
+// console.log(cam_horizontal)
 import * as BABYLON from "@babylonjs/core";
 import {fov} from './fov.js';
 
@@ -65,9 +67,9 @@ export var a = {
         let cam_d = cc.get("radius", _radius)
         let cam_cd = cc.get("cameraDownAngle", null);
 
-        cam_horizontal = cam_d * cam_d;
-        cam_vertical = cam_horizontal * Math.tan(cam_cd * 1.3);
-        cam_depression = cam_cd;
+        let cam_horizontal = cam_d * cam_d;
+        let cam_vertical = cam_horizontal * Math.tan(cam_cd * 1.3);
+        let cam_depression = cam_cd;
     },
     cam_cd: function(_cameraDownAngle) {
         let cam_d = cc.get("radius", null);
