@@ -7,13 +7,13 @@
 // import {cones, endings} from "./start";
 // import {cape_wings, cape_tail} from "./decorations";
 
-import { isMapLoaded } from "./start";
+// import { isMapLoaded } from "./start";
 
-var update = {
+window.update = {
 	loop: function() {
-		if (!isMapLoaded) return
+		if (!window.isMapLoaded) return
 		scene.render();
-		if (isSpectating) {
+		if (window.isSpectating) {
 			this.loopWhileSpectating();
 		} else if (alive) {
 			this.loopWhilePlaying();
@@ -163,4 +163,4 @@ var update = {
 		window.tsTriggers.setDriftEnabledSignVisibility(isTouchingDriftPad);
 	}
 }
-export { update }
+// export { update }

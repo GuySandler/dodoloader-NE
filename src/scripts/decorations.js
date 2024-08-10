@@ -1,9 +1,9 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
-import { scene, player } from "./start"
-import { IS_ICEPARTY } from "./alias";
+// import { scene, player } from "./start"
+// import { IS_ICEPARTY } from "./alias";
 
-export var decorations = {
+window.decorations = {
     materials: {},
     idno: 0,
     skybox: null,
@@ -14,58 +14,58 @@ export var decorations = {
         this.materials.player = this.rgba_mat(255, 255, 255,1.0);;
 
         // PLATFORM
-        this.bright = new BABYLON.StandardMaterial("brightmat", scene);
-        this.bright.diffuseTexture = new BABYLON.Texture("src/assets/textures/bright.png", scene);
+        this.bright = new BABYLON.StandardMaterial("brightmat", window.scene);
+        this.bright.diffuseTexture = new BABYLON.Texture("src/assets/textures/bright.png", window.scene);
         this.bright.diffuseTexture.uScale = this.bright.diffuseTexture.vScale = 1.0;
         this.bright.backFaceCulling = true; // false;
         this.bright.freeze();
 
-        this.dark = new BABYLON.StandardMaterial("darkmat", scene);
-        this.dark.diffuseTexture = new BABYLON.Texture("src/assets/textures/dark.png", scene);
+        this.dark = new BABYLON.StandardMaterial("darkmat", window.scene);
+        this.dark.diffuseTexture = new BABYLON.Texture("src/assets/textures/dark.png", window.scene);
         this.dark.diffuseTexture.uScale = this.dark.diffuseTexture.vScale = 1.0;
         this.dark.backFaceCulling = true; // false;
         this.dark.freeze();
 
-        this.flare = new BABYLON.StandardMaterial("flaremat", scene);
-        this.flare.diffuseTexture = new BABYLON.Texture("src/assets/textures/flare.png", scene);
+        this.flare = new BABYLON.StandardMaterial("flaremat", window.scene);
+        this.flare.diffuseTexture = new BABYLON.Texture("src/assets/textures/flare.png", window.scene);
         this.flare.diffuseTexture.uScale = this.flare.diffuseTexture.vScale = 1.0;
         this.flare.backFaceCulling = true; // false;
         this.flare.freeze();
 
-        this.icedd = new BABYLON.StandardMaterial("iceddmat", scene);
-        this.icedd.diffuseTexture = new BABYLON.Texture("src/assets/textures/icedd.png", scene);
+        this.icedd = new BABYLON.StandardMaterial("iceddmat", window.scene);
+        this.icedd.diffuseTexture = new BABYLON.Texture("src/assets/textures/icedd.png", window.scene);
         this.icedd.diffuseTexture.uScale = this.icedd.diffuseTexture.vScale = 1.0;
         this.icedd.backFaceCulling = true; // false;
         this.icedd.freeze();
 
-        this.pm1 = new BABYLON.StandardMaterial("pm1mat", scene);
-        this.pm1.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm1.png", scene);
+        this.pm1 = new BABYLON.StandardMaterial("pm1mat", window.scene);
+        this.pm1.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm1.png", window.scene);
         this.pm1.diffuseTexture.uScale = this.pm1.diffuseTexture.vScale = 1.0;
         this.pm1.backFaceCulling = true; // false;
         this.pm1.freeze();
 
-        this.pm2 = new BABYLON.StandardMaterial("pm2mat", scene);
-        this.pm2.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm2.png", scene);
+        this.pm2 = new BABYLON.StandardMaterial("pm2mat", window.scene);
+        this.pm2.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm2.png", window.scene);
         this.pm2.diffuseTexture.uScale = this.pm2.diffuseTexture.vScale = 1.0;
         this.pm2.backFaceCulling = true; // false;
         this.pm2.freeze();
 
-        this.skybox = new BABYLON.StandardMaterial("skyboxmat", scene);
-        this.skybox.diffuseTexture = new BABYLON.Texture("src/assets/textures/skybox.jpg", scene);
+        this.skybox = new BABYLON.StandardMaterial("skyboxmat", window.scene);
+        this.skybox.diffuseTexture = new BABYLON.Texture("src/assets/textures/skybox.jpg", window.scene);
         this.skybox.diffuseTexture.uScale = this.skybox.diffuseTexture.vScale = 1.0;
         this.skybox.backFaceCulling = true; // false;
         this.skybox.freeze();
 
         this.materials.plat0 = (settings.baseTexture === "dark") ? this.dark : this.bright;
 
-        this.materials.plat1 = new BABYLON.StandardMaterial("plat1", scene);
-        this.materials.plat1.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm1.png", scene);
+        this.materials.plat1 = new BABYLON.StandardMaterial("plat1", window.scene);
+        this.materials.plat1.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm1.png", window.scene);
         this.materials.plat1.diffuseTexture.uScale = this.bright.diffuseTexture.vScale = 1.0;
         this.materials.plat1.backFaceCulling = false;
         this.materials.plat1.freeze();
 
-        this.materials.plat2 = new BABYLON.StandardMaterial("plat2", scene);
-        this.materials.plat2.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm2.png", scene);
+        this.materials.plat2 = new BABYLON.StandardMaterial("plat2", window.scene);
+        this.materials.plat2.diffuseTexture = new BABYLON.Texture("src/assets/textures/pm2.png", window.scene);
         this.materials.plat2.diffuseTexture.uScale = this.bright.diffuseTexture.vScale = 1.0;
         this.materials.plat2.backFaceCulling = false;
         this.materials.plat2.freeze();
@@ -138,8 +138,8 @@ export var decorations = {
     decorate_player: function(mesh, skinUrl) {
         console.log(mesh);
         
-        let pmat = new BABYLON.StandardMaterial("pmat", scene);
-        pmat.diffuseTexture = new BABYLON.Texture(skinUrl, scene);
+        let pmat = new BABYLON.StandardMaterial("pmat", window.scene);
+        pmat.diffuseTexture = new BABYLON.Texture(skinUrl, window.scene);
         pmat.diffuseTexture.uScale = pmat.diffuseTexture.vScale = 1.0;
         pmat.backFaceCulling = false;
         pmat.freeze();
@@ -147,7 +147,7 @@ export var decorations = {
     },
     rgba_mat: function(r,g,b,a, backFaceCulling=false) {
         this.idno += 1;
-        let customMat = new BABYLON.StandardMaterial("mat" + this.idno, scene);
+        let customMat = new BABYLON.StandardMaterial("mat" + this.idno, window.scene);
         customMat.diffuseColor = new BABYLON.Color3(r/255, g/255, b/255);
         customMat.alpha = a;
         customMat.backFaceCulling = backFaceCulling;
@@ -155,11 +155,11 @@ export var decorations = {
         return customMat;
     },
     add_particle_system: function () {
-        let ps = new BABYLON.ParticleSystem("particles", 2000, scene);
+        let ps = new BABYLON.ParticleSystem("particles", 2000, window.scene);
         //Texture of each particle//textures/flare
-        ps.particleTexture = new BABYLON.Texture("assets/textures/flare.png", scene);
+        ps.particleTexture = new BABYLON.Texture("assets/textures/flare.png", window.scene);
         // Where the particles come from
-        ps.emitter = player; // the starting object, the emitter
+        ps.emitter = window.player; // the starting object, the emitter
         ps.minEmitBox = new BABYLON.Vector3(-0.2, 0, 0); // Starting all from
         ps.maxEmitBox = new BABYLON.Vector3(0.2, 0, 0); // To...
         // Colors of all particles
@@ -167,13 +167,13 @@ export var decorations = {
         ps.color2 = new BABYLON.Color4(0.9, 0.5, 0.4, 1.0);
         ps.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.8);
         // Size of each particle (random between...
-        ps.minSize = (IS_ICEPARTY) ? 0.3 : 0.15;
-        ps.maxSize = (IS_ICEPARTY) ? 0.7 : 0.4;
+        ps.minSize = (window.IS_ICEPARTY) ? 0.3 : 0.15;
+        ps.maxSize = (window.IS_ICEPARTY) ? 0.7 : 0.4;
         // Life time of each particle (random between...
         ps.minLifeTime = 0.3;
         ps.maxLifeTime = 0.4;
         // Emission rate
-        ps.emitRate = (IS_ICEPARTY) ? 10 : 100;
+        ps.emitRate = (window.IS_ICEPARTY) ? 10 : 100;
         // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
         ps.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
         // Direction of each particle after it has been emitted
@@ -195,13 +195,13 @@ export var decorations = {
         } else {
             if (!isSkyboxEnabled) return
             // add skybox
-            const skymat = new BABYLON.StandardMaterial("skyBox", scene);
+            const skymat = new BABYLON.StandardMaterial("skyBox", window.scene);
             skymat.backFaceCulling = false;
-            const texture = new BABYLON.Texture("assets/textures/skybox.jpg", scene);
+            const texture = new BABYLON.Texture("assets/textures/skybox.jpg", window.scene);
             skymat.reflectionTexture = texture;
             skymat.reflectionTexture.coordinatesMode = BABYLON.Texture.SPHERICAL_MODE;
             skymat.disableLighting = true;
-            this.skybox = BABYLON.Mesh.CreateBox("skyBox", 500, scene);
+            this.skybox = BABYLON.Mesh.CreateBox("skyBox", 500, window.scene);
             this.skybox.infiniteDistance = true;
             this.skybox.material = skymat;
 
@@ -253,4 +253,4 @@ export var decorations = {
         }
     }
 }
-export default decorations;
+// export default decorations;

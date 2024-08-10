@@ -1,10 +1,10 @@
-import * as BABYLON from "@babylonjs/core";
-import {boot} from "../scripts/boot"
-import {engine} from "../scripts/start"
+// import * as BABYLON from "@babylonjs/core";
+// import {boot} from "../scripts/boot"
+// import {engine} from "../scripts/start"
 import cannon from "cannon";
-import { update } from "../scripts/update";
-import { decorations } from "../scripts/decorations";
-import {map} from "../maps/infiltration.js"; // change later
+// import { update } from "../scripts/update"; // not a good name, work later
+// import { decorations } from "../scripts/decorations";
+// import {map} from "../maps/infiltration.js"; // change later // hopefully I got all of it
 
 window.CANNON = cannon;
 
@@ -695,17 +695,17 @@ class FBaseWorld {
   constructor() {
   }
   async asyncInit() {
-    await boot.preload();
+    await window.boot.preload();
     this.intervalManager.startInterval();
     const resolution = await FStorage.getString(StorageKeyEnum.ScreenResolution);
     this.resolutionManager.setResolution(resolution);
   }
   async applyPlayerSkin() {
     const skinId = await FStorage.getInteger(StorageKeyEnum.SelectedSkinId) ?? SkinIdEnum.Default;
-    decorations.decorate_player(window.player, SkinUtils.getSkinImageSrc(skinId));
+    window.decorations.decorate_player(window.player, SkinUtils.getSkinImageSrc(skinId));
   }
   async onMapLoaded() {
-    await boot.init();
+    await window.boot.init();
     await this.applyPlayerSkin();
     this.resolutionManager.resizeScreenForGame();
     this.soundPlayer.onMapLoaded();
@@ -903,8 +903,8 @@ class FBaseEndingManager {
     change_state.die("Self Destructed");
   }
   writeMapAndMakerName(cupId) {
-    this.endingMapNameDiv.innerText = map.title;
-    this.endingMakerNameDiv.innerText = CupUtils.getCupName(cupId) + " X " + map.maker;
+    this.endingMapNameDiv.innerText = window.map.title;
+    this.endingMakerNameDiv.innerText = CupUtils.getCupName(cupId) + " X " + window.map.maker;
   }
 }
 class FetchUtils {
@@ -1794,7 +1794,7 @@ class FBaseOverlayManager {
   onMapLoaded() {
     this.didEncounterJumpRegion = false;
     this.didEncounterDriftRegion = false;
-    this.overlayMapNameDiv.innerText = map.title;
+    this.overlayMapNameDiv.innerText = window.map.title;
     this.hideLoadingScreen();
     this.hideInGameMessage();
   }
@@ -14604,7 +14604,7 @@ class FResolutionManager {
     if (DeploymentUtils.isExtension()) {
       document.body.style.width = EXTENSION_GAME_WIDTH + "px";
       document.body.style.height = EXTENSION_GAME_HEIGHT + "px";
-      engine.resize();
+      window.engine.resize();
       return;
     }
     const screenHeight = this.renderCanvas.clientHeight;
@@ -14612,7 +14612,7 @@ class FResolutionManager {
     const scaleFactor = screenHeight / screenWidth > this.targetHeight / this.targetWidth ? Math.min(screenHeight, this.targetHeight) / screenHeight : Math.min(screenWidth, this.targetWidth) / screenWidth;
     const finalHeight = screenHeight * scaleFactor;
     const finalWidth = screenWidth * scaleFactor;
-    engine.setSize(finalWidth, finalHeight);
+    window.engine.setSize(finalWidth, finalHeight);
   }
   setResolution(storageValue) {
     this.targetHeight = FResolutionManager.getHeightFromResolution(storageValue);
@@ -14666,7 +14666,7 @@ class FBaseIntervalManager {
         break;
       case StorageValueEnum.Vsync:
         PrintUtils.pink("Starting vsync interval");
-        engine.runRenderLoop(() => this.onRenderLoop());
+        window.engine.runRenderLoop(() => this.onRenderLoop());
         this.currentStorageValue = StorageValueEnum.Vsync;
         break;
       default:
@@ -14685,7 +14685,7 @@ class FBaseIntervalManager {
   }
   onRenderLoop() {
     update.loop();
-    const fps = engine.getFps();
+    const fps = window.engine.getFps();
     this.detectFpsAndSwitchToFixedIntervalIfNeeded(fps);
     this.world.overlayManager.updateFpsText(fps);
   }
@@ -14713,7 +14713,7 @@ class FBaseIntervalManager {
       return;
     if (this.currentStorageValue === StorageValueEnum.Fixed)
       return;
-    engine.stopRenderLoop();
+    window.engine.stopRenderLoop();
     this.interval = setInterval(() => this.onRenderLoop(), 1e3 / TARGET_FPS);
   }
   switchToVsyncInterval() {
@@ -14724,7 +14724,7 @@ class FBaseIntervalManager {
       return;
     if (this.interval != null)
       clearInterval(this.interval);
-    engine.runRenderLoop(() => this.onRenderLoop());
+    window.engine.runRenderLoop(() => this.onRenderLoop());
   }
 }
 class FSingleIntervalManager extends FBaseIntervalManager {
@@ -16073,7 +16073,7 @@ const _sfc_main$2 = defineComponent({
       }
       this.playClickSound();
       this.selectedSkinId = skinId;
-      decorations.decorate_player(SkinUtils.getSkinImageSrc(skinId));
+      window.decorations.decorate_player(SkinUtils.getSkinImageSrc(skinId));
       await FStorage.set(StorageKeyEnum.SelectedSkinId, skinId);
     },
     playClickSound() {

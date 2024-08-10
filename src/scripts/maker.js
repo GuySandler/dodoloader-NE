@@ -1,12 +1,12 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
-import { scene } from "./start";
-import { decorations } from "./decorations";
-import { cones, jumppads, driftPads, endings } from "./start";
+// import { scene } from "./start";
+// import { decorations } from "./decorations";
+// import { cones, jumppads, driftPads, endings } from "./start";
 // import {decorations} from "./decorations";
 // import {jumppads, driftPads, cones, endings} from "./start"
 let KILLER_BOUNCE = 999999
-export var maker = {
+window.maker = {
     platform_count: 0,
     cone_count: 0,
     cylinder_count: 0,
@@ -18,19 +18,19 @@ export var maker = {
     init: function() {
         // console.log('Maker init called');
         this.add_root_meshes("cone", 2, (i) => {
-            return BABYLON.Mesh.CreateCylinder("cone"+i, 1.0, 0.0, 1.0, 5, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+            return BABYLON.Mesh.CreateCylinder("cone"+i, 1.0, 0.0, 1.0, 5, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
         });
         this.add_root_meshes("plat", 8, (i) => {
-            return BABYLON.Mesh.CreateBox("plat"+i,1, scene);
+            return BABYLON.Mesh.CreateBox("plat"+i,1, window.scene);
         });
         this.add_root_meshes("sphere", 5, (i) => {
-            return BABYLON.Mesh.CreateSphere("sphere"+i, 10, 1, scene);
+            return BABYLON.Mesh.CreateSphere("sphere"+i, 10, 1, window.scene);
         });
     },
     add_root_meshes: function(name, count, fn) {
         for (var i=0;i<count;i++) {
             this[name+i] = fn(i);
-            decorations.decorate(this[name+i], name+i);
+            window.decorations.decorate(this[name+i], name+i);
             this[name+i].isVisible = false;
             this[name+i].cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
         }
@@ -60,10 +60,10 @@ export var maker = {
             BABYLON.Tags.AddTagsTo(platform, "mesh");
             BABYLON.Tags.AddTagsTo(platform, "platform");
         } else {
-            platform = BABYLON.Mesh.CreateBox(mesh_name,1, scene);
+            platform = BABYLON.Mesh.CreateBox(mesh_name,1, window.scene);
             platform.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
-            let color_obj = decorations.hexToRgb("#"+imat);
-            platform.material = decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
+            let color_obj = window.decorations.hexToRgb("#"+imat);
+            platform.material = window.decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
             BABYLON.Tags.AddTagsTo(platform, "platform");
             BABYLON.Tags.AddTagsTo(platform, "mesh");
         }
@@ -74,13 +74,13 @@ export var maker = {
         platform.rotation = new BABYLON.Vector3(rX,rY,rZ);
 
         if (air == false) {
-            platform.physicsImpostor = new BABYLON.PhysicsImpostor(platform, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, scene);
+            platform.physicsImpostor = new BABYLON.PhysicsImpostor(platform, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, window.scene);
         }
         if (jump == true) {
-            jumppads.push(platform);
+            window.jumppads.push(platform);
         }
         if (isDriftOn == true) {
-            driftPads.push(platform)
+            window.driftPads.push(platform)
         }
 
         // Tracker
@@ -108,10 +108,10 @@ export var maker = {
             if (imat == -1) torus.isVisible = false;
             BABYLON.Tags.AddTagsTo(torus, "mesh torus");
         } else {
-            torus = BABYLON.Mesh.CreateBox(mesh_name,1, scene);
+            torus = BABYLON.Mesh.CreateBox(mesh_name,1, window.scene);
             torus.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
-            let color_obj = decorations.hexToRgb("#"+imat);
-            torus.material = decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
+            let color_obj = window.decorations.hexToRgb("#"+imat);
+            torus.material = window.decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
             BABYLON.Tags.AddTagsTo(torus, "mesh torus");
         }
         
@@ -121,13 +121,13 @@ export var maker = {
         torus.rotation = new BABYLON.Vector3(rX,rY,rZ);
 
         if (air == false) {
-            torus.physicsImpostor = new BABYLON.PhysicsImpostor(torus, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, scene);
+            torus.physicsImpostor = new BABYLON.PhysicsImpostor(torus, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, window.scene);
         }
         if (jump == true) {
-            jumppads.push(torus);
+            window.jumppads.push(torus);
         }
         if (isDriftOn == true) {
-            driftPads.push(torus)
+            window.driftPads.push(torus)
         }
 
         // Tracker
@@ -150,10 +150,10 @@ export var maker = {
             if (imat == -1) cone.isVisible = false;
             BABYLON.Tags.AddTagsTo(cone, "mesh cone");
         } else {
-            cone = BABYLON.Mesh.CreateCylinder(mesh_name, 1.0, 0.0, 1.0, 5, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+            cone = BABYLON.Mesh.CreateCylinder(mesh_name, 1.0, 0.0, 1.0, 5, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
             cone.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
-            let color_obj = decorations.hexToRgb("#"+imat);
-            cone.material = decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
+            let color_obj = window.decorations.hexToRgb("#"+imat);
+            cone.material = window.decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
             BABYLON.Tags.AddTagsTo(cone, "mesh cone");
         }
         
@@ -162,7 +162,7 @@ export var maker = {
         cone.scaling.y = 1.2;
         cone.freezeWorldMatrix();
         // Tracker
-        cones.push(cone);
+        window.cones.push(cone);
         this.cone_count += 1;
     },
     make_sphere: function(posList, r, imat=0, bounce=0, mass=0, friction=0.6, air=false, isKiller=false) {
@@ -181,10 +181,10 @@ export var maker = {
             if (imat == -1) sphere.isVisible = false;
             BABYLON.Tags.AddTagsTo(sphere, "mesh sphere");
         } else {
-            sphere = BABYLON.Mesh.CreateSphere(mesh_name, 10, 1, scene);
+            sphere = BABYLON.Mesh.CreateSphere(mesh_name, 10, 1, window.scene);
             sphere.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
-            let color_obj = decorations.hexToRgb("#"+imat);
-            sphere.material = decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
+            let color_obj = window.decorations.hexToRgb("#"+imat);
+            sphere.material = window.decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
             BABYLON.Tags.AddTagsTo(sphere, "mesh sphere");
         }
         // Set
@@ -193,7 +193,7 @@ export var maker = {
         sphere.freezeWorldMatrix(); // // Don't use: ???
 
         if (air == false) {
-            sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: mass, restitution: bounce, friction: friction }, scene);
+            sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: mass, restitution: bounce, friction: friction }, window.scene);
         }
 
         // Tracker
@@ -204,14 +204,14 @@ export var maker = {
         let pX = posList[0]; let pY = posList[1]; let pZ = posList[2];
         // Mesh
         let mesh_name = "E" + this.ending_count;
-        var ending = BABYLON.Mesh.CreateCylinder(mesh_name, 2.0, 2.0, 2.0, 8, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        var ending = BABYLON.Mesh.CreateCylinder(mesh_name, 2.0, 2.0, 2.0, 8, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
         BABYLON.Tags.AddTagsTo(ending, "mesh end");
         ending.position = new BABYLON.Vector3(pX, pY, pZ);
         // Visuals
-        ending.material = decorations.materials.ending;
+        ending.material = window.decorations.materials.ending;
         ending.freezeWorldMatrix();
         // Physics
-        endings.push(ending);
+        window.endings.push(ending);
         this.ending_count += 1;
     },
     make_cylinder: function(posList, rotList, sizList, imat=0, bounce=0, mass=0, friction=0.6, air=false, topR=1, isKiller=false) {
@@ -226,22 +226,22 @@ export var maker = {
         const height = 1;//sY;
         const radius = 1;//sZ;
 
-        var mesh = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, height, radius * topR, radius, 12, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        var mesh = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, height, radius * topR, radius, 12, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
         BABYLON.Tags.AddTagsTo(mesh, "mesh cylinder");
         mesh.scaling = new BABYLON.Vector3(sX,sY,sZ);
         mesh.position = new BABYLON.Vector3(pX,pY,pZ);
         mesh.rotation = new BABYLON.Vector3(rX,rY,rZ);
         
         if (air == false) {
-            mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: mass, restitution: bounce, friction: friction }, scene);
+            mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: mass, restitution: bounce, friction: friction }, window.scene);
         }
 
         if (isNaN(Math.round(imat)) == false) {
             imat = Math.round(imat);
-            decorations.decorate(mesh, "cylinder"+imat);
+            window.decorations.decorate(mesh, "cylinder"+imat);
         } else {
-            let color_obj = decorations.hexToRgb("#"+imat);
-            mesh.material = decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
+            let color_obj = window.decorations.hexToRgb("#"+imat);
+            mesh.material = window.decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
         }
         if (imat == -1) mesh.isVisible = false;
         this.cylinder_count += 1;
@@ -251,45 +251,45 @@ export var maker = {
         this.make_platform([pX,pY,pZ+9], [0,0,0], [3,0.5, 14]);
     },
     og_tree: function(positionX, positionY, positionZ) {
-        var greenTexture = decorations.materials.cylinder5;
-        var brownTexture = decorations.materials.cylinder6;
+        var greenTexture = window.decorations.materials.cylinder5;
+        var brownTexture = window.decorations.materials.cylinder6;
 
 
-        var cylinderXD = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, 0.65, 0.0, 3.3, 10, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        var cylinderXD = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, 0.65, 0.0, 3.3, 10, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
         cylinderXD.position.z = (positionZ);
         cylinderXD.position.x = (positionX * -1);
         cylinderXD.position.y = (positionY + 1);
-        cylinderXD.physicsImpostor = new BABYLON.PhysicsImpostor(cylinderXD, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, scene);
+        cylinderXD.physicsImpostor = new BABYLON.PhysicsImpostor(cylinderXD, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, window.scene);
         cylinderXD.material = greenTexture;
         this.cylinder_count += 1;
 
-        var cylinderXD2 = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, 1.65, 0.3, 0.3, 10, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        var cylinderXD2 = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, 1.65, 0.3, 0.3, 10, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
         cylinderXD2.position.z = (positionZ);
         cylinderXD2.position.x = (positionX * -1);
         cylinderXD2.position.y = (positionY);
-        cylinderXD2.physicsImpostor = new BABYLON.PhysicsImpostor(cylinderXD2, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, scene);
+        cylinderXD2.physicsImpostor = new BABYLON.PhysicsImpostor(cylinderXD2, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, window.scene);
         cylinderXD2.material = brownTexture;
 
         this.cylinder_count += 1;
     },
     og_cone: function(positionY, positionZ, positionX) {
-        var fireTexture = decorations.materials.cylinder4;
-        var cylinder = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, 0.45, 0.0, 0.45, 10, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        var fireTexture = window.decorations.materials.cylinder4;
+        var cylinder = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, 0.45, 0.0, 0.45, 10, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
         cylinder.position.z = (positionZ);
         cylinder.position.x = (positionX);
         cylinder.position.y = (positionY);
-        cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, scene);
+        cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, window.scene);
         cylinder.material = fireTexture;
 
         this.cylinder_count += 1;
     },
     og_cylinder(positionX, positionY, positionZ, rotationY, rotationX, rotationZ, rad, hei) {
-        var cylinderXD = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, hei, rad, rad, 12, 1, scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        var cylinderXD = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, hei, rad, rad, 12, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
         cylinderXD.position.z = (positionZ);
         cylinderXD.position.x = (positionX * -1);
         cylinderXD.position.y = (positionY);
-        cylinderXD.physicsImpostor = new BABYLON.PhysicsImpostor(cylinderXD, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, scene);
-        cylinderXD.material = decorations.materials.cylinder1;
+        cylinderXD.physicsImpostor = new BABYLON.PhysicsImpostor(cylinderXD, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0.0, restitution: 0.0 }, window.scene);
+        cylinderXD.material = window.decorations.materials.cylinder1;
         cylinderXD.rotation.x = (rotationX * (Math.PI / 180)); // complete
         cylinderXD.rotation.y = (rotationY * (Math.PI / 180)); // complete
         cylinderXD.rotation.z = (rotationZ * (Math.PI / 180)); // complete

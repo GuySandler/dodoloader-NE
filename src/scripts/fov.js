@@ -2,8 +2,8 @@
 // import {VSingleplayer} from "../assets/VSingleplayer";
 // import {camera} from "./start";
 // import {VSingleplayer} from "../assets/VSingleplayer";
-import {camera} from "./start";
-export var fov = {
+// import {camera} from "./start";
+window.fov = {
 	radius: 1,
 	y_offset: 2,
 	mul1: 1,
@@ -36,8 +36,8 @@ export var fov = {
 	},
 	apply: function() {
 		var intensity = this.mul1 * this.mul2;
-		camera.fov = Math.min(intensity, 2.8);
+		window.camera.fov = Math.min(intensity, 2.8);
 	}
 }
 // export { fov }
-export default fov;
+// export default fov;

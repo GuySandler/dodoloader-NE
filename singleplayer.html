@@ -191,16 +191,6 @@
         import $ from "jquery";
 
         $(document).ready(function () {
-            let canvas = document.getElementById("renderCanvas")
-            var scene = new BABYLON.Scene(new Engine(renderCanvas, true));
-            var camera = new BABYLON.FreeCamera(
-                'camera1',
-                new BABYLON.Vector3(0, 5, -10),
-                scene
-            );
-            camera.setTarget(BABYLON.Vector3.Zero());
-            camera.attachControl(canvas, true);
-
             $(".modmenuOption").hide();
             $(".LevelEditorOption").hide();
             $(".LevelEditorObjects").hide();
@@ -212,11 +202,11 @@
             $("#dodocontrols").hide();
 
             $("#testbutton").click(function() {
-                sphere = BABYLON.MeshBuilder.CreateIcoSphere("icosphere", options = {radius: 3, subdivisions: 4}, scene);
+                sphere = BABYLON.MeshBuilder.CreateIcoSphere("icosphere", options = {radius: 3, subdivisions: 4}, window.scene);
                 sphere.position = new BABYLON.Vector3(0, 2, -50);
                 // player.scale = new BABYLON.Vector3(0.1, 0.1, 0.1);
-                player.scaling = new BABYLON.Vector3(2, 2, 2);
-                physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 1, friction: 0.1}, scene)
+                window.player.scaling = new BABYLON.Vector3(2, 2, 2);
+                physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 1, friction: 0.1}, window.scene)
             })
 
             let lasthighlight;
@@ -244,12 +234,12 @@
                 TextureName = [];
                 TextureColor = [];
                 document.getElementById("ObjectSelector").innerHTML = "<option> </option>";
-                meshes = scene.getMeshesByTags("mesh")
-                platforms = scene.getMeshesByTags("platform")
-                cones = scene.getMeshesByTags("cone")
-                spheres = scene.getMeshesByTags("sphere")
-                ends = scene.getMeshesByTags("end")
-                cylinders = scene.getMeshesByTags("cylinder")
+                meshes = window.scene.getMeshesByTags("mesh")
+                platforms = window.scene.getMeshesByTags("platform")
+                cones = window.scene.getMeshesByTags("cone")
+                spheres = window.scene.getMeshesByTags("sphere")
+                ends = window.scene.getMeshesByTags("end")
+                cylinders = window.scene.getMeshesByTags("cylinder")
                 for(let i = 0;i < meshes.length;i++) {
                     document.getElementById("ObjectSelector").innerHTML += "<option value="+i+">"+meshes[i].name+"</option>"
                 }
@@ -265,10 +255,10 @@
             })
             $("#DeleteAllMadeObjects").click(function(){
                 for(let i = 0;i < boxnum;i++) {
-                    scene.getMeshByName("box"+i).dispose()
+                    window.scene.getMeshByName("box"+i).dispose()
                 }
                 for(let i = 0;i < cylindernum;i++) {
-                    scene.getMeshByName("cylinder"+i).dispose()
+                    window.scene.getMeshByName("cylinder"+i).dispose()
                 }
                 boxnum = 0;
                 cylindernum = 0;
@@ -282,15 +272,15 @@
             let cylindernum = 0
             $("#addBox").click(function() {
                 // texture
-                let mat = new BABYLON.StandardMaterial("mat", scene);
-                mat.diffuseTexture = new BABYLON.Texture("assets/textures/bright.png", scene);
+                let mat = new BABYLON.StandardMaterial("mat", window.scene);
+                mat.diffuseTexture = new BABYLON.Texture("assets/textures/bright.png", window.scene);
                 mat.diffuseTexture.uScale = mat.diffuseTexture.vScale = 1.0;
                 mat.backFaceCulling = false;
                 mat.freeze();
 
-                let box = BABYLON.MeshBuilder.CreateBox("box"+boxnum, options={size:2}, scene);
+                let box = BABYLON.MeshBuilder.CreateBox("box"+boxnum, options={size:2}, window.scene);
                 BABYLON.Tags.AddTagsTo(box, "mesh");
-                box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene)
+                box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, window.scene)
                 box.material = mat;
                 
                 boxnum++
@@ -298,20 +288,20 @@
             })
             $("#addcylinder").click(function() {
                 // texture
-                let mat = new BABYLON.StandardMaterial("mat", scene);
-                mat.diffuseTexture = new BABYLON.Texture("assets/textures/bright.png", scene);
+                let mat = new BABYLON.StandardMaterial("mat", window.scene);
+                mat.diffuseTexture = new BABYLON.Texture("assets/textures/bright.png", window.scene);
                 mat.diffuseTexture.uScale = mat.diffuseTexture.vScale = 1.0;
                 mat.backFaceCulling = false;
                 mat.freeze();
 
-                let cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder"+cylindernum, options={height:2}, scene);
+                let cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder"+cylindernum, options={height:2}, window.scene);
                 cylinder.checkCollisions = true;
                 cylinder.applyGravity = false;
                 cylinder.isPickable = false;
-                scene.collisionsEnabled = true;
+                window.scene.collisionsEnabled = true;
                 camera.checkCollisions = true;
                 BABYLON.Tags.AddTagsTo(cylinder, "mesh");
-                cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene)
+                cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, window.scene)
                 cylinder.material = mat;
                 
                 cylindernum++
@@ -364,7 +354,7 @@
             function ExportMap() {
                 GetAllObjects();
                 MapScript1 = 'var map = {title: "EngineV9Level",song: "env2",maker: "Someone",spawn: [0, 0.5, 0],init: function() {let box;';
-                MapScirpt2 = `let meshes = scene.getMeshesByTags("mesh");let platforms = scene.getMeshesByTags("platform");let cones = scene.getMeshesByTags("cone");let ends = scene.getMeshesByTags("end");decorations.decorateCustomLevel(meshes, platforms, cones, ends, ${TextureName}, ${TextureColor})},`
+                MapScirpt2 = `let meshes = window.scene.getMeshesByTags("mesh");let platforms = window.scene.getMeshesByTags("platform");let cones = window.scene.getMeshesByTags("cone");let ends = window.scene.getMeshesByTags("end");decorations.decorateCustomLevel(meshes, platforms, cones, ends, ${TextureName}, ${TextureColor})},`
                 MapScirpt3 = 'post: function() {},section_id: 0,section_update: function() {},reset: function() {},'
                 MapScirpt4 = 'player_move: function() {},physics_update: function() {},render_update: function() {},}'
                 for (let i = 0; i < platforms.length; i++) {
@@ -390,10 +380,10 @@
                     let height = Distance3D(vertices[0].x, vertices[0].y, vertices[0].z, vertices[3].x, vertices[3].y, vertices[3].z);
                     let depth = Distance3D(vertices[0].x, vertices[0].y, vertices[0].z, vertices[4].x, vertices[4].y, vertices[4].z);
 
-                    MapInit += `box = BABYLON.MeshBuilder.CreateBox('${platforms[i].name}', {size: 1}, scene);
+                    MapInit += `box = BABYLON.MeshBuilder.CreateBox('${platforms[i].name}', {size: 1}, window.scene);
                                 box.scaling = new BABYLON.Vector3(${width}, ${height}, ${depth});
                                 box.position = new BABYLON.Vector3(${center.x}, ${center.y}, ${center.z});
-                                box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
+                                box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, window.scene);
                                 box.rotation = new BABYLON.Vector3(${rotation.x}, ${rotation.y}, ${rotation.z});
                                 BABYLON.Tags.AddTagsTo(box, 'mesh platform');`;
                 }
@@ -419,11 +409,11 @@
                     let width = Distance3D(vertices[0].x, vertices[0].y, vertices[0].z, vertices[2].x, vertices[2].y, vertices[2].z);
                     let height = Distance3D(vertices[0].x, vertices[0].y, vertices[0].z, vertices[3].x, vertices[3].y, vertices[3].z);
                     let depth = Distance3D(vertices[0].x, vertices[0].y, vertices[0].z, vertices[4].x, vertices[4].y, vertices[4].z);
-                    MapInit += `cone = BABYLON.MeshBuilder.CreateCylinder('${cones[i].name}', {diameterTop: 0, diameterBottom:${width}, height:${height-0.1}}, scene);
+                    MapInit += `cone = BABYLON.MeshBuilder.CreateCylinder('${cones[i].name}', {diameterTop: 0, diameterBottom:${width}, height:${height-0.1}}, window.scene);
                                         cone.scaling = new BABYLON.Vector3(${width}, ${height-0.05}, ${depth});
                                         cone.position = new BABYLON.Vector3(${center.x-0.05}, ${center.y}, ${center.z});
                                         cone.rotation = new BABYLON.Vector3(${rotation.x}, ${rotation.y}, ${rotation.z});
-                                        cone.physicsImpostor = new BABYLON.PhysicsImpostor(cone, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
+                                        cone.physicsImpostor = new BABYLON.PhysicsImpostor(cone, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, window.scene);
                                         cone.physicsImpostor.registerOnPhysicsCollide(player.physicsImpostor, function(main, collided) {
                                             window.change_state.die("Died From Cone");
                                         });
@@ -450,10 +440,10 @@
                     let vertices = boundingBox.vectorsWorld
                     let width = Distance3D(vertices[0].x, vertices[0].y, vertices[0].z, vertices[2].x, vertices[2].y, vertices[2].z);
                     let height = Distance3D(vertices[0].x, vertices[0].y, vertices[0].z, vertices[3].x, vertices[3].y, vertices[3].z);
-                    MapInit += `end = BABYLON.MeshBuilder.CreateCylinder('${ends[i].name}', {diameterTop: ${width}, diameterBottom:${width}, height:${height}}, scene);
+                    MapInit += `end = BABYLON.MeshBuilder.CreateCylinder('${ends[i].name}', {diameterTop: ${width}, diameterBottom:${width}, height:${height}}, window.scene);
                                         end.position = new BABYLON.Vector3(${center.x-0.05}, ${center.y}, ${center.z});
                                         end.rotation = new BABYLON.Vector3(${rotation.x}, ${rotation.y}, ${rotation.z});
-                                        end.physicsImpostor = new BABYLON.PhysicsImpostor(end, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
+                                        end.physicsImpostor = new BABYLON.PhysicsImpostor(end, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, window.scene);
                                         end.physicsImpostor.registerOnPhysicsCollide(player.physicsImpostor, function(main, collided) {
                                             window.change_state.win();
                                         });

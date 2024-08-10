@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-var cleanup = {
+window.cleanup = {
 	run: function(full_reset=true) {
 		if (isMapLoaded == false) {
 			console.error("Map is not loaded");
