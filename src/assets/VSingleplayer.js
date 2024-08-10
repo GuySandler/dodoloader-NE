@@ -1937,7 +1937,8 @@ class FMapLoader {
       if (scriptUrl.substring(0,4) == "src/") {script.src = scriptUrl;}
       else {script.innerHTML = scriptUrl;}
       script.id = "map-script";
-      head.appendChild(script);
+    //   head.appendChild(script);
+      head.prepend(script);
     //   cleanup.run();
       setTimeout(resolve2, 50);
     });

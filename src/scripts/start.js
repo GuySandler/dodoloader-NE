@@ -9,10 +9,10 @@ import * as BABYLON from "@babylonjs/core";
 // var cape_wings = null;
 // var cape_tail = null;
 
-// var endings = [];
-// var cones = [];
-// var jumppads = [];
-// var driftPads = [];
+window.endings = [];
+window.cones = [];
+window.jumppads = [];
+window.driftPads = [];
 
 // // game essentials
 // var canvas = null;

@@ -8,7 +8,7 @@ const INF = 90000000000000;
 let speedtoggle = document.getElementById("speedoverwrite")
 let speedOverwrite = document.getElementById("speed");
 
-let default_speed;
+// let default_speed;
 const default_radius = 2.5;
 const default_steer = 0.022;
 const default_gravity = -9;
@@ -20,29 +20,29 @@ const default_jumpHeight = 1;
 
 
 // current
-var speed;// = default_speed;
-var steer;// = default_steer;
-var gravity;
+// var speed;// = default_speed;
+// var steer;// = default_steer;
+// var gravity;
 
-var jumpSpeed;
-var jumpHeight;
+// var jumpSpeed;
+// var jumpHeight;
 
-var radius;// = default_radius;
-var cameraDownAngle;// = default_cameraDownAngle;
-var cameraRightAngle;// = default_cameraRightAngle;
+// var radius;// = default_radius;
+// var cameraDownAngle;// = default_cameraDownAngle;
+// var cameraRightAngle;// = default_cameraRightAngle;
 
 // solved
-var cam_horizontal = 0;
-var cam_vertical = 0;
-var cam_depression = 0;
+// var cam_horizontal = 0;
+// var cam_vertical = 0;
+// var cam_depression = 0;
 
 window.cc = {
 	default: {},
 	monkey: {},
 	set_default: function() {
-		this.default["window.camera.maxZ"] = () => {return 300};
-		this.default["window.camera.fov mul2"] = () => {return 1};
-		this.default["window.light.intensity"] = () => {return 1.0};
+		this.default["camera.maxZ"] = () => {return 300};
+		this.default["camera.fov mul2"] = () => {return 1};
+		this.default["light.intensity"] = () => {return 1.0};
 		this.default["radius"] = () => {return default_radius;};
 		this.default["cameraDownAngle"] = () => {return default_cameraDownAngle;};
 		this.default["cameraRightAngle"] = () => {return default_cameraRightAngle;};
@@ -51,24 +51,24 @@ window.cc = {
 		this.default["speed"] = () => {
             let freeze = document.getElementById("freeze");
             if (speedtoggle.checked) {
-                default_speed = speedOverwrite;
+                window.default_speed = speedOverwrite;
                 return speedOverwrite.value;
             }
             else if (freeze.checked) {
-                default_speed=0;return 0
+                window.default_speed=0;return 0
             }
             else {
-                default_speed = 0.28;
+                window.default_speed = 0.28;
                 return 0.28;
             }
         };
 		this.default["steer"] = () => {return default_steer};
-		this.default["window.player.scaling"] = () => {return new BABYLON.Vector3(1, 0.16, 1)};
-		this.default["window.scene.clearColor"] = () => {return new BABYLON.Color4(0,0,0,1)};
-		this.default["window.scene.ambientColor"] = () => {return new BABYLON.Color4(1,1,1,1)};
-		this.default["window.light.diffuse"] = () => {return new BABYLON.Color4(1, 1, 1, 1)};
-		this.default["window.light.specular"] = () => {return new BABYLON.Color3(1, 1, 1)};
-		this.default["window.light.groundColor"] = () => {return new BABYLON.Color3(0, 0, 0)};
+		this.default["player.scaling"] = () => {return new BABYLON.Vector3(1, 0.16, 1)};
+		this.default["scene.clearColor"] = () => {return new BABYLON.Color4(0,0,0,1)};
+		this.default["scene.ambientColor"] = () => {return new BABYLON.Color4(1,1,1,1)};
+		this.default["light.diffuse"] = () => {return new BABYLON.Color4(1, 1, 1, 1)};
+		this.default["light.specular"] = () => {return new BABYLON.Color3(1, 1, 1)};
+		this.default["light.groundColor"] = () => {return new BABYLON.Color3(0, 0, 0)};
 		this.default["gravity"] = () => {
             let gravitytoggle = document.getElementById("gravityoverwrite")
             let gravityOverwrite = document.getElementById("gravity");
@@ -81,13 +81,15 @@ window.cc = {
             }
             else {return new BABYLON.Vector3(0,-9,0)}
         }
-		this.default["window.camera.upVector"] = () => {return new BABYLON.Vector3(0,1,0)};
+		this.default["camera.upVector"] = () => {return new BABYLON.Vector3(0,1,0)};
 	},
 	set_monkey: function(key, val) {
 		this.monkey[key] = val;
 	},
 	get: function(const_key, top_vec=null) {
-		var vec = this.default[const_key]();
+        console.log("get", const_key);
+        console.log("thing", this.default[const_key]);
+		var vec = this.default[const_key](); // is this meant to not be a function?
 		if (Object.keys(vec).length == 0) {
 			// scalar
 			var arr = [vec, this.monkey[const_key], top_vec].filter(v => v != null);
@@ -117,21 +119,21 @@ window.cc = {
 	    }
 	},
 	refresh: function() {
-		window.camera.maxZ = this.get("window.camera.maxZ");
-		window.light.intensity = this.get("window.light.intensity");
-		radius = this.get("radius");
-		cameraDownAngle = this.get("cameraDownAngle");
-		cameraRightAngle = this.get("cameraRightAngle");
-		speed = this.get("speed");
-		steer = this.get("steer");
-		window.player.scaling = this.get("window.player.scaling");
-		window.scene.clearColor = this.get("window.scene.clearColor");
-		window.scene.ambientColor = this.get("window.scene.ambientColor");
-		window.light.diffuse = this.get("window.light.diffuse");
-		window.light.specular = this.get("window.light.specular");
-		window.light.groundColor = this.get("window.light.groundColor");
-		jumpSpeed = this.get("jumpSpeed");
-		jumpHeight = this.get("jumpHeight");
+		window.camera.maxZ = this.get("camera.maxZ");
+		window.light.intensity = this.get("light.intensity");
+		window.radius = this.get("radius");
+		window.cameraDownAngle = this.get("cameraDownAngle");
+		window.cameraRightAngle = this.get("cameraRightAngle");
+		window.speed = this.get("speed");
+		window.steer = this.get("steer");
+		window.player.scaling = this.get("player.scaling");
+		window.scene.clearColor = this.get("scene.clearColor");
+		window.scene.ambientColor = this.get("scene.ambientColor");
+		window.light.diffuse = this.get("light.diffuse");
+		window.light.specular = this.get("light.specular");
+		window.light.groundColor = this.get("light.groundColor");
+		window.jumpSpeed = this.get("jumpSpeed"); // <-- problem here
+		window.jumpHeight = this.get("jumpHeight");
 		window.a.fov_mul2(null);
 		window.a.g(null, null, null);
 		window.a.d(null, null, null);

@@ -61,7 +61,7 @@ window.a = {
         window.scene.getPhysicsEngine().setGravity(vec);
     },
     d: function(x,y,z) {
-        window.player.scaling = window.cc.get("window.player.scaling", {x,y,z});
+        window.player.scaling = window.cc.get("player.scaling", {x,y,z});
     },
     cam_d: function(_radius) {
         let cam_d = window.cc.get("radius", _radius)
@@ -80,10 +80,10 @@ window.a = {
         cam_depression = cam_cd;
     },
     cam_cr: function(_cameraRightAngle) {
-        cameraRightAngle = window.cc.get("cameraRightAngle", (_cameraRightAngle != null) ? _cameraRightAngle * Math.PI / 180 : null);
+        window.cameraRightAngle = window.cc.get("cameraRightAngle", (_cameraRightAngle != null) ? _cameraRightAngle * Math.PI / 180 : null);
     },
     t: function(x,y,z) {
-        window.camera.upVector = window.cc.get("window.camera.upVector", {x,y,z});
+        window.camera.upVector = window.cc.get("camera.upVector", {x,y,z});
     },
     mov: function(id, axis, value) {
         window.scene.getMeshByName(id).position[axis] += value * default_speed;
@@ -95,7 +95,7 @@ window.a = {
         window.scene.getMeshByName(id).scaling[axis] += value / 100;
     },
     fov_mul2: function(_mul2) {
-        let mul2 = window.cc.get("window.camera.fov mul2", _mul2);
+        let mul2 = window.cc.get("camera.fov mul2", _mul2);
         window.fov.set_mul2(mul2);
         window.fov.apply();
     },

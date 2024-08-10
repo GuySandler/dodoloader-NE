@@ -8,11 +8,11 @@
 // import {cape_wings, cape_tail} from "./decorations";
 
 // import { isMapLoaded } from "./start";
-
+import * as BABYLON from "@babylonjs/core";
 window.update = {
 	loop: function() {
 		if (!window.isMapLoaded) return
-		scene.render();
+		window.scene.render();
 		if (window.isSpectating) {
 			this.loopWhileSpectating();
 		} else if (alive) {
@@ -20,31 +20,31 @@ window.update = {
 		}
 	},
 	loopWhileSpectating() {
-		spectateAnimationValue += 1;
+		window.spectateAnimationValue += 1;
 
-		camera.rotation.x = 0.1 + Math.sqrt(spectateAnimationValue * 0.0015);
-		camera.rotation.z = 0;
-		camera.rotation.y = Math.PI;
+		window.camera.rotation.x = 0.1 + Math.sqrt(spectateAnimationValue * 0.0015);
+		window.camera.rotation.z = 0;
+		window.camera.rotation.y = Math.PI;
 
-		camera.position.x = 0;
-		camera.position.z = -0.2 * spectateAnimationValue;
-		camera.position.y = 2 + 0.2 * spectateAnimationValue;
+		window.camera.position.x = 0;
+		window.camera.position.z = -0.2 * spectateAnimationValue;
+		window.camera.position.y = 2 + 0.2 * spectateAnimationValue;
 	},
 	loopWhilePlaying() {
 		try {
-			score += 1;
+			window.score += 1;
 			window.tsTriggers.onFrame()
 			// render call
             this.player_move();
-			map.render_update();
-			map.section_update();
-			flyjump.render_loop();
+			window.map.render_update();
+			window.map.section_update();
+			window.flyjump.render_loop();
 			// physics call
 			if (score % physics_call_rate == 0) {
                 // god mode
                 this.collision_check();
-				map.physics_update();
-				flyjump.compute_loop();
+				window.map.physics_update();
+				window.flyjump.compute_loop();
 				this.update_overlay();
 			}
 		} catch(err) {
@@ -66,56 +66,56 @@ window.update = {
 		for (let i=0;i<maker.cone_count;i++) {
 			let cone = cones[i];
 			if (this.are_touching(player, cone, 0.5)) {
-				change_state.die('Died From Cone');
+				window.change_state.die('Died From Cone');
 				break;
 			}
 		}
 	},
 	checkEndingCollision() {
-		if (score < 10) return
-		for (let i=0;i<maker.ending_count;i++) {
+		if (window.score < 10) return
+		for (let i=0;i<window.maker.ending_count;i++) {
 			let ending = endings[i];
-			if (this.are_touching(player, ending, 1.2)) { // previously 1.0
-				change_state.win();
+			if (this.are_touching(window.player, ending, 1.2)) { // previously 1.0
+				window.change_state.win();
 				break;
 			}
 		}
 	},
 	player_move: function() {
 		// steer
-		if ((controls.space) && (score > 10)) {
-			flyjump.jump();
+		if ((controls.space) && (window.score > 10)) {
+			window.flyjump.jump();
 		}
 		if (!this.shouldSpin()) {
-			player.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0));
-			player.rotationQuaternion = BABYLON.Quaternion.RotationAxis(new BABYLON.Vector3(0,0,0),0);
+			window.player.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0));
+			window.player.rotationQuaternion = BABYLON.Quaternion.RotationAxis(new BABYLON.Vector3(0,0,0),0);
 		}
 		const rotationAdjustment = window.tsTriggers.getRotationAdjustment()
-		rotation += rotationAdjustment
-		player.rotation.y = rotation;
+		window.rotation += rotationAdjustment
+		window.player.rotation.y = rotation;
 
         let freeze = document.getElementById("freeze");
         if (window.platformermode) {}
         else if (freeze.checked == false) {
             const positionAdjustment = window.tsTriggers.getPositionAdjustment()
-            player.position.x += positionAdjustment.x;
-            player.position.z += positionAdjustment.z;
+            window.player.position.x += positionAdjustment.x;
+            window.player.position.z += positionAdjustment.z;
         }
 		// light & camera
         let freecam = document.getElementById("freecam");
         let follow = document.getElementById("follow");
         if (!freecam.checked) {
-            let rotation_offsetted = rotation + cameraRightAngle;
-            camera.position.x = player.position.x + Math.sin(rotation_offsetted) * cam_horizontal;
-            camera.position.z = player.position.z + Math.cos(rotation_offsetted) * cam_horizontal;
-            camera.position.y = player.position.y + cam_vertical;
-            camera.rotation.y = 3.14 + rotation_offsetted;
-            camera.rotation.x = cam_depression;
+            let rotation_offsetted = rotation + window.cameraRightAngle;
+            window.camera.position.x = player.position.x + Math.sin(rotation_offsetted) * cam_horizontal;
+            window.camera.position.z = player.position.z + Math.cos(rotation_offsetted) * cam_horizontal;
+            window.camera.position.y = player.position.y + cam_vertical;
+            window.camera.rotation.y = 3.14 + rotation_offsetted;
+            window.camera.rotation.x = cam_depression;
         }
         else if (follow.checked) {
-            camera.setTarget(player.position)
+            window.camera.setTarget(player.position)
         }
-		light.position = camera.position;
+		window.light.position = camera.position;
 	},
 	shouldSpin: function() {
         let spinCheckbox = document.getElementById("spin");

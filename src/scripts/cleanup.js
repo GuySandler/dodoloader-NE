@@ -42,10 +42,10 @@ window.cleanup = {
 			let mesh = scene.getMeshByName(mesh_name);
 			mesh.dispose();
 		}
-		cones = [];
-		endings = [];
-		jumppads = [];
-		driftPads = [];
+		window.cones = [];
+		window.endings = [];
+		window.jumppads = [];
+		window.driftPads = [];
 		maker.platform_count = 0;
 		maker.cone_count = 0;
 		maker.cylinder_count = 0;
