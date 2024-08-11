@@ -903,8 +903,10 @@ class FBaseEndingManager {
     change_state.die("Self Destructed");
   }
   writeMapAndMakerName(cupId) {
-    this.endingMapNameDiv.innerText = window.map.title;
-    this.endingMakerNameDiv.innerText = CupUtils.getCupName(cupId) + " X " + window.map.maker;
+    setTimeout(() => {
+        this.endingMapNameDiv.innerText = window.map.title;
+        this.endingMakerNameDiv.innerText = CupUtils.getCupName(cupId) + " X " + window.map.maker;
+    }, 250);
   }
 }
 class FetchUtils {
@@ -1792,11 +1794,13 @@ class FBaseOverlayManager {
     this.overlayCurrentTimeDiv.innerHTML = "TIME: " + window.score;
   }
   onMapLoaded() {
-    this.didEncounterJumpRegion = false;
-    this.didEncounterDriftRegion = false;
-    this.overlayMapNameDiv.innerText = window.map.title;
-    this.hideLoadingScreen();
-    this.hideInGameMessage();
+    setTimeout(() => {
+        this.didEncounterJumpRegion = false;
+        this.didEncounterDriftRegion = false;
+        this.overlayMapNameDiv.innerText = window.map.title;
+        this.hideLoadingScreen();
+        this.hideInGameMessage();
+    }, 250);
   }
   hideAllSigns() {
     this.setJumpEnabledSignVisibility(false);
@@ -1910,14 +1914,14 @@ async function GetMap(mapId, mapUrl, cupId, num){
     catch{}
     let scriptUrl = "";
     await FMapLoader.getUrl(mapId, mapUrl, cupId, num).then(result => {
-        console.log(result);
+        // console.log(result);
         scriptUrl = result;
     });
     await FMapLoader.loadScript(scriptUrl, cupId);
 }
 class FMapLoader {
   static async loadMap(mapId, mapUrl, cupId, num) {
-    console.log(mapId)
+    // console.log(mapId)
     if (window.isMapLoaded) {
       console.error("Map already loaded");
       return;
@@ -1933,7 +1937,7 @@ class FMapLoader {
       const head = document.getElementsByTagName("head")[0];
       const script = document.createElement("script");
       script.type = "module";
-      console.log(scriptUrl)
+    //   console.log(scriptUrl)
       if (scriptUrl.substring(0,4) == "src/") {script.src = scriptUrl;}
       else {script.innerHTML = scriptUrl;}
       script.id = "map-script";
@@ -1971,7 +1975,7 @@ class FMapLoader {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            console.log('Fetched JSON Data:', data); // Log the entire JSON data
+            // console.log('Fetched JSON Data:', data); // Log the entire JSON data
             return data[num];
         }
 
@@ -14788,7 +14792,7 @@ class FSingleWorld extends FBaseWorld {
     // console.log(this.mainState.mapListing.cupId);
     // console.log(this.mainState.mapListing.num);
     // console.log(this.mainState.mapListing);
-    console.log("Map ID "+this.mainState)
+    // console.log("Map ID "+this.mainState)
     await FMapLoader.loadMap(this.mainState.mapListing.mapId, this.mainState.mapUrl, this.mainState.mapListing.cupId, this.mainState.mapListing.num);
     await this.onMapLoaded();
   }

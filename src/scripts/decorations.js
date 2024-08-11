@@ -136,7 +136,7 @@ window.decorations = {
         }
     },
     decorate_player: function(mesh, skinUrl) {
-        console.log(mesh);
+        // console.log(mesh);
         
         let pmat = new BABYLON.StandardMaterial("pmat", window.scene);
         pmat.diffuseTexture = new BABYLON.Texture(skinUrl, window.scene);
@@ -230,8 +230,8 @@ window.decorations = {
         return info;
     },
     decorateCustomLevel: function(meshes, platforms, cones, ends, TextureName, TextureColor) {
-        console.log(TextureName)
-        console.log(TextureColor)
+        // console.log(TextureName)
+        // console.log(TextureColor)
         // let meshes = scene.getMeshesByTags("mesh");
         // let platforms = scene.getMeshesByTags("platform");
         // let cones = scene.getMeshesByTags("cone");

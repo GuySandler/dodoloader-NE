@@ -34,18 +34,20 @@ window.boot = {
         await window.start.create_scene();
         await window.cc.set_default();
         await window.decorations.add_particle_system();
-    },
+    }, // interesting. preload works, init breaks it
     init: async function() {
-        await window.fov.init();
-        await window.flyjump.init();
-        const mapScript = document.querySelector('#map-script').innerHTML;
-        eval(mapScript);
-        await window.map.init();
-        await window.cc.refresh()
-        window.decorations.addOrRemoveSkybox()
-        await window.change_state.spawn();
-        // await premium.updatePremiumRequirementMet();
-        await window.map.post();
+        setTimeout(async () => {
+            await window.fov.init();
+            await window.flyjump.init();
+            // const mapScript = document.querySelector('#map-script').innerHTML;
+            // eval(mapScript);
+            await window.map.init();
+            await window.cc.refresh()
+            window.decorations.addOrRemoveSkybox()
+            await window.change_state.spawn(); // <-- problem here
+            // await premium.updatePremiumRequirementMet();
+            await window.map.post();
+        }, 100);
     }
 }
 

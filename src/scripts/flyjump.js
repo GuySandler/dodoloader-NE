@@ -1,5 +1,6 @@
 /* eslint-disable */
-// import * as BABYLON from "@babylonjs/core";
+import * as BABYLON from "@babylonjs/core";
+import { greasedLineVertexShader } from "@babylonjs/core/Shaders/greasedLine.vertex";
 // import { player } from "./start";
 window.flyjump = {
 	can_jump: false,
@@ -14,10 +15,10 @@ window.flyjump = {
 		this.impulse_sess = 0;
 		this.impulse_vec = null;
 
-		isTouchingDriftPad = false
+		window.isTouchingDriftPad = false
 	},
 	compute_loop: function() {
-		isTouchingDriftPad = this.getIsTouchingDriftPad()
+		window.isTouchingDriftPad = this.getIsTouchingDriftPad()
 
 		if (score - this.last_frame > 35) {
 			var can_jump = false;
@@ -62,9 +63,10 @@ window.flyjump = {
 		this.last_frame = score;
 		this.can_jump = false;
 
-		var ImpulseVector = gravity;
-		ImpulseMagnitude = -1.4 * jumpHeight * 0.9;
-		ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
+        console.log(typeof gravity, window,gravity);
+		var ImpulseVector = window.gravity;
+		window.ImpulseMagnitude = -1.4 * jumpHeight * 0.9;
+		ImpulseVector = ImpulseVector.scale(window.ImpulseMagnitude);
 		ImpulseVector.x += 9 * jumpSpeed * Math.sin(rotation - 3.14) * 0.24;
 		ImpulseVector.z += 9 * jumpSpeed * Math.cos(rotation - 3.14) * 0.24;
 
@@ -79,9 +81,9 @@ window.flyjump = {
 
 		player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));
 
-		var ImpulseVector = gravity;
-		ImpulseMagnitude = -1.4 * jumpHeight;
-		ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
+		var ImpulseVector = window.gravity;
+		window.ImpulseMagnitude = -1.4 * jumpHeight;
+		ImpulseVector = ImpulseVector.scale(window.ImpulseMagnitude);
 		ImpulseVector.x += 9 * jumpSpeed * Math.sin(rotation - 3.14);
 		ImpulseVector.z += 9 * jumpSpeed * Math.cos(rotation - 3.14);
 		player.physicsImpostor.applyImpulse(ImpulseVector, player.getAbsolutePosition());

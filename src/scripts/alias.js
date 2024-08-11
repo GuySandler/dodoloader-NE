@@ -36,7 +36,8 @@ window.a = {
     },
     re: function(id, q, r, s) { // reset
         let mesh = window.scene.getMeshByName(id);
-        mesh.rotationQuaternion = BABYLON.Quaternion.RotationAxis(new BABYLON.Vector3(0, 0, 0), 0);
+        // mesh.rotationQuaternion = BABYLON.Quaternion.RotationAxis(new BABYLON.Vector3(0, 0, 0), 0);
+        mesh.rotation = new BABYLON.Vector3(0, 0, 0);
         mesh.rotation.x = r[1];
         mesh.rotation.y = r[0];
         mesh.rotation.z = r[2];
@@ -47,8 +48,12 @@ window.a = {
         mesh.scaling.y = s[1];
         mesh.scaling.z = s[2];
         if (mesh.physicsImpostor) {
-            mesh.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));
-            mesh.physicsImpostor.setAngularVelocity(new BABYLON.Quaternion(0,0,0,0));
+            // mesh.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));
+            // mesh.physicsImpostor.setAngularVelocity(new BABYLON.Quaternion(0,0,0,0));
+            mesh.applyImpulse(
+                new BABYLON.Vector3(0,0,0),
+                window.player.absolutePosition
+            );
         }
     },
     g: function(x,y,z) {
@@ -57,7 +62,7 @@ window.a = {
             y: (y != null) ? y*default_gravity : null,
             z: (z != null) ? z*default_gravity : null
         });
-        // gravity = vec; // hopefully this won't bite me back
+        window.gravity = vec; // hopefully this won't bite me back, I think it did
         window.scene.getPhysicsEngine().setGravity(vec);
     },
     d: function(x,y,z) {

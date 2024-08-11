@@ -17,7 +17,7 @@
     <script type="text/javascript" src="src/scripts/cleanup.js"></script>
     <script type="module" type="text/javascript" src="src/scripts/start.js"></script>
     <script type="module" type="text/javascript" src="src/scripts/update.js"></script>
-    <script type="text/javascript" src="src/scripts/flyjump.js"></script>
+    <script type="module" type="text/javascript" src="src/scripts/flyjump.js"></script>
     <script type="module" type="text/javascript" src="src/scripts/boot.js"></script>
     <link rel="stylesheet" href="src/assets/index.css">
     <!-- <link rel="stylesheet" href="src/assets/VSingleplayer.css"> -->
@@ -102,7 +102,7 @@
                     <botton class="button" onclick="window.tsTriggers.onWin()">Instant Win</botton>
                 </div>
                 <button id="toggledodocontrols" class="modbutton">Dodo Cinematics</button>
-                <!-- <button id="testbutton" class="modbutton">Dodo rotation</button> -->
+                <button id="testbutton" class="modbutton">Dodo rotation</button>
                 <div id="dodocontrols">
                     <input id="freecam" type="checkbox">
                     <label>FreeCam</label>
@@ -202,13 +202,10 @@
             $("#dodocontrols").hide();
 
             $("#testbutton").click(function() {
-                sphere = BABYLON.MeshBuilder.CreateIcoSphere("icosphere", options = {radius: 3, subdivisions: 4}, window.scene);
-                sphere.position = new BABYLON.Vector3(0, 2, -50);
-                // player.scale = new BABYLON.Vector3(0.1, 0.1, 0.1);
-                window.player.scaling = new BABYLON.Vector3(2, 2, 2);
-                physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 1, friction: 0.1}, window.scene)
+                const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2, segments: 32 }, scene);
+                const impostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, friction: 0.2, restitution: 0.3 }, scene);
+                sphere.position.y = 10
             })
-
             let lasthighlight;
             $("#ObjectSelector").on("input", function() {
                 try{meshes[lasthighlight].showBoundingBox = false;}catch{}
@@ -278,7 +275,7 @@
                 mat.backFaceCulling = false;
                 mat.freeze();
 
-                let box = BABYLON.MeshBuilder.CreateBox("box"+boxnum, options={size:2}, window.scene);
+                let box = BABYLON.MeshBuilder.CreateBox("box"+boxnum, {size:2}, window.scene);
                 BABYLON.Tags.AddTagsTo(box, "mesh");
                 box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, window.scene)
                 box.material = mat;
@@ -294,7 +291,7 @@
                 mat.backFaceCulling = false;
                 mat.freeze();
 
-                let cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder"+cylindernum, options={height:2}, window.scene);
+                let cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder"+cylindernum, {height:2}, window.scene);
                 cylinder.checkCollisions = true;
                 cylinder.applyGravity = false;
                 cylinder.isPickable = false;

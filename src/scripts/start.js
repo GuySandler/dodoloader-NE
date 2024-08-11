@@ -21,7 +21,7 @@ window.driftPads = [];
 
 // // game variables
 // var rotation = 0;
-// var isTouchingDriftPad = false
+window.isTouchingDriftPad = false
 window.isSpectating = false
 // var spectateAnimationValue = 0
 // var currentMapId = null

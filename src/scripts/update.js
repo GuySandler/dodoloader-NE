@@ -15,7 +15,7 @@ window.update = {
 		window.scene.render();
 		if (window.isSpectating) {
 			this.loopWhileSpectating();
-		} else if (alive) {
+		} else if (window.alive) {
 			this.loopWhilePlaying();
 		}
 	},
@@ -40,7 +40,7 @@ window.update = {
 			window.map.section_update();
 			window.flyjump.render_loop();
 			// physics call
-			if (score % physics_call_rate == 0) {
+			if (score % window.physics_call_rate == 0) {
                 // god mode
                 this.collision_check();
 				window.map.physics_update();
@@ -105,12 +105,12 @@ window.update = {
         let freecam = document.getElementById("freecam");
         let follow = document.getElementById("follow");
         if (!freecam.checked) {
-            let rotation_offsetted = rotation + window.cameraRightAngle;
-            window.camera.position.x = player.position.x + Math.sin(rotation_offsetted) * cam_horizontal;
-            window.camera.position.z = player.position.z + Math.cos(rotation_offsetted) * cam_horizontal;
-            window.camera.position.y = player.position.y + cam_vertical;
-            window.camera.rotation.y = 3.14 + rotation_offsetted;
-            window.camera.rotation.x = cam_depression;
+            let rotation_offsetted = window.rotation + window.cameraRightAngle;
+            window.camera.position.x = window.player.position.x + Math.sin(rotation_offsetted) * window.cam_horizontal;
+            window.camera.position.z = window.player.position.z + Math.cos(rotation_offsetted) * window.cam_horizontal;
+            window.camera.position.y = window.player.position.y + window.cam_vertical;
+            window.camera.rotation.y = 3.14 + window.rotation_offsetted;
+            window.camera.rotation.x = window.cam_depression;
         }
         else if (follow.checked) {
             window.camera.setTarget(player.position)
@@ -160,7 +160,7 @@ window.update = {
 		cape_tail.isVisible = isControlsReversed;
 		window.tsTriggers.setControlsReversedSignVisibility(isControlsReversed);
 
-		window.tsTriggers.setDriftEnabledSignVisibility(isTouchingDriftPad);
+		window.tsTriggers.setDriftEnabledSignVisibility(window.isTouchingDriftPad);
 	}
 }
 // export { update }

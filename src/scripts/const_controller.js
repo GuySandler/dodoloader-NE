@@ -12,7 +12,8 @@ let speedOverwrite = document.getElementById("speed");
 const default_radius = 2.5;
 const default_steer = 0.022;
 const default_gravity = -9;
-const physics_call_rate = 2; // higher = better performance. lower = better accuracy.
+// const physics_call_rate = 2; // higher = better performance. lower = better accuracy.
+window.physics_call_rate = 2;
 const default_cameraDownAngle = 0.3;
 const default_cameraRightAngle = 0;
 const default_jumpSpeed = 1;
@@ -87,8 +88,8 @@ window.cc = {
 		this.monkey[key] = val;
 	},
 	get: function(const_key, top_vec=null) {
-        console.log("get", const_key);
-        console.log("thing", this.default[const_key]);
+        // console.log("get", const_key);
+        // console.log("thing", this.default[const_key]);
 		var vec = this.default[const_key](); // is this meant to not be a function?
 		if (Object.keys(vec).length == 0) {
 			// scalar
