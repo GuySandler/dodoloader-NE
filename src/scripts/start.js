@@ -61,19 +61,34 @@ window.start = {
         // scene.ambientColor = new BABYLON.Color4(225,225,225,0);
 
 		// camera
-		window.camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 2, 10), scene);
-		window.camera.setTarget(BABYLON.Vector3.Zero());
+		// window.camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 2, 10), window.scene);
+        window.camera = new BABYLON.FollowCamera("camera", new BABYLON.Vector3(0, 10, -10), window.scene);
+        // window.camera.target = window.player;
+		// window.camera.setTarget(BABYLON.Vector3.Zero());
 		window.camera.rotation.y = -3.14;
-		window.camera.rotation.x = 0.3;
-		window.camera.rotation.z = 0;
-		window.camera.speed = 0;
-		window.camera.maxZ = 300; //200; //120;
-		window.camera.noRotationConstraint = true;
+
+        camera.radius = 30;
+        camera.heightOffset = 10;
+        camera.rotationOffset = 0;
+        camera.cameraAcceleration = 0.005;
+        camera.maxCameraSpeed = 10;
+        camera.attachControl(window.canvas, true);
+
+		// window.camera.rotation.x = 0.3;
+		// window.camera.rotation.z = 0;
+		// window.camera.speed = 0;
+		// window.camera.maxZ = 300; //200; //120;
+		// window.camera.noRotationConstraint = true;
 
 		// player
-		window.player = BABYLON.Mesh.CreateBox("player",0.5,scene);
+		window.player = BABYLON.MeshBuilder.CreateBox("player", {size:0.5}, window.scene);
 		window.player.scaling = new BABYLON.Vector3(1, 0.16, 1);
-		window.player.physicsImpostor = new BABYLON.PhysicsImpostor(player, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1.0, restitution: 1.0, friction: 0.5}, scene);
+		// window.player.physicsImpostor = new BABYLON.PhysicsImpostor(player, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1.0, restitution: 1.0, friction: 0.5}, scene);
+        // window.playerPhysicsImpostor = new BABYLON.PhysicsAggregate("player", BABYLON.PhysicsShapeType.BOX, window.scene); // older aggragate
+        window.playerPhysicsImpostor = new BABYLON.PhysicsAggregate(window.player, BABYLON.PhysicsShapeType.BOX, { mass: 1.0, friction: 0.5, restitution: 1.0 }, window.scene);
+        // window.playerPhysicsImpostor.body.setMassProperties({mass: 1.0});
+        // window.player.material = {restitution: 1.0, friction: 0.5};
+
 
 		window.player.position = new BABYLON.Vector3(0,0,0);
 		window.player.applyGravity = true;

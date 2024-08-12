@@ -47,6 +47,7 @@ window.boot = {
             await window.change_state.spawn(); // <-- problem here
             // await premium.updatePremiumRequirementMet();
             await window.map.post();
+            window.camera.lockedTarget = window.player;
         }, 100);
     }
 }

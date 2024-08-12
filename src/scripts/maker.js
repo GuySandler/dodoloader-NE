@@ -18,13 +18,16 @@ window.maker = {
     init: function() {
         // console.log('Maker init called');
         this.add_root_meshes("cone", 2, (i) => {
-            return BABYLON.Mesh.CreateCylinder("cone"+i, 1.0, 0.0, 1.0, 5, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
+            // return BABYLON.Mesh.CreateCylinder("cone"+i, 1.0, 0.0, 1.0, 5, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
+            return BABYLON.MeshBuilder.CreateCylinder("cone"+i, {height:1.0, diameterTop:0.0, diameterBottom:1.0, tessellation:5, subdivisions:1}, window.scene);
         });
         this.add_root_meshes("plat", 8, (i) => {
-            return BABYLON.Mesh.CreateBox("plat"+i,1, window.scene);
+            // return BABYLON.Mesh.CreateBox("plat"+i,1, window.scene);
+            return BABYLON.MeshBuilder.CreateBox("plat"+i, { size:1 }, window.scene);
         });
         this.add_root_meshes("sphere", 5, (i) => {
-            return BABYLON.Mesh.CreateSphere("sphere"+i, 10, 1, window.scene);
+            // return BABYLON.Mesh.CreateSphere("sphere"+i, 10, 1, window.scene);
+            return BABYLON.MeshBuilder.CreateSphere("sphere"+i, { segments:10, diameter:1 }, window.scene);
         });
     },
     add_root_meshes: function(name, count, fn) {
@@ -75,6 +78,12 @@ window.maker = {
 
         if (air == false) {
             platform.physicsImpostor = new BABYLON.PhysicsImpostor(platform, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, window.scene);
+            // new BABYLON.PhysicsAggregate(platform, BABYLON.PhysicsShapeType.BOX, scene);
+            // platform.setMassProperties({
+            //     mass: 1,
+            //     friction: 0.2,
+            //     restitution: 0.3
+            // });
         }
         if (jump == true) {
             window.jumppads.push(platform);
@@ -85,53 +94,6 @@ window.maker = {
 
         // Tracker
         this.platform_count += 1;
-    },
-    make_torus: function(posList, rotList, sizList, imat=0, bounce=0, mass=0, friction=0.6, jump=false, air=false, isKiller=false, isDriftOn=false) {
-        if (isKiller == true) {
-            bounce = KILLER_BOUNCE
-        }
-        // Data
-        let pX = posList[0]; let pY = posList[1]; let pZ = posList[2];
-        let rX = rotList[1]; let rY = rotList[0]; let rZ = rotList[2];
-        let sX = sizList[0]; let sY = sizList[1]; let sZ = sizList[2];
-        pY += Math.random() * 0.0007;
-        // Mesh
-        let mesh_name = "T" + this.torus_count;
-        var torus;
-
-        function isNum(x) {
-            return (isNaN(Math.round(x)) == false);
-        }
-        if (isNum(imat)) {
-            imat = Math.round(imat);
-            torus = (this["torus"+imat] || this["torus"+0]).createInstance(mesh_name);
-            if (imat == -1) torus.isVisible = false;
-            BABYLON.Tags.AddTagsTo(torus, "mesh torus");
-        } else {
-            torus = BABYLON.Mesh.CreateBox(mesh_name,1, window.scene);
-            torus.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
-            let color_obj = window.decorations.hexToRgb("#"+imat);
-            torus.material = window.decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
-            BABYLON.Tags.AddTagsTo(torus, "mesh torus");
-        }
-        
-        // Set
-        torus.scaling = new BABYLON.Vector3(sX,sY,sZ);
-        torus.position = new BABYLON.Vector3(pX,pY,pZ);
-        torus.rotation = new BABYLON.Vector3(rX,rY,rZ);
-
-        if (air == false) {
-            torus.physicsImpostor = new BABYLON.PhysicsImpostor(torus, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, window.scene);
-        }
-        if (jump == true) {
-            window.jumppads.push(torus);
-        }
-        if (isDriftOn == true) {
-            window.driftPads.push(torus)
-        }
-
-        // Tracker
-        this.torus_count += 1;
     },
     make_cone: function(posList, imat) {
         // Data

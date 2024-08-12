@@ -20,10 +20,10 @@ window.change_state = {
 		// window.player.rotationQuaternion = BABYLON.Quaternion.RotationAxis(new BABYLON.Vector3(0,0,0),0); // this also breaks it (probably legacy code issue)
         window.player.rotation = new BABYLON.Vector3(0, 0, 0);
 		// window.player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));
-        window.player.applyImpulse(
-            new BABYLON.Vector3(0,0,0),
-            window.player.absolutePosition
-        );
+        // window.player.physicsImpostor.applyImpulse(
+        //     new BABYLON.Vector3(0,0,0),
+        //     window.player.absolutePosition
+        // );
 		// window.player.physicsImpostor.setAngularVelocity(new BABYLON.Quaternion(0,1,0,0)); // hopefully the top one does that
         if (!document.getElementById("PracticeMode").checked) {
 		    window.player.position = new BABYLON.Vector3(window.map.spawn[0],window.map.spawn[1],window.map.spawn[2]);

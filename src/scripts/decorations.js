@@ -11,7 +11,7 @@ window.decorations = {
         // GENERAL
         this.materials.invis = this.rgba_mat(0,0,0,0);
         this.materials.ending = this.rgba_mat(36, 252, 3, 0.5);
-        this.materials.player = this.rgba_mat(255, 255, 255,1.0);;
+        this.materials.player = this.rgba_mat(255, 255, 255,1.0);
 
         // PLATFORM
         this.bright = new BABYLON.StandardMaterial("brightmat", window.scene);
