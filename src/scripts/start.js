@@ -1,5 +1,13 @@
 /* eslint-disable */
 import * as BABYLON from "@babylonjs/core";
+// import { HavokPhysics } from "@babylonjs/core/Physics";
+import HavokPhysics from "@babylonjs/havok";
+
+let initializedHavok;
+HavokPhysics().then((havok) => {
+  initializedHavok = havok;
+});
+
 // import { decorations } from "./decorations";
 // import { decorations } from "./decorations";
 // game objects
@@ -35,8 +43,25 @@ window.start = {
 		window.engine = await this.asyncEngineCreation();
 		window.scene = await new BABYLON.Scene(engine, {antialiasing: false});
         // console.log("scene created");
-		const gravityVector = new BABYLON.Vector3(0,-9, 0);
-		window.scene.enablePhysics(gravityVector);
+		// const gravityVector = new BABYLON.Vector3(0,-9, 0);
+        // const hk = await window.HavokPhysics();
+        // const plugin =  new BABYLON.HavokPlugin(true, hk);
+        const havokInstance = await HavokPhysics();
+        const havokPlugin = new BABYLON.HavokPlugin(true, havokInstance);
+		window.scene.enablePhysics(new BABYLON.Vector3(0,-9, 0), havokPlugin);
+        // window.scene.onPointerDown = function () {
+        //     window.playerPhysicsImpostor.body.applyImpulse(
+        //         new BABYLON.Vector3(0, 100, 0),
+        //         window.player.absolutePosition
+        //     );
+        // } // yay physics works!
+        window.scene.onPointerDown = function () {
+            // window.playerPhysicsImpostor.body.applyImpulse(
+            //     new BABYLON.Vector3(0, 100, 0),
+            //     window.player.absolutePosition
+            // );
+            window.player.position._y = 1;
+        }
 	},
 	asyncEngineCreation: async function() {
 		try {
@@ -86,6 +111,7 @@ window.start = {
 		// window.player.physicsImpostor = new BABYLON.PhysicsImpostor(player, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1.0, restitution: 1.0, friction: 0.5}, scene);
         // window.playerPhysicsImpostor = new BABYLON.PhysicsAggregate("player", BABYLON.PhysicsShapeType.BOX, window.scene); // older aggragate
         window.playerPhysicsImpostor = new BABYLON.PhysicsAggregate(window.player, BABYLON.PhysicsShapeType.BOX, { mass: 1.0, friction: 0.5, restitution: 1.0 }, window.scene);
+        window.playerPhysicsImpostor.body.disablePreStep = false;
         // window.playerPhysicsImpostor.body.setMassProperties({mass: 1.0});
         // window.player.material = {restitution: 1.0, friction: 0.5};
 

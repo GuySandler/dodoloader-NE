@@ -77,13 +77,14 @@ window.maker = {
         platform.rotation = new BABYLON.Vector3(rX,rY,rZ);
 
         if (air == false) {
-            platform.physicsImpostor = new BABYLON.PhysicsImpostor(platform, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, window.scene);
+            // platform.physicsImpostor = new BABYLON.PhysicsImpostor(platform, BABYLON.PhysicsImpostor.BoxImpostor, { mass: mass, restitution: bounce, friction: friction}, window.scene);
             // new BABYLON.PhysicsAggregate(platform, BABYLON.PhysicsShapeType.BOX, scene);
             // platform.setMassProperties({
             //     mass: 1,
             //     friction: 0.2,
             //     restitution: 0.3
             // });
+            new BABYLON.PhysicsAggregate(platform, BABYLON.PhysicsShapeType.BOX, { mass: mass, friction: friction, restitution: bounce }, window.scene);
         }
         if (jump == true) {
             window.jumppads.push(platform);
@@ -112,7 +113,8 @@ window.maker = {
             if (imat == -1) cone.isVisible = false;
             BABYLON.Tags.AddTagsTo(cone, "mesh cone");
         } else {
-            cone = BABYLON.Mesh.CreateCylinder(mesh_name, 1.0, 0.0, 1.0, 5, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
+            // cone = BABYLON.Mesh.CreateCylinder(mesh_name, 1.0, 0.0, 1.0, 5, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
+            cone = BABYLON.MeshBuilder.CreateCylinder(mesh_name, {height:1, diameterTop:0, diameterBottom:1, tessellation:5, subdivisions:1}, window.scene)
             cone.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY;
             let color_obj = window.decorations.hexToRgb("#"+imat);
             cone.material = window.decorations.rgba_mat(color_obj.r, color_obj.g, color_obj.b, color_obj.a);
@@ -155,7 +157,8 @@ window.maker = {
         sphere.freezeWorldMatrix(); // // Don't use: ???
 
         if (air == false) {
-            sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: mass, restitution: bounce, friction: friction }, window.scene);
+            // sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: mass, restitution: bounce, friction: friction }, window.scene);
+            new BABYLON.PhysicsAggregate(sphere, BABYLON.PhysicsShapeType.SPHERE, { mass: mass, friction: friction, restitution: bounce }, window.scene);
         }
 
         // Tracker
@@ -188,14 +191,16 @@ window.maker = {
         const height = 1;//sY;
         const radius = 1;//sZ;
 
-        var mesh = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, height, radius * topR, radius, 12, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        // var mesh = BABYLON.Mesh.CreateCylinder("Y" + this.cylinder_count, height, radius * topR, radius, 12, 1, window.scene, false, BABYLON.Mesh.DEFAULTSIDE);
+        var mesh = BABYLON.MeshBuilder.CreateCylinder("Y" + this.cylinder_count, {height:height, diameterTop:radius * topR, diameterBottom:radius, tessellation:12, subdivisions:1}, window.scene);
         BABYLON.Tags.AddTagsTo(mesh, "mesh cylinder");
         mesh.scaling = new BABYLON.Vector3(sX,sY,sZ);
         mesh.position = new BABYLON.Vector3(pX,pY,pZ);
         mesh.rotation = new BABYLON.Vector3(rX,rY,rZ);
         
         if (air == false) {
-            mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: mass, restitution: bounce, friction: friction }, window.scene);
+            // mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: mass, restitution: bounce, friction: friction }, window.scene);
+            new BABYLON.PhysicsAggregate(mesh, BABYLON.PhysicsShapeType.CYLINDER, { mass: mass, friction: friction, restitution: bounce }, window.scene);
         }
 
         if (isNaN(Math.round(imat)) == false) {

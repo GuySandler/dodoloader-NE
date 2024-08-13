@@ -4,7 +4,7 @@ window.map = {
     title: "Infiltration",
     song: "env2",
     maker: "DonW15",
-    spawn: [0, 0.5, 0],
+    spawn: [0, 10.5, 0],
     init: function () {
         window.a.p([1.54021, -12.67979, -76.19979], [0, 0, 0], [0.2, 0.2, 27], "00fcf4", 0, 0, 0.6, false, false, false, false);
         window.a.p([-9.62972, -12.67972, -77.76972], [-1.57, 0, 0], [0.2, 0.2, 18], "00fcf4", 0, 0, 0.6, false, false, false, false);

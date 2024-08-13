@@ -10,7 +10,7 @@ window.change_state = {
 		window.tsTriggers.onDeath(deathMessage);
 	},
 	spawn: function() {
-		// window.alive = true; // problem here? really?
+		window.alive = true; // ah, I turned it off
 		window.score = 0;
 		window.flyjump.last_frame = 0;
         window.rotation = 0

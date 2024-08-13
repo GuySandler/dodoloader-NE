@@ -18,6 +18,7 @@ window.update = {
 		} else if (window.alive) {
 			this.loopWhilePlaying();
 		}
+        // console.log("basic loop please run") // it runs, ah, it's not alive
 	},
 	loopWhileSpectating() {
 		window.spectateAnimationValue += 1;
@@ -36,6 +37,7 @@ window.update = {
 			window.tsTriggers.onFrame()
 			// render call
             this.player_move();
+            // console.log("loop")
 			window.map.render_update();
 			window.map.section_update();
 			window.flyjump.render_loop();
@@ -95,12 +97,14 @@ window.update = {
 		window.player.rotation.y = rotation;
 
         let freeze = document.getElementById("freeze");
-        if (window.platformermode) {}
+        if (window.platformermode) {console.log("platformer mode")}
         else if (freeze.checked == false) {
+            // console.log("player move") // aw oh, this is not working
             const positionAdjustment = window.tsTriggers.getPositionAdjustment()
             window.player.position.x += positionAdjustment.x;
             window.player.position.z += positionAdjustment.z;
         }
+        // console.log("hi") // the entire function isn't running
 		// light & camera
         let freecam = document.getElementById("freecam");
         let follow = document.getElementById("follow");
