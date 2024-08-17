@@ -11,7 +11,7 @@ let speedOverwrite = document.getElementById("speed");
 // let default_speed;
 const default_radius = 2.5;
 const default_steer = 0.022;
-const default_gravity = -9;
+window.default_gravity = -9;
 // const physics_call_rate = 2; // higher = better performance. lower = better accuracy.
 window.physics_call_rate = 2;
 const default_cameraDownAngle = 0.3;

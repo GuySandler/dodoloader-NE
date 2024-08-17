@@ -11,6 +11,7 @@ window.IS_ICEPARTY = false;
 
 // console.log('maker:', maker.make_platform);
 window.a = {
+    // window.a.p([-8.11993, 0.01007, -65.91993], [0, 0, 0], [10, 0.5, 12], "1f6914", 0, 0, 0.6, false, false, false, false);
     p: function(q,r,s, imat, bounce, mass, friction, jump, air, isKiller, isDriftOn) {
         if (!imat) imat = (IS_ICEPARTY) ? 1 : 0;
         if (!bounce) bounce = 0;
@@ -58,9 +59,9 @@ window.a = {
     },
     g: function(x,y,z) {
         let vec = window.cc.get("gravity", {
-            x: (x != null) ? x*default_gravity : null,
-            y: (y != null) ? y*default_gravity : null,
-            z: (z != null) ? z*default_gravity : null
+            x: (x != null) ? x*window.default_gravity : null,
+            y: (y != null) ? y*window.default_gravity : null,
+            z: (z != null) ? z*window.default_gravity : null
         });
         window.gravity = vec; // hopefully this won't bite me back, I think it did
         window.scene.getPhysicsEngine().setGravity(vec);

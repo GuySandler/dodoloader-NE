@@ -23,6 +23,7 @@
 // console.log('Type of maker:', typeof maker);
 // console.log('Maker keys:', Object.keys(maker));
 // console.log('Maker init method:', maker.init);
+import * as BABYLON from "@babylonjs/core";
 window.boot = {
     didPreload: false,
     preload: async function() {
@@ -49,7 +50,8 @@ window.boot = {
             await window.map.post();
             // window.camera.target = window.player;
             window.camera.lockedTarget = window.player;
-        }, 100);
+            window.playerPhysicsImpostor.setAngularVelocity(BABYLON.Vector3.Zero());
+        }, 500);
     }
 }
 

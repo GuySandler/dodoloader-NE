@@ -115,7 +115,7 @@ window.start = {
 		window.player.scaling = new BABYLON.Vector3(1, 0.16, 1);
 		// window.player.physicsImpostor = new BABYLON.PhysicsImpostor(player, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1.0, restitution: 1.0, friction: 0.5}, scene);
         // window.playerPhysicsImpostor = new BABYLON.PhysicsAggregate("player", BABYLON.PhysicsShapeType.BOX, window.scene); // older aggragate
-        window.playerPhysicsImpostor = new BABYLON.PhysicsAggregate(window.player, BABYLON.PhysicsShapeType.BOX, { mass: 1.0, friction: 0.5, restitution: 1.0 }, window.scene);
+        window.playerPhysicsImpostor = new BABYLON.PhysicsAggregate(window.player, BABYLON.PhysicsShapeType.BOX, { mass: 10.0, friction: 0.5, restitution: 0.0 }, window.scene);
         window.playerPhysicsImpostor.body.disablePreStep = false;
         // window.playerPhysicsImpostor.body.setMassProperties({mass: 1.0});
         // window.player.material = {restitution: 1.0, friction: 0.5};

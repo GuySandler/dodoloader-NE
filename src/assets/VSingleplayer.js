@@ -1888,6 +1888,11 @@ class FSingleOverlayManager extends FBaseOverlayManager {
     this.overlayFpsDiv.style.visibility = "visible";
   }
   async onMenuButtonClicked() {
+    // var element = document.getElementById('map-script');
+    // if (typeof(element) === 'undefined' || element === null) {
+    //     await FMapLoader.loadScript(scriptUrl, cupId);
+    // }
+    // element.remove();
     if (!window.isMapLoaded)
       return;
     if (this.isLoadingScreenVisible())
@@ -1910,14 +1915,26 @@ async function GetMap(mapId, mapUrl, cupId, num){
     // for(let i = 0;i < meshes.length;i++) {
     //     meshes[i].dispose();
     // }
-    try{document.getElementById("map-script").remove();}
-    catch{}
+    // try{document.getElementById("map-script").remove();}
+    // catch{}
     let scriptUrl = "";
     await FMapLoader.getUrl(mapId, mapUrl, cupId, num).then(result => {
         // console.log(result);
         scriptUrl = result;
     });
-    await FMapLoader.loadScript(scriptUrl, cupId);
+    // if (window.isMapLoaded) {
+        // document.getElementById('map-script').remove();await FMapLoader.loadScript(scriptUrl, cupId);
+    // };
+    // var element = document.getElementById('map-script');
+    // if (typeof(element) != 'undefined' && element != null){
+    //     element.remove();
+    //     await FMapLoader.loadScript(scriptUrl, cupId);
+    // }
+    // else {await FMapLoader.loadScript(scriptUrl, cupId)}
+    // window.map.init = function(){};
+    // if (typeof(element) === 'undefined' || element === null) {
+        await FMapLoader.loadScript(scriptUrl, cupId);
+    // }
 }
 class FMapLoader {
   static async loadMap(mapId, mapUrl, cupId, num) {
@@ -1933,6 +1950,10 @@ class FMapLoader {
   }
   static async loadScript(scriptUrl, cupId) {
     return new Promise((resolve2) => {
+        var element = document.getElementById('map-script');
+        if (typeof(element) !== 'undefined' || element !== null) {
+            document.getElementById('map-script').remove();
+        }
         // I somehow need to inject import a from "../scripts/alias";export to all maps
       const head = document.getElementsByTagName("head")[0];
       const script = document.createElement("script");
@@ -1943,7 +1964,7 @@ class FMapLoader {
       script.id = "map-script";
     //   head.appendChild(script);
       head.prepend(script);
-    //   cleanup.run();
+    //   window.cleanup.run();
       setTimeout(resolve2, 50);
     });
   }

@@ -157,7 +157,7 @@ window.decorations = {
     add_particle_system: function () {
         let ps = new BABYLON.ParticleSystem("particles", 2000, window.scene);
         //Texture of each particle//textures/flare
-        ps.particleTexture = new BABYLON.Texture("assets/textures/flare.png", window.scene);
+        ps.particleTexture = new BABYLON.Texture("src/assets/textures/flare.png", window.scene);
         // Where the particles come from
         ps.emitter = window.player; // the starting object, the emitter
         ps.minEmitBox = new BABYLON.Vector3(-0.2, 0, 0); // Starting all from
