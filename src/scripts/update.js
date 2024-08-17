@@ -23,13 +23,13 @@ window.update = {
 	loopWhileSpectating() {
 		window.spectateAnimationValue += 1;
 
-		window.camera.rotation.x = 0.1 + Math.sqrt(spectateAnimationValue * 0.0015);
-		window.camera.rotation.z = 0;
-		window.camera.rotation.y = Math.PI;
+		// window.camera.rotation.x = 0.1 + Math.sqrt(spectateAnimationValue * 0.0015);
+		// window.camera.rotation.z = 0;
+		// window.camera.rotation.y = Math.PI;
 
-		window.camera.position.x = 0;
-		window.camera.position.z = -0.2 * spectateAnimationValue;
-		window.camera.position.y = 2 + 0.2 * spectateAnimationValue;
+		// window.camera.position.x = 0;
+		// window.camera.position.z = -0.2 * spectateAnimationValue;
+		// window.camera.position.y = 2 + 0.2 * spectateAnimationValue;
 	},
 	loopWhilePlaying() {
 		try {
@@ -89,7 +89,7 @@ window.update = {
 			window.flyjump.jump();
 		}
 		if (!this.shouldSpin()) {
-			window.player.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0));
+			// window.playerPhysicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0)); // I think this feature was removed
 			window.player.rotationQuaternion = BABYLON.Quaternion.RotationAxis(new BABYLON.Vector3(0,0,0),0);
 		}
 		const rotationAdjustment = window.tsTriggers.getRotationAdjustment()
@@ -109,15 +109,15 @@ window.update = {
         let freecam = document.getElementById("freecam");
         let follow = document.getElementById("follow");
         if (!freecam.checked) {
-            let rotation_offsetted = window.rotation + window.cameraRightAngle;
-            window.camera.position.x = window.player.position.x + Math.sin(rotation_offsetted) * window.cam_horizontal;
-            window.camera.position.z = window.player.position.z + Math.cos(rotation_offsetted) * window.cam_horizontal;
-            window.camera.position.y = window.player.position.y + window.cam_vertical;
-            window.camera.rotation.y = 3.14 + window.rotation_offsetted;
-            window.camera.rotation.x = window.cam_depression;
+            // let rotation_offsetted = window.rotation + window.cameraRightAngle;
+            // window.camera.position.x = window.player.position.x + Math.sin(rotation_offsetted) * window.cam_horizontal;
+            // window.camera.position.z = window.player.position.z + Math.cos(rotation_offsetted) * window.cam_horizontal;
+            // window.camera.position.y = window.player.position.y + window.cam_vertical;
+            // window.camera.rotation.y = 3.14 + window.rotation_offsetted;
+            // window.camera.rotation.x = window.cam_depression;
         }
         else if (follow.checked) {
-            window.camera.setTarget(player.position)
+            // window.camera.setTarget(player.position)
         }
 		window.light.position = camera.position;
 	},

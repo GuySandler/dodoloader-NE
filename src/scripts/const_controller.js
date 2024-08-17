@@ -120,7 +120,7 @@ window.cc = {
 	    }
 	},
 	refresh: function() {
-		window.camera.maxZ = this.get("camera.maxZ");
+		window.cameraMaxZ = this.get("camera.maxZ");
 		window.light.intensity = this.get("light.intensity");
 		window.radius = this.get("radius");
 		window.cameraDownAngle = this.get("cameraDownAngle");

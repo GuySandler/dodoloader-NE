@@ -4,7 +4,7 @@ window.map = {
     title: "Infiltration",
     song: "env2",
     maker: "DonW15",
-    spawn: [0, 10.5, 0],
+    spawn: [0, .5, 0],
     init: function () {
         window.a.p([1.54021, -12.67979, -76.19979], [0, 0, 0], [0.2, 0.2, 27], "00fcf4", 0, 0, 0.6, false, false, false, false);
         window.a.p([-9.62972, -12.67972, -77.76972], [-1.57, 0, 0], [0.2, 0.2, 18], "00fcf4", 0, 0, 0.6, false, false, false, false);
@@ -154,7 +154,7 @@ window.map = {
     post: function () {
         window.a.u("P14");
         window.cc.set_monkey("scene.clearColor", BABYLON.Color3.FromHexString("#1ba9c2"));
-        window.cc.set_monkey("speed", 0.2);
+        window.cc.set_monkey("window.speed", 0.2);
         window.cc.set_monkey("steer", 0.03);
         window.cc.refresh();
     },
@@ -165,20 +165,20 @@ window.map = {
             case 0:
                 if (PZ < -39.62951) {
                     window.a.msg_set("The enemy stole your files, get them back!");
-                    speed = default_speed * 0.4;
+                    window.window.speed = window.default_speed * 0.4;
                     this.section_id += 1;
                 }
                 break;
             case 1:
                 if (PZ < -61.62951) {
                     window.a.msg_del();
-                    speed = window.cc.get("speed", null);
+                    window.speed = window.cc.get("window.speed", null);
                     this.section_id += 1;
                 }
                 break;
             case 2:
                 if (PZ < -72.52) {
-                    speed = default_speed * 0.45;
+                    window.speed = default_speed * 0.45;
                     window.a.msg_set("Dodge the traps!");
                     window.a.jh(0.7);
                     this.section_id += 1;
@@ -186,7 +186,7 @@ window.map = {
                 break;
             case 3:
                 if (PZ < -102.52) {
-                    speed = window.cc.get("speed", null);
+                    window.speed = window.cc.get("window.speed", null);
                     window.a.msg_del();
                     window.a.jh(null);
                     this.section_id += 1;
@@ -194,14 +194,14 @@ window.map = {
                 break;
             case 4:
                 if (PZ < -105.24993) {
-                    speed = default_speed * 0.5;
+                    window.speed = default_speed * 0.5;
                     window.a.msg_set("Theres the files, get it and get out");
                     this.section_id += 1;
                 }
                 break;
             case 5:
                 if (PZ < -123.24993) {
-                    speed = window.cc.get("speed", null);
+                    window.speed = window.cc.get("window.speed", null);
                     window.a.msg_del();
                     this.section_id += 1;
                 }

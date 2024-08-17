@@ -48,20 +48,20 @@ window.start = {
         // const plugin =  new BABYLON.HavokPlugin(true, hk);
         const havokInstance = await HavokPhysics();
         const havokPlugin = new BABYLON.HavokPlugin(true, havokInstance);
-		window.scene.enablePhysics(new BABYLON.Vector3(0,-9, 0), havokPlugin);
+		await window.scene.enablePhysics(new BABYLON.Vector3(0,-9, 0), havokPlugin);
         // window.scene.onPointerDown = function () {
         //     window.playerPhysicsImpostor.body.applyImpulse(
         //         new BABYLON.Vector3(0, 100, 0),
         //         window.player.absolutePosition
         //     );
         // } // yay physics works!
-        window.scene.onPointerDown = function () {
+        // window.scene.onPointerDown = function () {
             // window.playerPhysicsImpostor.body.applyImpulse(
             //     new BABYLON.Vector3(0, 100, 0),
             //     window.player.absolutePosition
             // );
-            window.player.position._y = 1;
-        }
+            // window.player.position._y = 1;
+        // }
 	},
 	asyncEngineCreation: async function() {
 		try {
@@ -79,7 +79,7 @@ window.start = {
 		  	// timeStep: 1 / 60,
 		});
 	},
-	create_scene: function() {
+	create_scene: async function() {
 		window.scene.clearColor = new BABYLON.Color4(0,0,0,1);
         // scene.clearColor = new BABYLON.Color4(225,225,225,1);
 		window.scene.ambientColor = new BABYLON.Color4(0,0,0,1);
@@ -87,17 +87,22 @@ window.start = {
 
 		// camera
 		// window.camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 2, 10), window.scene);
+        // window.camera = await new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 5, -10), window.scene);
+        // window.camera.inputs.addMouseWheel();
+        // window.camera.setTarget(window.player.position);
+        // camera.attachControl(true);
         window.camera = new BABYLON.FollowCamera("camera", new BABYLON.Vector3(0, 10, -10), window.scene);
         // window.camera.target = window.player;
 		// window.camera.setTarget(BABYLON.Vector3.Zero());
-		window.camera.rotation.y = -3.14;
+		// window.camera.rotation.y = -3.14;
 
-        camera.radius = 30;
-        camera.heightOffset = 10;
+        window.cameraView = 7;
+        camera.radius = window.cameraView;
+        camera.heightOffset = window.cameraView-5;
         camera.rotationOffset = 0;
-        camera.cameraAcceleration = 0.005;
-        camera.maxCameraSpeed = 10;
-        camera.attachControl(window.canvas, true);
+        camera.cameraAcceleration = 0.05;
+        camera.maxCameraSpeed = 100;
+        // camera.attachControl(window.canvas, true);
 
 		// window.camera.rotation.x = 0.3;
 		// window.camera.rotation.z = 0;

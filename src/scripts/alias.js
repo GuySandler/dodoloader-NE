@@ -88,7 +88,7 @@ window.a = {
         window.cameraRightAngle = window.cc.get("cameraRightAngle", (_cameraRightAngle != null) ? _cameraRightAngle * Math.PI / 180 : null);
     },
     t: function(x,y,z) {
-        window.camera.upVector = window.cc.get("camera.upVector", {x,y,z});
+        window.cameraUpVector = window.cc.get("camera.upVector", {x,y,z});
     },
     mov: function(id, axis, value) {
         window.scene.getMeshByName(id).position[axis] += value * default_speed;
