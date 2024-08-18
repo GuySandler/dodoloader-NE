@@ -100,7 +100,7 @@ window.start = {
         camera.radius = window.cameraView;
         camera.heightOffset = window.cameraView-5;
         camera.rotationOffset = 0;
-        camera.cameraAcceleration = 0.05;
+        camera.cameraAcceleration = 0.10;
         camera.maxCameraSpeed = 100;
         // camera.attachControl(window.canvas, true);
 
@@ -171,7 +171,6 @@ window.start = {
 		window.cape_tail.scaling.z = 0.3;
 		window.cape_tail.isVisible = false;
 		window.cape_tail.parent = player;
-
 	}
 }
 

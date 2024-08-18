@@ -50,7 +50,14 @@ window.boot = {
             await window.map.post();
             // window.camera.target = window.player;
             window.camera.lockedTarget = window.player;
-            window.playerPhysicsImpostor.setAngularVelocity(BABYLON.Vector3.Zero());
+            // window.playerPhysicsImpostor.setAngularVelocity(BABYLON.Vector3.Zero());
+            // window.player.physicsBody.setLinearVelocity(BABYLON.Vector3.Zero()); // not here?
+            var viewer = new BABYLON.PhysicsViewer();
+            scene.meshes.forEach((mesh) => {
+                if (mesh.physicsBody) {
+                    viewer.showBody(mesh.physicsBody);
+                }
+            });
         }, 500);
     }
 }

@@ -1919,7 +1919,7 @@ async function GetMap(mapId, mapUrl, cupId, num){
     // catch{}
     let scriptUrl = "";
     await FMapLoader.getUrl(mapId, mapUrl, cupId, num).then(result => {
-        // console.log(result);
+        console.log(result);
         scriptUrl = result;
     });
     // if (window.isMapLoaded) {
@@ -1933,8 +1933,30 @@ async function GetMap(mapId, mapUrl, cupId, num){
     // else {await FMapLoader.loadScript(scriptUrl, cupId)}
     // window.map.init = function(){};
     // if (typeof(element) === 'undefined' || element === null) {
-        await FMapLoader.loadScript(scriptUrl, cupId);
+        // await FMapLoader.loadScript(scriptUrl, cupId);
     // }
+    window.map = {}
+    fetch(scriptUrl)
+        .then((res) => res.text())
+        .then((text) => {
+            let returned = JSON.parse(text)
+            // window.text = text
+            console.log(returned.title)
+            // window.map = JSON.parse(text);
+            window.map.title = returned.title;
+            window.map.song = returned.song;
+            window.map.maker = returned.maker;
+            window.map.spawn = returned.spawn;
+            window.map.init = new Function("", returned.init.body);
+            window.map.post = new Function("", returned.post.body);
+            window.map.section_id = returned.section_id;
+            window.map.section_update = new Function("", returned.section_update.body);
+            window.map.reset = new Function(returned.reset.args, returned.reset.body);
+            window.map.physics_update = new Function("", returned.physics_update.body);
+            window.map.render_update = new Function("", returned.render_update.body);
+
+        })
+        .catch((e) => console.error(e));
 }
 class FMapLoader {
   static async loadMap(mapId, mapUrl, cupId, num) {
@@ -1951,8 +1973,8 @@ class FMapLoader {
   static async loadScript(scriptUrl, cupId) {
     return new Promise((resolve2) => {
         var element = document.getElementById('map-script');
-        if (typeof(element) !== 'undefined' || element !== null) {
-            document.getElementById('map-script').remove();
+        if (element) {
+            element.remove();
         }
         // I somehow need to inject import a from "../scripts/alias";export to all maps
       const head = document.getElementsByTagName("head")[0];
@@ -1988,7 +2010,7 @@ class FMapLoader {
                     fetchUrl = 'src/JSON cups/dodoCup.json';
                     break;
                 default:
-                    return "src/maps/" + mapId + ".js";
+                    return "src/maps/" + mapId + ".json";
             }
 
             const response = await fetch(fetchUrl);

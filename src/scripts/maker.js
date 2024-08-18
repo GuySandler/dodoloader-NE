@@ -124,6 +124,7 @@ window.maker = {
         // Set
         cone.position = new BABYLON.Vector3(pX,pY,pZ);
         cone.scaling.y = 1.2;
+        cone.scaling = new BABYLON.Vector3(0.3, 0.3, 0.3);
         cone.freezeWorldMatrix();
         // Tracker
         window.cones.push(cone);
