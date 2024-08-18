@@ -6875,7 +6875,7 @@ var CupIdEnum = /* @__PURE__ */ ((CupIdEnum2) => {
   CupIdEnum2[CupIdEnum2["Ye"] = 2] = "Ye";
   CupIdEnum2[CupIdEnum2["Jay"] = 3] = "Jay";
   CupIdEnum2[CupIdEnum2["Tim"] = 4] = "Tim";
-  CupIdEnum2[CupIdEnum2["Golden"] = 5] = "Golden";
+  CupIdEnum2[CupIdEnum2["Golden"] = 5] = "Tale Of A Cruel";
   CupIdEnum2[CupIdEnum2["Rocky"] = 6] = "Rocky";
   CupIdEnum2[CupIdEnum2["June"] = 7] = "June";
   CupIdEnum2[CupIdEnum2["Bean"] = 8] = "Bean";
@@ -7088,7 +7088,8 @@ class CupUtils {
       case CupIdEnum.Jay:
         return SoundFileEnum.Dodosynthesis;
       case CupIdEnum.Golden:
-        return SoundFileEnum.Uprise;
+        // return SoundFileEnum.Uprise;
+        return SoundFileEnum.thedevourerer;
       case CupIdEnum.Bean:
         return SoundFileEnum.Dodozart_by_insolence;
       case CupIdEnum.Fish:
@@ -7167,7 +7168,7 @@ class CupUtils {
       case CupIdEnum.Rytai:
         return "Maps made by Rytai (Currently Retired from mapmaking)";
       case CupIdEnum.Golden:
-        return "Bonus cup made by multiple mapmakers, presented by Golden. She is the main founder of the Ice Dodo tournaments";
+        return "Used to be Golden, taken for calamity dodoloader NE demo";
       case CupIdEnum.Bean:
         return "Bonus cup made by multiple mapmakers, presented by Bean. He was a maptester who would reject basically every map that would be submitted of the game.";
       case CupIdEnum.Fish:
@@ -7576,31 +7577,31 @@ class CondensedMapUtils {
         ];
       case CupIdEnum.Golden:
         return [
-          { diff: 1, id: "infiltration", name: "Infiltration" },
-          { diff: 1, id: "dodo_cube", name: "Dodo Cube" },
-          { diff: 2, id: "snow_hill", name: "Snow hill" },
-          { diff: 2, id: "grass_hill", name: "Grass Hill" },
-          { diff: 2, id: "skittletopia", name: "Skittletopia" },
-          { diff: 3, id: "centred", name: "Centred" },
-          { diff: 3, id: "walking_with_wienerdogs", name: "walking with wienerdogs" },
-          { diff: 3, id: "2_dollar_minecraft", name: "2 Dollar Minecraft" },
-          { diff: 3, id: "trippy", name: "Trippy" },
-          { diff: 3, id: "ominous_cave", name: "Ominous cave" },
-          { diff: 4, id: "wrenched_water_pipes", name: "Wrenched Water Pipes" },
-          { diff: 4, id: "keyboard", name: "Keyboard" },
-          { diff: 4, id: "clocks", name: "Clocks" },
-          { diff: 4, id: "computer_realm", name: "Computer Realm" },
-          { diff: 4, id: "colour_wheel", name: "Colour Wheel" },
-          { diff: 5, id: "blind_maze", name: "Blind Maze" },
-          { diff: 5, id: "side_to_side", name: "Side to Side" },
-          { diff: 6, id: "slippery_path", name: "Slippery Path" },
-          { diff: 6, id: "cosmic_dogfight", name: "Cosmic Dogfight" },
-          { diff: 6, id: "albus", name: "Albus" },
-          { diff: 6, id: "the_unseen", name: "the unseen" },
-          { diff: 6, id: "gelatinous", name: "Gelatinous" },
-          { diff: 7, id: "anomaly", name: "Anomaly" },
-          { diff: 7, id: "dna", name: "DNA" },
-          { diff: 8, id: "chaos_zone", name: "Chaos Zone" }
+          { diff: 1, id: "infiltration", name: "The Devourer" },
+        //   { diff: 1, id: "dodo_cube", name: "Dodo Cube" },
+        //   { diff: 2, id: "snow_hill", name: "Snow hill" },
+        //   { diff: 2, id: "grass_hill", name: "Grass Hill" },
+        //   { diff: 2, id: "skittletopia", name: "Skittletopia" },
+        //   { diff: 3, id: "centred", name: "Centred" },
+        //   { diff: 3, id: "walking_with_wienerdogs", name: "walking with wienerdogs" },
+        //   { diff: 3, id: "2_dollar_minecraft", name: "2 Dollar Minecraft" },
+        //   { diff: 3, id: "trippy", name: "Trippy" },
+        //   { diff: 3, id: "ominous_cave", name: "Ominous cave" },
+        //   { diff: 4, id: "wrenched_water_pipes", name: "Wrenched Water Pipes" },
+        //   { diff: 4, id: "keyboard", name: "Keyboard" },
+        //   { diff: 4, id: "clocks", name: "Clocks" },
+        //   { diff: 4, id: "computer_realm", name: "Computer Realm" },
+        //   { diff: 4, id: "colour_wheel", name: "Colour Wheel" },
+        //   { diff: 5, id: "blind_maze", name: "Blind Maze" },
+        //   { diff: 5, id: "side_to_side", name: "Side to Side" },
+        //   { diff: 6, id: "slippery_path", name: "Slippery Path" },
+        //   { diff: 6, id: "cosmic_dogfight", name: "Cosmic Dogfight" },
+        //   { diff: 6, id: "albus", name: "Albus" },
+        //   { diff: 6, id: "the_unseen", name: "the unseen" },
+        //   { diff: 6, id: "gelatinous", name: "Gelatinous" },
+        //   { diff: 7, id: "anomaly", name: "Anomaly" },
+        //   { diff: 7, id: "dna", name: "DNA" },
+        //   { diff: 8, id: "chaos_zone", name: "Chaos Zone" }
         ];
       case CupIdEnum.Bean:
         return [

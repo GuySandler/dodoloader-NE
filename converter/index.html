@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engine Converter</title>
+</head>
+<body>
+    <h1>Engine Converter</h1>
+    <textarea id="mapcode"></textarea>
+    <button id="convert">Convert</button>
+    <textarea id="output"></textarea>
+    <script type="module">
+        import $ from "jquery";
+
+        $(document).ready(function () {
+            $('#convert').click(function() {
+                let mapcode = $('#mapcode').val();
+                let output = {};
+                let lines = mapcode.split('\n');
+                for (let line of lines) {
+                    // console.log(line.trim());
+                    let parts = line.trim().split(' ');
+                    // console.log(parts);
+                    switch (line.trim().slice(0, 3)) {
+                        case 'var':
+                            output+="{"
+                            break;
+                        case 'tit':
+                            // console.log(parts.slice(1));
+                            let title = "";
+                            for (let item = 0; item < parts.slice(1);item++) {
+                                console.log(parts.slice(1)[item].replace(/['"]/g, '').replace(/,/g, '')); // removes " and commas
+                                title+=parts.slice(1)[item].replace(/['"]/g, '').replace(/,/g, '');
+                            }
+                            
+                            output+="\n"
+                    }
+                }
+                $('#output').val(JSON.stringify(output));
+                // for (let key in mapcode) {
+                //     if (typeof mapcode[key] === 'function') {
+                //         let args = mapcode[key].toString().match(/\(([^)]*)\)/)[1];
+                //         output[key] = {
+                //             args: args ? args.split(',').map(arg => arg.trim()) : [],
+                //             body: mapcode[key].toString().match(/function[^{]+\{([\s\S]*)\}$/)[1].trim()
+                //         };
+                //     } else {
+                //         output[key] = mapcode[key];
+                //     }
+                // }
+                // $('#output').val(JSON.stringify(output, null, 4));
+            });
+
+        });
+    </script>
+</body>
+</html>
