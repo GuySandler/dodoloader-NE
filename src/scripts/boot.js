@@ -24,6 +24,8 @@
 // console.log('Maker keys:', Object.keys(maker));
 // console.log('Maker init method:', maker.init);
 import * as BABYLON from "@babylonjs/core";
+import "@babylonjs/loaders/glTF";
+
 window.boot = {
     didPreload: false,
     preload: async function() {
@@ -52,12 +54,50 @@ window.boot = {
             window.camera.lockedTarget = window.player;
             // window.playerPhysicsImpostor.setAngularVelocity(BABYLON.Vector3.Zero());
             // window.player.physicsBody.setLinearVelocity(BABYLON.Vector3.Zero()); // not here?
-            var viewer = new BABYLON.PhysicsViewer();
-            scene.meshes.forEach((mesh) => {
-                if (mesh.physicsBody) {
-                    viewer.showBody(mesh.physicsBody);
-                }
+            // var viewer = new BABYLON.PhysicsViewer();
+            // scene.meshes.forEach((mesh) => {
+            //     if (mesh.physicsBody) {
+            //         viewer.showBody(mesh.physicsBody);
+            //     }
+            // });
+            // Load the asset (e.g., from a .glb or .babylon file)
+            await BABYLON.SceneLoader.ImportMesh("", "src/assets/models/", "jet.glb", scene, function (meshes) {
+                let rootMesh = meshes[0];
+                rootMesh.position = new BABYLON.Vector3(10, 0, 0);
+                rootMesh.rotation = new BABYLON.Vector3(0, Math.PI / 4, 0);
+                rootMesh.scaling = new BABYLON.Vector3(2, 2, 2);
+                window.jet = rootMesh;
             });
+            // window.jet = await BABYLON.SceneLoader.Append("src/assets/models/", "jet.glb", scene, function (container) {
+            //     container.addAllToScene();
+            //     var parentName = 'car-parent'
+            //     var parent = new BABYLON.Mesh(parentName, scene);
+
+            //     let orientation = 180;
+            //     // change orientation to suit the direction of the car
+            //     parent.rotation = new BABYLON.Vector3 (
+            //     BABYLON.Tools.ToRadians(0),
+            //     BABYLON.Tools.ToRadians(orientation),
+            //     BABYLON.Tools.ToRadians(0)
+            //     )
+
+            //     container.meshes.forEach(mesh => {
+            //         mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, friction: 0.01, restitution: 0 }, scene);
+
+            //         mesh.setParent(parent);
+            
+
+
+
+            //     var yaw = BABYLON.Tools.ToRadians(0);
+            //     var pitch = BABYLON.Tools.ToRadians(0);
+            //     var roll = BABYLON.Tools.ToRadians(0);
+            //     var yprQuaternion = BABYLON.Quaternion.RotationYawPitchRoll(yaw, pitch, roll);
+
+            //     // parent.rotate(new BABYLON.Vector3(0, 0.5, 0), BABYLON.Tools.ToRadians(90));
+            //     parent.rotationQuaternion = yprQuaternion;
+            //     resolve(parent)
+            // });
         }, 500);
     }
 }

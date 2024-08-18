@@ -6584,6 +6584,7 @@ var StorageValueEnum = /* @__PURE__ */ ((StorageValueEnum2) => {
   StorageValueEnum2["Music2"] = "Bloom";
   StorageValueEnum2["Music3"] = "Dodo Synthesis";
   StorageValueEnum2["Music4"] = "Brink";
+  StorageValueEnum2["Music5"] = "thedevourerer";
   StorageValueEnum2["MusicDefault"] = "Cup";
   return StorageValueEnum2;
 })(StorageValueEnum || {});
@@ -7002,6 +7003,7 @@ var SoundFileEnum = /* @__PURE__ */ ((SoundFileEnum2) => {
   SoundFileEnum2["Death"] = "sounds/death.wav";
   SoundFileEnum2["LevelComplete"] = "sounds/level_complete.wav";
   SoundFileEnum2["Click"] = "sounds/click.wav";
+  SoundFileEnum2["thedevourerer"] = "music/thedevourerer.mp3";
   return SoundFileEnum2;
 })(SoundFileEnum || {});
 const ALL_SOUND_FILE_PATHS = MiscUtils.getStringEnumValues(SoundFileEnum);

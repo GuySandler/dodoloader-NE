@@ -14545,6 +14545,8 @@ class FBaseSoundPlayer {
         return SoundFileEnum.Dodosynthesis;
       case StorageValueEnum.Music4:
         return SoundFileEnum.Brink;
+      case StorageValueEnum.Music5:
+        return SoundFileEnum.thedevourerer;
       case StorageValueEnum.MusicDefault:
       default:
         return CupUtils.getBackgroundMusicForCup(this.getCupIdForBackgroundMusic());

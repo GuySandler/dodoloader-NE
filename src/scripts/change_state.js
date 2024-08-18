@@ -35,7 +35,7 @@ window.change_state = {
             window.rotation = parseFloat(document.getElementById("PracticeR").value);
         }
 		window.cc.refresh();
-		window.map.reset(BABYLON.Vector3.Zero()); // only breaks map
+		window.map.reset(BABYLON); // only breaks map
 	},
 	win: function() {
 		if (!window.alive) return
